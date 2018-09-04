@@ -12,22 +12,26 @@ app.use(cors());
 app.use(express.static(`${__dirname}/../build`));
 
 const {
-
+    SERVER_PORT
 } = process.env;
 
-massive(process.env.CONNECTION_STRING)
-  .then(dbInstance => {
+massive(process.env.CONNECTION_STRING).then(dbInstance => {
     app.set("db", dbInstance);
-  })
-  .catch(e => console.log(`Error: ${e}`));
+}).catch(e => console.log(`Error: ${e}`));
 
 
+app.use(
+    session({
+        secret: SECRET_SESSION,
+        resave: false,
+        saveUninitialized: true
+    })
+);
 
 
-  
 // ##### ENDPOINTS ######
 
-app.listen(port, () => {
-  console.log(`Creeping on Port: ${port}`);
+app.listen(SERVER_PORT, () => {
+  console.log(`Creeping on Port: ${SERVER_PORT}`);
 });
 
