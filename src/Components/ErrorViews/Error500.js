@@ -1,12 +1,12 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Redirect} from 'react-router-dom';
 
 
 export function Error500(props){
     function handleClick(e){
         e.preventDefault();
 
-        this.props.history.push('/');
+        props.history.push('/');
     }
     return (
         <div className='error500'>
