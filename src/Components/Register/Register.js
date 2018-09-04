@@ -1,6 +1,8 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import RegisterHeader from './RegisterHeader';
+import axios from 'axios';
+import * as util from '../../utilities/generalUtilities';
 
 export class Register extends React.Component {
     constructor(props) {
@@ -16,6 +18,8 @@ export class Register extends React.Component {
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.createAccount = this.createAccount.bind(this);
+        this.loginRedirect = this.loginRedirect.bind(this);
+        this.resetForm = this.resetForm.bind(this);
     }
 
 
@@ -25,15 +29,38 @@ export class Register extends React.Component {
 
     createAccount(e) {
         e.preventDefault();
+        
+        let user = Object.assign({}, this.state);
+        
+        if(user.confirmPW === user.pw) {
+            axios.post(`/api/auth/register`, user).then((result) => {
+                this.resetForm();
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
     }
 
     loginRedirect(e) {
         e.preventDefault();
-
         this.props.history.push('/login');
     }
 
+    resetForm(){
+        this.setState({
+            firstName: '',
+            lastName: '',
+            email: '',
+            pw: '',
+            confirmPW: ''  
+        })
+    }
+
     render() {
+        const validPW = (this.state.pw === this.state.confirmPW) && (this.state.confirmPW.length <=25 && this.state.pw.length <=25);
+        const validEmail = util.validateEmail(this.state.email) && this.state.email.length > 0;
+        const submitDisabled = validPW && validEmail && this.state.pw.length > 0 && this.state.confirmPW.length > 0;
+        
         return (
             <div className='regsiter'>
                 <RegisterHeader login={this.loginRedirect}/>
@@ -55,8 +82,19 @@ export class Register extends React.Component {
                             <div className='form-row'>
                                 <input required type='password' name='confirmPW' value={this.state.confirmPW} maxLength={25} placeholder='Confirm Password' onChange={(e)=>this.handleInputChange(e)}/>
                             </div>
-                            <button onClick={(e)=>this.createAccount(e)}>Create An Account</button>
+                            {
+                                validPW ? null : (
+                                    <div className='form-row'>
+                                        Password does not match
+                                    </div>
+                                )
+                            }
+                            
+                            <button disabled={!submitDisabled} type='submit' onClick={(e)=>this.createAccount(e)}>Create An Account</button>
                         </form>
+                        {
+
+                        }
                     </div>
                 </main>
                 
