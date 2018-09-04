@@ -12,6 +12,7 @@ module.exports = {
             confirmPW
         } = req.body
 
+        console.log(req.body);
         if(pw !== confirmPW) {
             res.sendStatus(400);
         };
@@ -47,10 +48,6 @@ module.exports = {
     },
 
     logout: (req, res, next) => {
-        const db = req.app.get('db');
-    },
-
-    register: (req, res, next) => {
         const db = req.app.get('db');
     },
 

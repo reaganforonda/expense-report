@@ -40,7 +40,6 @@ app.post('/api/auth/login', authController.login);
 app.get('/api/auth/logout', authController.logout);
 app.post('/api/auth/register', authController.register);
 
-
 app.listen(SERVER_PORT, () => {
   console.log(`Creeping on Port: ${SERVER_PORT}`);
 });
