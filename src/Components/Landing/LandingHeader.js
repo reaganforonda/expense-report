@@ -13,8 +13,8 @@ export default function LandingHeader(props) {
                 <div>Link</div>
             </menu>
             <div className='btns'>
-                <button>Login</button>
-                <button>Sign Up</button>
+                <button onClick={(e)=>props.register(e)}>Sign Up</button>
+                <button onClick={(e)=>props.login(e)}>Log In</button>
             </div>
         </header>
     )
