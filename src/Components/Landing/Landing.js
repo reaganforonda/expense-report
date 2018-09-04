@@ -14,7 +14,12 @@ export class Landing extends React.Component{
             <div className='landing'>
                 <LandingHeader/>
                 <main>
-                    Main
+                    <div className='main-sec-1'>
+                        <h1>Expenster</h1>
+                    </div>
+                    <div className='main-sec-1'>
+                        
+                    </div>
                 </main>
                 <LandingFooter/>
             </div>
