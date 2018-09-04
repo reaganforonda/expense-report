@@ -18,7 +18,7 @@ const {
     CONNECTION_STRING
 } = process.env;
 
-massive(process.env.CONNECTION_STRING).then(dbInstance => {
+massive(CONNECTION_STRING).then(dbInstance => {
     app.set("db", dbInstance);
 }).catch(e => console.log(`Error: ${e}`));
 
