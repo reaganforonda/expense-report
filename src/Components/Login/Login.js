@@ -14,6 +14,7 @@ export class Login extends React.Component{
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.resetForm = this.resetForm.bind(this);
     }
 
     handleInputChange(e){
@@ -25,9 +26,17 @@ export class Login extends React.Component{
         let user = Object.assign({}, this.state);
 
         axios.post(`/api/auth/login`, user).then((result) => {
+            this.resetForm();
             
         }).catch((err) => {
-            console.log(err);
+            console.log(err.response);
+        })
+    }
+
+    resetForm(){
+        this.setState({
+            email: '',
+            password: ''
         })
     }
 

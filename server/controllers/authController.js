@@ -47,7 +47,7 @@ module.exports = {
 
         const {email, password} = req.body;
 
-        db.GET_EMAIL([email]).then((user) => {
+        db.CHECK_EMAIL([email]).then((user) => {
             if(user.length === 0) {
                 res.sendStatus(401);
             }
