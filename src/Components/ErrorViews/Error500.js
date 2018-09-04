@@ -1,5 +1,5 @@
 import React from 'react';
-import {withRouter, Redirect} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 
 export function Error500(props){
