@@ -16,8 +16,14 @@
 
     .btns {
         display: flex;
+        justify-content: space-between;
     }
 
-    @include for-desktop-up {}
+    @include for-desktop-up {
+        .btns button {
+            width: 100px;
+            height: 25px;
+        }
+    }
     @include for-phone-only {}
 }
