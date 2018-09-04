@@ -12,7 +12,6 @@ module.exports = {
             confirmPW
         } = req.body
 
-        console.log(req.body);
         if(pw !== confirmPW) {
             res.sendStatus(400);
         };
@@ -45,6 +44,31 @@ module.exports = {
     
     login: (req, res, next) => {
         const db = req.app.get('db');
+
+        const {email, password} = req.body;
+
+        db.GET_EMAIL([email]).then((user) => {
+            if(user.length === 0) {
+                res.sendStatus(401);
+            }
+
+            if(user.length !== 0){
+                const userID = user[0].user_id;
+                const userPW = user[0].pw;
+                const confirmedPW = bcrypt.compareSync(password, userPW);
+
+                if(confirmedPW){
+                    req.session.user.user_id = userID;
+                    req.session.user.acct_type = user[0].acct_type;
+                    res.status(200).send(user[0]);
+                } else {
+                    res.sendStatus(401);
+                }
+            }
+        }).catch((err) => {
+            console.log(`Server error while attempting to login user: ${err}`);
+            res.sendStatus(500);
+        })
     },
 
     logout: (req, res, next) => {
