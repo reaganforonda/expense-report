@@ -37,6 +37,7 @@ export class Register extends React.Component {
                 this.resetForm();
             }).catch((err) => {
                 console.log(err);
+                // TODO: 400 error for duplicate emails
             })
         }
     }
