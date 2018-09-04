@@ -8,6 +8,7 @@ const session = require('express-session');
 const dotenv = require("dotenv");
 dotenv.config();
 const authController = require('./controllers/authController');
+const middleware = require('./middlewares/middleware');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -32,6 +33,7 @@ app.use(
     })
 );
 
+app.use(middleware.checkSession);
 
 // ##### ENDPOINTS ######
 // AUTH ENDPOINTS
