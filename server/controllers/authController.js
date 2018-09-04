@@ -60,7 +60,16 @@ module.exports = {
                 if(confirmedPW){
                     req.session.user.user_id = userID;
                     req.session.user.acct_type = user[0].acct_type;
-                    res.status(200).send(user[0]);
+                    let loggedUser = {
+                        user_id : user[0].user_id,
+                        first_name: user[0].first_name,
+                        last_name: user[0].last_name,
+                        title: user[0].title,
+                        department: user[0].department,
+                        company: user[0].company,
+                        acct_type: user[0].acct_type
+                    }
+                    res.status(200).send(loggedUser);
                 } else {
                     res.sendStatus(401);
                 }
