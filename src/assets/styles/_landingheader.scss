@@ -1,3 +1,18 @@
+$test: 1px solid blue;
+$test2: 1px solid red;
+@import './mixins.scss';
+@import './variables.scss';
+
 .landing-header{
-    
+    border: $test;
+    display: flex;
+    justify-content: space-evenly;
+
+    .menu {
+        display: flex;
+    }
+
+    .btns {
+        display: flex;
+    }
 }
