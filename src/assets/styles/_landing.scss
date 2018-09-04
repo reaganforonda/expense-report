@@ -1,0 +1,9 @@
+@import './mixins.scss';
+@import './variables.scss';
+
+.landing {
+    main {
+        background: $grey;
+        margin-top: 81px;
+    }
+}

@@ -1,18 +1,22 @@
-$test: 1px solid blue;
-$test2: 1px solid red;
 @import './mixins.scss';
 @import './variables.scss';
 
-.landing-header{
-    border: $test;
-    display: flex;
-    justify-content: space-evenly;
-
-    .menu {
+.landing-header {
+    @include for-desktop-up {
+        border: $test;
         display: flex;
-    }
+        justify-content: space-evenly;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 81px;
 
-    .btns {
-        display: flex;
+        .menu {
+            display: flex;
+        }
+
+        .btns {
+            display: flex;
+        }
     }
 }
