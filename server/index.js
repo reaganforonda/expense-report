@@ -7,6 +7,7 @@ const massive = require("massive");
 const session = require('express-session');
 const dotenv = require("dotenv");
 dotenv.config();
+const authController = require('./controllers/authController');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -33,6 +34,12 @@ app.use(
 
 
 // ##### ENDPOINTS ######
+// AUTH ENDPOINTS
+app.get('/api/auth/me', authController.validate)
+app.post('/api/auth/login', authController.login);
+app.get('/api/auth/logout', authController.logout);
+app.post('/api/auth/register', authController.register);
+
 
 app.listen(SERVER_PORT, () => {
   console.log(`Creeping on Port: ${SERVER_PORT}`);
