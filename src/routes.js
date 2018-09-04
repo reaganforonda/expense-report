@@ -3,6 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import Landing from './Components/Landing/Landing';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
+import Dashboard from './Components/DashboardView/Dashboard';
 import Error500 from './Components/ErrorViews/Error500';
 
 export default (
@@ -11,5 +12,6 @@ export default (
         <Route path='/register' component={Register}/>
         <Route path='/login' component = {Login} />
         <Route path='/error/500' component = {Error500}/>
+        <Route path='/dashboard' component={Dashboard}/>
     </Switch>
 )
