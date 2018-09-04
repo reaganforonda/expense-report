@@ -2,6 +2,8 @@ import React from 'react';
 import {withRouter} from 'react-router-dom';
 import * as util from '../../utilities/generalUtilities';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {loadUser} from '../../ducks/userReducer';
 
 export class Login extends React.Component{
     constructor(props) {
@@ -26,8 +28,9 @@ export class Login extends React.Component{
         let user = Object.assign({}, this.state);
 
         axios.post(`/api/auth/login`, user).then((result) => {
+            this.props.loadUser(result.data);
+            this.props.history.push('/dashboard');
             this.resetForm();
-            
         }).catch((err) => {
             if(err.response.status === 500){
                 this.props.history.push('/error/500');
@@ -67,4 +70,10 @@ export class Login extends React.Component{
     }
 }
 
-export default withRouter(Login);
+function mapStateToProps(state) {
+    return {
+        user: state.userReducer.user
+    }
+}
+
+export default connect(mapStateToProps, {loadUser})(withRouter(Login));
