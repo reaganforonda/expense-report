@@ -6,4 +6,11 @@
         background: $grey;
         margin-top: 81px;
     }
+
+    @include for-desktop-up {
+        main {
+            height: 600px;
+        }
+    }
+    
 }
