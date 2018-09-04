@@ -1,0 +1,20 @@
+@import './mixins.scss';
+@import './variables.scss';
+
+.sidemenu {
+    border: $test;
+
+    .side-link {
+        text-decoration: none;
+    }
+
+    .active-link {
+        color: pink;
+    }
+
+    @include for-desktop-up {
+        width: 150px;
+        height: 100vh;
+
+    }
+}

@@ -1,0 +1,11 @@
+@import './mixins.scss';
+@import './variables.scss';
+
+.dashboard {
+    display: flex;
+    
+    .main-section {
+        display: flex;
+        flex-direction: column;
+    }
+}
