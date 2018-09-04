@@ -36,7 +36,7 @@ export class Register extends React.Component {
             axios.post(`/api/auth/register`, user).then((result) => {
                 this.resetForm();
             }).catch((err) => {
-                console.log(err);
+                console.log(err.response);
                 // TODO: 400 error for duplicate emails
             })
         }
