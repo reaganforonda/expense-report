@@ -17,7 +17,7 @@ module.exports = {
             res.sendStatus(400);
         };
 
-        if(pw.length > 20 && confirmPW.length > 20 ){
+        if(pw.length > 25 && confirmPW.length > 25 ){
             res.sendStatus(400);
         };
 
