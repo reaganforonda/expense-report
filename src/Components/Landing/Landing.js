@@ -1,5 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import LandingHeader from './LandingHeader';
+import LandingFooter from './LandingFooter';
 
 export class Landing extends React.Component{
     constructor(props) {
@@ -10,7 +12,11 @@ export class Landing extends React.Component{
     render(){
         return (
             <div className='landing'>
-                Landing Page
+                <LandingHeader/>
+                <main>
+                    Main
+                </main>
+                <LandingFooter/>
             </div>
         )
     }
