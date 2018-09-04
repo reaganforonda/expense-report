@@ -15,11 +15,14 @@ export class Dashboard extends React.Component{
         console.log(this.props.user);
         return (
             <div className='dashboard'>
-                <DashboardHeader/>
                 <SideMenu/>
-                <main>
-                    main
-                </main>
+                <div className='main-section'>
+                    <DashboardHeader/>
+                    <main>
+                        main
+                    </main>
+                </div>
+                
             </div>
         )
     }
