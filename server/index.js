@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const massive = require("massive");
+const session = require('express-session');
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -12,7 +13,9 @@ app.use(cors());
 app.use(express.static(`${__dirname}/../build`));
 
 const {
-    SERVER_PORT
+    SERVER_PORT,
+    SECRET_SESSION,
+    CONNECTION_STRING
 } = process.env;
 
 massive(process.env.CONNECTION_STRING).then(dbInstance => {
