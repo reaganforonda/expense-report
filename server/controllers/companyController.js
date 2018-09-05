@@ -9,7 +9,7 @@ module.exports = {
         console.log(req.body);
 
         db.CREATE_COMPANY([name, address, city, state, zipcode, phone, admin]).then((result) => {
-            res.status(200).send(result);
+            res.status(200).send(result[0]);
         }).catch((err) => {
             console.log(`Server error while attempting to create new company: ${err}`);
             res.sendStatus(500);
