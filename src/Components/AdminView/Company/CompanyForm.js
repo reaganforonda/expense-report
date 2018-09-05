@@ -3,6 +3,7 @@ import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as util from '../../../utilities/generalUtilities';
 import {loadCompany} from '../../../ducks/companyReducer';
+import axios from 'axios';
 
 export class CompanyForm extends React.Component{
     constructor(props) {
@@ -39,12 +40,13 @@ export class CompanyForm extends React.Component{
                     state: props.company.state,
                     zipcode: props.company.zipcode,
                     phone: props.company.phone,
-                    editMode: 'Edit'
+                    editMode: 'Edit',
+                    displayForm: true
                 }
             }
         } else {
             return{
-                newCompany: true,
+                displayForm: true,
                 editMode: 'New'
             }
         }
@@ -72,7 +74,9 @@ export class CompanyForm extends React.Component{
         }
 
         if(this.state.editMode === 'New') {
-            console.log(company);
+            axios.post(`/api/company`, company).then((result) => {
+                this.props.loadCompany(result.data);
+            })
         } else if (this.state.editMode = 'Edit') {
             console.log(`Edit: ${company}`)
         }
