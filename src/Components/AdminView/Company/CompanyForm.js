@@ -68,6 +68,7 @@ export class CompanyForm extends React.Component{
         } else if(this.state.editMode === true) {
             e.preventDefault();
             let company = {
+                companyID: this.state.companyID,
                 name: this.state.name,
                 address: this.state.address,
                 city: this.state.address,
@@ -82,7 +83,16 @@ export class CompanyForm extends React.Component{
                     this.props.loadCompany(result.data);
                 })
             } else if (this.state.editMode = true) {
-                console.log(`Edit: ${company}`)
+                axios.put('/api/company', company).then((result) => {
+                    this.props.loadCompany(result.data);
+                    this.setState({
+                        btnText: 'Edit',
+                        editMode: false,
+                        companyID: ''
+                    })
+                }).catch((err) => {
+                    console.log(err.response);
+                })
             }
         }
     }
@@ -100,27 +110,27 @@ export class CompanyForm extends React.Component{
                             <form className='form'>
                                 <div className='form-row'>
                                     <input type='text' name='name' value={this.state.name} placeholder='Company Name' 
-                                        onChange={(e)=>this.handleInputChange(e)}/>
+                                        onChange={(e)=>this.handleInputChange(e)} disabled={!this.state.editMode}/>
                                 </div>
                                 <div className='form-row'>
                                     <input type='text' name='address' value={this.state.address} placeholder='Company Address' 
-                                        onChange={(e)=>this.handleInputChange(e)}/>
+                                        onChange={(e)=>this.handleInputChange(e)} disabled={!this.state.editMode}/>
                                 </div>
                                 <div className='form-row'>
                                     <input type='text' name='city' value={this.state.city} placeholder='Company City' 
-                                        onChange={(e)=>this.handleInputChange(e)}/>
+                                        onChange={(e)=>this.handleInputChange(e)} disabled={!this.state.editMode}/>
                                 </div>
                                 <div className='form-row'>
                                     <input type='text' name='state' value={this.state.state} placeholder='Company State' 
-                                        onChange={(e)=>this.handleInputChange(e)}/>
+                                        onChange={(e)=>this.handleInputChange(e)} disabled={!this.state.editMode}/>
                                 </div>
                                 <div className='form-row'>
                                     <input type='number' name='zipcode' value={this.state.zipcode} placeholder='Company Zip' 
-                                        onChange={(e)=>this.handleInputChange(e)}/>
+                                        onChange={(e)=>this.handleInputChange(e)} disabled={!this.state.editMode}/>
                                 </div>
                                 <div className='form-row'>
                                     <input type='text' name='phone' value={this.state.phone} placeholder='Phone' 
-                                        onChange={(e)=>this.handleInputChange(e)}/>
+                                        onChange={(e)=>this.handleInputChange(e)} disabled={!this.state.editMode}/>
                                 </div>
                                 <div className='form-row'>
                                     <button disabled={disabledBtn} onClick={(e)=>this.handleBtnClick(e)}>{this.state.btnText}</button>
