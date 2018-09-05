@@ -1,2 +1,9 @@
 @import './mixins.scss';
 @import './variables.scss';
+
+.landing-footer{
+    @include for-desktop-up{
+        height: 100px;
+        border: $test;
+    }
+}

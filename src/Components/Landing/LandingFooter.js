@@ -4,7 +4,7 @@ import React from 'react';
 export default function LandingFooter(){
     return (
         <footer className='landing-footer'>
-            Footer
+            <p>Developed by Helius Labs LLC</p>
         </footer>
     )
 }
