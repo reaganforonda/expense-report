@@ -36,7 +36,7 @@ export class Landing extends React.Component{
                         
                     </div>
                 </main>
-                <LandingFooter/>
+                {/* <LandingFooter/> */}
             </div>
         )
     }

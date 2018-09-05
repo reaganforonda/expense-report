@@ -2,6 +2,7 @@
 @import './variables.scss';
 
 .landing {
+    
     main {
         background: #00B4DB;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to top, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
@@ -11,7 +12,7 @@
 
     @include for-desktop-up {
         main {
-            height: 700px;
+            // height: 700px;
         }
     }
     
