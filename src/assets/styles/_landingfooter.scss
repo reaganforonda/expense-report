@@ -4,7 +4,6 @@
 .landing-footer{
     @include for-desktop-up{
         height: 100px;
-        border: $test;
         position: absolute;
         bottom: 0;
         width: 100%;
