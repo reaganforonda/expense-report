@@ -2,6 +2,7 @@ import React from 'react';
 import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {loadDepartments} from '../../../ducks/companyReducer';
+import axios from 'axios';
 
 export class Departments extends React.Component{
     constructor(props){
@@ -9,7 +10,8 @@ export class Departments extends React.Component{
 
         this.state={
             departments: '',
-            displayForm: false
+            displayForm: false,
+            name: ''
         }
 
         this.displayAddForm = this.displayAddForm.bind(this);
@@ -17,11 +19,8 @@ export class Departments extends React.Component{
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    componentDidMount(){
-        this.props.loadDepartments(this.props.company.company_id, this.props.user.user_id)
-    }
-
     static getDerivedStateFromProps(props, state){
+        
         if(props.departments) {
             if(props.departments.legnth !== state.departments.length) {
                 return {
@@ -31,50 +30,59 @@ export class Departments extends React.Component{
         }
     }
 
-    displayAddForm(){
+    displayAddForm(e){
         if(this.state.displayForm === false) {
-            this.state.displayForm === true
+            this.setState({displayForm: true})
         } else if(this.state.displayForm === true ) {
-            this.state.displayForm === false
+            this.setState({displayForm: false});
         }
     }
 
     handleAddDepartment(e) {
         e.preventDefault();
+        let department = {
+            name : this.state.name
+        }
 
-        this.displayAddForm();
-    }
+        axios.post(`/api/department?userID?=${this.props.user.user_id}&companyID=${this.props.company.company_id}`, department).then((result) => {
+            this.props.loadDepartments(this.props.company.company_id, this.props.user.user_id);
+            this.setState({name:'', displayForm: false})
+        }).catch((err) => {
+            console.log(err.response);
+        })
+        
+    }       
 
     handleInputChange(e) {
         this.setState({[e.target.name] : e.target.value})
     }
 
     render(){
+        
         return (
             <div className='department'>
                 {
-                    this.state.displayAddForm ? null : (
+                    this.state.displayForm ? null : (
                     <header>
-                        <button onClick={()=>this.displayAddForm()}>Add New Department</button>
+                        <button onClick={(e)=>this.displayAddForm(e)}>Add New Department</button>
                     </header>
                     )
                 }               
                 <main className='department-main'>
-                {
-                    !this.state.displayAddForm ? null : (
-                        <div className='add-department'>
-                            <form className='add-department-form'>
-                                <div className='add-form-row'>
-                                    <input name='name' placeholder='Department Name'/>
-                                </div>
-                                <div className='add-form-row'>
-                                    <button>Add Department</button>
-                                </div>
-                            </form>
-                        </div>
-                    )
-                }
-            
+                    {
+                        !this.state.displayForm ? null : (
+                            <div className='add-department'>
+                                <form className='add-department-form'>
+                                    <div className='add-form-row'>
+                                        <input value={this.state.name} onChange={(e)=>this.handleInputChange(e)} name='name' placeholder='Department Name'/>
+                                    </div>
+                                    <div className='add-form-row'>
+                                        <button onClick={(e)=>this.handleAddDepartment(e)}>Add Department</button>
+                                    </div>
+                                </form>
+                            </div>
+                        )
+                    }
                 </main>
             </div>
         )

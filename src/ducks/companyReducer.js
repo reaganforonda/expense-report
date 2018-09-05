@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const INITIAL_STATE = {
     company: {},
-    departments: {}
+    departments: {},
+    departmentLoading: true
 }
 
 const LOAD_COMPANY = "LOAD_COMPANY";
@@ -30,9 +31,9 @@ export default function companyReducer(state=INITIAL_STATE, action ) {
     switch(action.type) {
 
         case LOAD_DEPARTMENTS + "_PENDING":
-            return "Loading";
+            return Object.assign({}, state, {departmentLoading: true})
         case LOAD_DEPARTMENTS + "_FULFILLED":
-            return Object.assign({}, state, {departments: action.payload});
+            return Object.assign({}, state, {departments: action.payload, departmentLoading: false});
 
         case LOAD_COMPANY:
             return Object.assign({}, state, {company: action.payload})
