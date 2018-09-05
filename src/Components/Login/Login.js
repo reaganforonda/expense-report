@@ -52,7 +52,7 @@ export class Login extends React.Component{
     }
 
     render(){
-        const disabledSubmit = (this.state.password.length > 0) && (this.state.email.length > 0) && (util.validateEmail(this.state.email));
+        const disabledSubmit = (this.state.password.length > 0) && (this.state.email.length > 0) && (util.validEmail(this.state.email));
         return (
             <div className='login'>
                 <div className='logo-holder'>
