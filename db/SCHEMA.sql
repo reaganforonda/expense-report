@@ -3,9 +3,14 @@ DROP TABLE IF EXISTS acct_type;
 DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS company;
 
-CREATE TABLE company (
+CREATE TABLE companies (
     company_id SERIAL PRIMARY KEY,
-    name VARCHAR(45)
+    name VARCHAR(45),
+    address VARCHAR(45),
+    city VARCHAR(45),
+    state VARCHAR(45),
+    zipcode VARCHAR(45),
+    phone VARCHAR(45)
 );
 
 CREATE TABLE departments(
