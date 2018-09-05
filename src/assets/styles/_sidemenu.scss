@@ -3,18 +3,19 @@
 
 .sidemenu {
     border: $test;
+    background: $darkBlue;
+    height: 100vh;
 
     .side-link {
         text-decoration: none;
     }
 
     .active-link {
-        color: pink;
+        color: $grey;
+        font-size: 16px;
     }
 
     @include for-desktop-up {
         width: 150px;
-        height: 100vh;
-
     }
 }

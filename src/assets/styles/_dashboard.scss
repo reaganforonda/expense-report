@@ -4,8 +4,10 @@
 .dashboard {
     display: flex;
     
+
     .main-section {
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
 }
