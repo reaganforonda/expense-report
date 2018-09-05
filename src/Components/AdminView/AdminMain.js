@@ -13,9 +13,7 @@ export class AdminMain extends React.Component{
         return (
             <div className='admin-main'>
                 <div className='company-profile'>
-
                 </div>
-                
             </div>
         )
     }
