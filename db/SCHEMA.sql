@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS acct_type;
 DROP TABLE IF EXISTS departments;
-DROP TABLE IF EXISTS company;
+DROP TABLE IF EXISTS companies;
 
 CREATE TABLE companies (
     company_id SERIAL PRIMARY KEY,
@@ -15,7 +15,7 @@ CREATE TABLE companies (
 
 CREATE TABLE departments(
     dept_id SERIAL PRIMARY KEY,
-    company_id INTEGER REFERENCES company(company_id)
+    company_id INTEGER REFERENCES companies(company_id)
 );
 
 CREATE TABLE acct_type(
@@ -31,6 +31,6 @@ CREATE TABLE users(
     last_name VARCHAR(45),
     title VARCHAR(45),
     department VARCHAR(45),
-    company INTEGER REFERENCES company(company_id),
+    company INTEGER REFERENCES companies(company_id),
     acct_type INTEGER REFERENCES acct_type(acct_type_id)
 );
