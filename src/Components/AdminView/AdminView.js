@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import AdminViewHeader from './AdminViewHeader';
 import AdminMain from './AdminMain';
 import CompanyForm from './Company/CompanyForm';
+import Departments from './Departments/Departments';
 
 export class AdminView extends React.Component {
     constructor(props) {
@@ -20,6 +21,7 @@ export class AdminView extends React.Component {
                     <Switch>
                         <Route exact path='/dashboard/admin' component={AdminMain}/>
                         <Route path='/dashboard/admin/company' component={CompanyForm}/>
+                        <Route path='/dashboard/admin/departments' component={Departments}/>
                     </Switch>
                 </main>
             </div>

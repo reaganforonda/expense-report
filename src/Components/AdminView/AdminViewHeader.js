@@ -7,6 +7,7 @@ export default function AdminViewHeader(props) {
             <nav className='header-nav'>
                 <NavLink to='/dashboard/admin/main'>Main</NavLink>
                 <NavLink to='/dashboard/admin/company'>Company</NavLink>
+                <NavLink to='/dashboard/admin/departments'>Departments</NavLink>
             </nav>        
         </header>
     )
