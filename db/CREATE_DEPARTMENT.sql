@@ -1,4 +1,5 @@
 INSERT INTO departments
 (name, company_id)
-VALUE
+VALUES
 ($1, $2)
+RETURNING *
