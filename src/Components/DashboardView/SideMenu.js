@@ -6,7 +6,7 @@ export default function SideMenu(props) {
         <div className='sidemenu'>
             <div className='user-section'>
                 <div className='profile-image'>
-                    <img src={require(`../../assets/images/male-avatar.png`)} alt={'profile picture'}/>
+                    <img src={require(`../../assets/images/male-avatar.png`)} alt={'profile-avatar'}/>
                 </div>
                 <div className='profile-name'>
                     {props.user.first_name} {props.user.last_name}
