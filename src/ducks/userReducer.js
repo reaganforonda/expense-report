@@ -5,7 +5,6 @@ const INITIAL_STATE = {
 const LOAD_USER = "LOAD_USER";
 
 export function loadUser(user){
-
     return {
         type: LOAD_USER,
         payload: user
