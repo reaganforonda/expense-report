@@ -5,7 +5,6 @@ const INITIAL_STATE = {
 const LOAD_COMPANY = "LOAD_COMPANY";
 
 export function loadCompany(company){
-    console.log(company);
     return {
         type: LOAD_COMPANY,
         payload: company
