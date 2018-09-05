@@ -12,7 +12,7 @@ export class CompanyForm extends React.Component{
     render(){
         return (
             <div className='company-form'>
-            
+
             </div>
         )
     }
@@ -20,7 +20,8 @@ export class CompanyForm extends React.Component{
 
 function mapStateToProps(state) {
     return {
-        user: state.userReducer.user
+        user: state.userReducer.user,
+        company: state.companyReducer.user
     }
 }
 
