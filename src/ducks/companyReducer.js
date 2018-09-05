@@ -11,8 +11,6 @@ export function loadCompany(company){
     }
 }
 
-
-
 export default function companyReducer(state=INITIAL_STATE, action ) {
     switch(action.type) {
 
