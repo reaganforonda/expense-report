@@ -1,8 +1,12 @@
+import axios from 'axios';
+
 const INITIAL_STATE = {
-    company: {}
+    company: {},
+    departments: {}
 }
 
 const LOAD_COMPANY = "LOAD_COMPANY";
+const LOAD_DEPARTMENTS = "LOAD_DEPARTMENTS";
 
 export function loadCompany(company){
     return {
@@ -11,8 +15,24 @@ export function loadCompany(company){
     }
 }
 
+export function loadDepartments(companyID, userID) {
+    let departments = axios.get(`/api/departments?companyID=${companyID}&userID=${userID}`).then((result) => {
+        return result.data
+    })
+
+    return {
+        type: LOAD_DEPARTMENTS,
+        payload: departments
+    }
+}
+
 export default function companyReducer(state=INITIAL_STATE, action ) {
     switch(action.type) {
+
+        case LOAD_DEPARTMENTS + "_PENDING":
+            return "Loading";
+        case LOAD_DEPARTMENTS + "_FULFILLED":
+            return Object.assign({}, state, {departments: action.payload});
 
         case LOAD_COMPANY:
             return Object.assign({}, state, {company: action.payload})
