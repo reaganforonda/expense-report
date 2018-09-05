@@ -6,8 +6,6 @@ module.exports = {
             state, phone, admin, zipcode
         } = req.body;
 
-        console.log(req.body);
-
         db.CREATE_COMPANY([name, address, city, state, zipcode, phone, admin]).then((result) => {
             res.status(200).send(result[0]);
         }).catch((err) => {
@@ -17,7 +15,18 @@ module.exports = {
     },
 
     editCompany: (req, res) => {
+        const db = req.app.get('db');
+        const {
+            name, address, city,
+            state, phone, admin, zipcode, companyID
+        } = req.body;
 
+        db.UPDATE_COMPANY([name, address, city, state, zipcode, phone, admin, companyID]).then((result) => {
+            res.status(200).send(result[0]);
+        }).catch((err) => {
+            console.log(`Server error while attempting to update company: ${err}`);
+            res.sendStatus(500);
+        })
     },
 
     getCompany: (req, res) => {
