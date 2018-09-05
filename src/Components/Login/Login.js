@@ -4,6 +4,7 @@ import * as util from '../../utilities/generalUtilities';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {loadUser} from '../../ducks/userReducer';
+import {loadCompany} from '../../ducks/companyReducer';
 
 export class Login extends React.Component{
     constructor(props) {
@@ -29,8 +30,13 @@ export class Login extends React.Component{
 
         axios.post(`/api/auth/login`, user).then((result) => {
             this.props.loadUser(result.data);
-            this.props.history.push('/dashboard');
-            this.resetForm();
+            axios.get(`/api/company/${result.data.user_id}`).then((result) => {
+                console.log(result.data[0]);
+                this.props.loadCompany(result.data[0])
+                this.props.history.push('/dashboard');
+                this.resetForm();
+            })
+            
         }).catch((err) => {
             if(err.response.status === 500){
                 this.props.history.push('/error/500');
@@ -76,4 +82,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {loadUser})(withRouter(Login));
+export default connect(mapStateToProps, {loadUser, loadCompany})(withRouter(Login));
