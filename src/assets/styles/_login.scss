@@ -1,0 +1,83 @@
+@import './mixins.scss';
+@import './variables.scss';
+
+.login {
+    height: 100%;
+    width: 100%;
+    background: #2193b0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .logo-holder {
+        width: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 0;
+
+    }
+
+    .logo-holder {
+        font-size: 3em;
+        color: $white;
+        letter-spacing: 4px;
+    }
+
+    .form-container {
+        border: $darkBlue 1px solid ;
+        height: 400px;
+        width: 400px;
+        border-radius: 5px;
+        background: $white;
+        padding: 20px 20px;
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.4);
+        transition: 0.3s;
+    }
+
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 100%;
+    }
+    .form-row{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-row input {
+        width: 90%;
+        padding: 10px 0;
+        font-size: 15px;
+    }
+
+    .form-row input:focus {
+        outline: 0;
+        border: 1px solid $blue;
+    }
+
+    .form-row button {
+        width: 80px;
+        padding: 5px;
+        outline: 0;
+        border: 0;
+        border-radius: 4px;
+        border: solid 1px $grey;
+        
+    }
+
+    .form-row button:enabled {
+        background: $blue;
+        color: $white;
+        cursor: pointer;
+    }
+
+    
+ }

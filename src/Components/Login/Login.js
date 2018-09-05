@@ -56,7 +56,7 @@ export class Login extends React.Component{
         return (
             <div className='login'>
                 <div className='logo-holder'>
-                    Expenster
+                    <h1>Expenster</h1>
                 </div>
                 <article className='form-container'>
                     <form className='login-form'>
