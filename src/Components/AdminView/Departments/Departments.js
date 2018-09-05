@@ -3,6 +3,7 @@ import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {loadDepartments} from '../../../ducks/companyReducer';
 import axios from 'axios';
+import DepartmentList from './DepartmentList';
 
 export class Departments extends React.Component{
     constructor(props){
@@ -83,6 +84,7 @@ export class Departments extends React.Component{
                             </div>
                         )
                     }
+                    <DepartmentList userID={this.props.user.user_id} companyID={this.props.company.company_id}/>
                 </main>
             </div>
         )
