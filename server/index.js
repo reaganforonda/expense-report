@@ -47,6 +47,7 @@ app.post('/api/auth/register', authController.register);
 app.post('/api/company', companyController.createNewCompany);
 app.get('/api/company/:userID', companyController.getCompany);
 app.put('/api/company', companyController.editCompany);
+app.get('/api/departments', companyController.getDepartments)
 
 app.listen(SERVER_PORT, () => {
   console.log(`Creeping on Port: ${SERVER_PORT}`);
