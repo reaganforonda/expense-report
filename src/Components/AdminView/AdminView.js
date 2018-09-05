@@ -1,7 +1,9 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-
+import AdminViewHeader from './AdminViewHeader';
+import AdminMain from './AdminMain';
+import CompanyForm from './Company/CompanyForm';
 
 export class AdminView extends React.Component {
     constructor(props) {
@@ -13,7 +15,13 @@ export class AdminView extends React.Component {
     render(){
         return (
             <div className='admin-view'>
-                Admin View
+                <AdminViewHeader/>
+                <main>
+                    <Switch>
+                        <Route exact path='/dashboard/admin' component={AdminMain}/>
+                        <Route path='/dashboard/admin/company' component={CompanyForm}/>
+                    </Switch>
+                </main>
             </div>
         )
     }
