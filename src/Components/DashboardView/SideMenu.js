@@ -12,8 +12,13 @@ export default function SideMenu(props) {
                     {props.user.first_name} {props.user.last_name}
                 </div>
             </div>
-            <nav>
+            <nav className='nav-menu'>
                 <NavLink className='side-link' activeClassName='active-link' exact to='/dashboard'>Home</NavLink>
+                {
+                    props.user.acct_type === 1 ? <NavLink className='side-link' activeClassName='active-link' to='/dashboard/admin'>Admin</NavLink> : (
+                        null
+                    )
+                }
             </nav>
         </div>
     )

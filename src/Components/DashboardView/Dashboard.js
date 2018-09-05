@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Switch, Route} from 'react-router-dom';
 import DashboardHeader from './DashboardHeader';
 import SideMenu from './SideMenu';
 import Loading from '../Loading/Loading';
+import AdminView from '../AdminView/AdminView';
 
 export class Dashboard extends React.Component{
     constructor(props){
@@ -22,7 +23,9 @@ export class Dashboard extends React.Component{
                 <div className='main-section'>
                     <DashboardHeader/>
                     <main>
-                        main
+                        <Switch>
+                            <Route path='/dashboard/admin' component={AdminView}/>
+                        </Switch>
                     </main>
                 </div>
             </div>)
