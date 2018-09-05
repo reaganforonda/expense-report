@@ -18,9 +18,9 @@ export class Dashboard extends React.Component{
         return (
             (!this.props.user || this.props.user === {}) ? <Loading/> : (
             <div className='dashboard'>
-                <SideMenu/>
+                <SideMenu user={this.props.user}/>
                 <div className='main-section'>
-                    <DashboardHeader user={this.props.user}/>
+                    <DashboardHeader/>
                     <main>
                         main
                     </main>

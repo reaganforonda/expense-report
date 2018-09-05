@@ -2,7 +2,7 @@
 @import './variables.scss';
 
 .sidemenu {
-    border: $test;
+    
     background: $darkBlue;
     height: 100vh;
 
@@ -17,5 +17,17 @@
 
     @include for-desktop-up {
         width: 150px;
+
+        .user-section {
+            height: 81px;
+            background: $blue;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 5px;
+        }
+
+        
     }
 }
