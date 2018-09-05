@@ -44,12 +44,24 @@ module.exports = {
     getDepartments: (req, res) => {
         const db = req.app.get('db');
         const {companyID, userID} = req.query;
-        console.log(req.query);
 
         db.GET_DEPARTMENTS([companyID, userID]).then((result) => {
             res.status(200).send(result);
         }).catch((err) => {
             console.log(`Server error while atttempting to retrieve departments: ${err}`);
+            res.sendStatus(500);
+        })
+    },
+
+    addDepartment: (req, res) => {
+        const db = req.app.get('db');
+        const {companyID, userID} = req.query;
+        const {name} = req.body;
+
+        db.CREATE_DEPARTMENT([name, companyID]).then((result) => {
+            res.status(200).send(result[0])
+        }).catch((err) => {
+            console.log(`Server error while attempting to create new department: ${err}`);
             res.sendStatus(500);
         })
     }
