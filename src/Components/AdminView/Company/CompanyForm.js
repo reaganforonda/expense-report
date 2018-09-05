@@ -19,9 +19,9 @@ export class CompanyForm extends React.Component{
             zipcode: '',
             phone: '',
             displayForm: false,
-            editMode: '',
-            newCompanyBtn: 'Create Compoany',
-            btnText: 'Edit'
+            editMode: false,
+            btnText: 'Edit',
+            newCompany: false
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -40,14 +40,15 @@ export class CompanyForm extends React.Component{
                     state: props.company.state,
                     zipcode: props.company.zipcode,
                     phone: props.company.phone,
-                    editMode: 'Edit',
                     displayForm: true
                 }
             }
         } else {
             return{
                 displayForm: true,
-                editMode: 'New'
+                editMode: true,
+                newCompany: true,
+                btnText: "Save"
             }
         }
     }
@@ -62,34 +63,38 @@ export class CompanyForm extends React.Component{
 
     handleBtnClick(e) {
         e.preventDefault();
-
-        let company = {
-            name: this.state.name,
-            address: this.state.address,
-            city: this.state.address,
-            state: this.state.state,
-            zipcode: this.state.zipcode,
-            phone: this.state.phone,
-            admin: this.state.userID
-        }
-
-        if(this.state.editMode === 'New') {
-            axios.post(`/api/company`, company).then((result) => {
-                this.props.loadCompany(result.data);
-            })
-        } else if (this.state.editMode = 'Edit') {
-            console.log(`Edit: ${company}`)
+        if(this.state.editMode === false) {
+            this.setState({editMode: true, btnText: 'Save'})
+        } else if(this.state.editMode === true) {
+            e.preventDefault();
+            let company = {
+                name: this.state.name,
+                address: this.state.address,
+                city: this.state.address,
+                state: this.state.state,
+                zipcode: this.state.zipcode,
+                phone: this.state.phone,
+                admin: this.state.userID
+            }
+    
+            if(this.state.newCompany === true) {
+                axios.post(`/api/company`, company).then((result) => {
+                    this.props.loadCompany(result.data);
+                })
+            } else if (this.state.editMode = true) {
+                console.log(`Edit: ${company}`)
+            }
         }
     }
 
     render(){
         let disabledBtn = !(util.validCity(this.state.city) && util.validZipCode(this.state.zipcode) && util.validState(this.state.state) && util.validAddress(this.state.address));
-        
+
         return (
             <div className='company-form'>
                 {
                     !this.state.displayForm ? <div className='new-company-btn-container'>
-                        <button onClick={(e)=>this.handleNewCompanyClick(e)} >{this.state.newCompanyBtn}</button>
+                        <button onClick={(e)=>this.handleNewCompanyClick(e)} >Create New Company</button>
                     </div> : (
                         <div className='company-form-container'>
                             <form className='form'>
@@ -132,7 +137,7 @@ export class CompanyForm extends React.Component{
 function mapStateToProps(state) {
     return {
         user: state.userReducer.user,
-        company: state.companyReducer.user
+        company: state.companyReducer.company
     }
 }
 

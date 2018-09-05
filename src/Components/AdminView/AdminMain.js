@@ -23,7 +23,8 @@ export class AdminMain extends React.Component{
 
 function mapStateToProps(state) {
     return {
-        user: state.userReducer.user
+        user: state.userReducer.user,
+        company: state.companyReducer.company
     }
 }
 

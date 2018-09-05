@@ -14,8 +14,6 @@ export class Dashboard extends React.Component{
     }
 
     render(){
-        console.log(this.props.user)
-        console.log(this.props.user === {})
         return (
             (!this.props.user || this.props.user === {}) ? <Loading/> : (
             <div className='dashboard'>
@@ -35,7 +33,8 @@ export class Dashboard extends React.Component{
 
 function mapStateToProps(state) {
     return {
-        user: state.userReducer.user
+        user: state.userReducer.user,
+        company: state.companyReducer.company
     }
 }
 
