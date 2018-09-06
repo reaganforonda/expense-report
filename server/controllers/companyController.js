@@ -74,8 +74,27 @@ module.exports = {
 
     createEmployee: (req, res) => {
         const db = req.app.get('db');
-        const {} = req.body;
+        const {
+            company,
+            firstName,
+            lastName,
+            department,
+            title,
+            workPhone,
+            email,
+            user
+        } = req.body;
 
+        console.log(user.rights.Admin)
+        if(user.rights.Admin) {
+            db.CREATE_EMPLOYEE([company, department, firstName, lastName, title, workPhone, email]).then((result) => {
+                res.status(200).send(result[0])
+            }).catch((err)=> {
+                console.log(`Server error while attempting to create employee: ${err}`)
+            })
+        } else {
+            res.sendStatus(401);
+        }
 
     }
 }
