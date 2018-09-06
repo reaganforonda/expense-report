@@ -1,3 +1,4 @@
+DROP TABLE IF EXITS employees;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS companies;
@@ -41,5 +42,17 @@ CREATE TABLE departments(
 CREATE TABLE roles (
     role_id SERIAL PRIMARY KEY,
     tile VARCHAR(45),
-    description VARCHAR(45)
-)
+    description VARCHAR(45),
+    rights JSONB
+);
+
+CREATE TABLE employees {
+    employee_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(45),
+    last_name VARCHAR(45),
+    department INTEGER REFERENCES departments(department_id),
+    title VARCHAR(45),
+    work_phone VARCHAR(20),
+    email VARCHAR(20),
+    rights JSONB
+};
