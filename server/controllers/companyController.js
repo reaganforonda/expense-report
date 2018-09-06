@@ -64,5 +64,11 @@ module.exports = {
             console.log(`Server error while attempting to create new department: ${err}`);
             res.sendStatus(500);
         })
+    },
+
+    getEmployees: (req, res) => {
+        const db = req.app.get('db');
+
+        
     }
 }

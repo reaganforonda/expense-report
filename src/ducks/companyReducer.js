@@ -3,11 +3,19 @@ import axios from 'axios';
 const INITIAL_STATE = {
     company: {},
     departments: {},
-    departmentLoading: true
+    departmentLoading: true,
+    employees: {},
+    employeesLoading: true
 }
 
 const LOAD_COMPANY = "LOAD_COMPANY";
 const LOAD_DEPARTMENTS = "LOAD_DEPARTMENTS";
+const LOAD_EMPLOYEES = "LOAD_EMPLOYEES";
+
+export function loadEmployees(companID, userID){
+    
+
+}
 
 export function loadCompany(company){
     return {
