@@ -1,0 +1,47 @@
+@import './mixins.scss';
+@import './variables.scss';
+
+
+.register-header {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 81px;
+    padding: 10px 0;
+    background: $white;
+
+    .logo {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo h1 {
+        font-size: 3em;
+        color: $blue
+    }
+
+    .btns {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 50%;
+    }
+
+    .btns button {
+        margin-right: 30px;
+        background: none;
+        border-radius: 4px;
+        border: 1px solid $blue;
+        color: $blue;
+        outline: 0;
+        cursor: pointer;
+    }
+    @include for-desktop-up {
+        .btns button {
+            width: 100px;
+            height: 25px;
+        }
+    }
+}
