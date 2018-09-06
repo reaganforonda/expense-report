@@ -42,6 +42,7 @@ export class AddEmployeeForm extends React.Component {
         e.preventDefault();
 
         let employee = {
+            company: this.state.companyID,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             department: this.state.department,
