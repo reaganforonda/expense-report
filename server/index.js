@@ -50,7 +50,7 @@ app.put('/api/company', companyController.editCompany);
 app.get('/api/departments', companyController.getDepartments);
 app.post('/api/department', companyController.addDepartment);
 app.get('/api/employees', companyController.getEmployees);
-
+app.post('/api/employees', companyController.createEmployee);
 
 app.listen(SERVER_PORT, () => {
   console.log(`Creeping on Port: ${SERVER_PORT}`);
