@@ -9,6 +9,7 @@ export class Register extends React.Component {
         super(props);
 
         this.state={
+            acct_type: '',
             firstName: '',
             lastName: '',
             email: '',
@@ -20,6 +21,8 @@ export class Register extends React.Component {
         this.createAccount = this.createAccount.bind(this);
         this.loginRedirect = this.loginRedirect.bind(this);
         this.resetForm = this.resetForm.bind(this);
+        this.setEnterpise = this.setEnterpise.bind(this);
+        this.setIndividual = this.setIndividual.bind(this);
     }
 
 
@@ -50,12 +53,21 @@ export class Register extends React.Component {
 
     resetForm(){
         this.setState({
+            acct_type: '',
             firstName: '',
             lastName: '',
             email: '',
             pw: '',
             confirmPW: ''  
         })
+    }
+
+    setEnterpise() {
+        this.setState({acct_type: 1})
+    }
+
+    setIndividual() {
+        this.setState({acct_type: 1})
     }
 
     render() {
@@ -72,6 +84,12 @@ export class Register extends React.Component {
                             <h2>Sign Up</h2>
                         </div>
                         <form className='register-form'>
+                            <div className='form-row'>
+                                <div className='form-row-btns'>
+                                    <button type='button' onClick={()=>this.setEnterpise()}>Enterpise</button>
+                                    <button type='button' onClick={()=>this.setIndividual()} disabled={true}>Individual</button>
+                                </div>
+                            </div>
                             <div className='form-row'>
                                 <input required type='text' name="firstName" value={this.state.firstName} placeholder='First Name' onChange={(e)=>this.handleInputChange(e)}/>
                             </div>
