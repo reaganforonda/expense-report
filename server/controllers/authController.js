@@ -81,10 +81,17 @@ module.exports = {
     },
 
     logout: (req, res, next) => {
-        const db = req.app.get('db');
+        req.session.destroy();
+        res.status(200).send();
     },
 
     validate: (req, res, next) => {
-        const db = req.app.get('db');
+        let user = req.session.user;
+
+        if(req.session.user.user_id) {
+            res.status(200).send(user);
+        } else {
+            res.status(401).send('Unauthorized');
+        }
     }
 }
