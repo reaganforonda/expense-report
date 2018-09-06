@@ -58,6 +58,7 @@
 --     rights JSONB
 -- );
 
+DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS companies;
 DROP TABLE IF EXISTS enterprise_users;
@@ -98,7 +99,7 @@ CREATE TABLE departments (
 
 CREATE TABLE employees (
     employee_id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES enterprise_user(user_id),
+    user_id INTEGER REFERENCES enterprise_users(user_id),
     company INTEGER REFERENCES companies(company_id),
     department INTEGER REFERENCES departments(dept_id),
     first_name VARCHAR(45),
@@ -106,9 +107,5 @@ CREATE TABLE employees (
     title VARCHAR(45),
     work_phone VARCHAR(45),
     email VARCHAR(45),
-    rights JSON NOT NULL '{
-        "Admin":false,
-        "Approve": false,
-        "Expense": false
-    }'
+    rights JSONB NOT NULL DEFAULT '{"Admin":false, "Approve":false, "Expense":false}'::JSONB
 );
