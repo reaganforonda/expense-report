@@ -8,6 +8,7 @@ export default function AdminViewHeader(props) {
                 <NavLink to='/dashboard/admin/main'>Main</NavLink>
                 <NavLink to='/dashboard/admin/company'>Company</NavLink>
                 <NavLink to='/dashboard/admin/departments'>Departments</NavLink>
+                <NavLink to='/dashboard/admin/employees'>Employees</NavLink>
             </nav>        
         </header>
     )
