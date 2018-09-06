@@ -32,7 +32,6 @@ export class Login extends React.Component{
         axios.post(`/api/auth/login`, user).then((result) => {
             this.props.loadUser(result.data);
             axios.get(`/api/company/${result.data.user_id}`).then((result) => {
-                console.log(result.data[0]);
                 this.props.loadCompany(result.data[0])
                 this.props.history.push('/dashboard');
                 this.resetForm();
