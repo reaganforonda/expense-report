@@ -73,7 +73,7 @@ export class Register extends React.Component {
     render() {
         const validPW = (this.state.pw === this.state.confirmPW) && (this.state.confirmPW.length <=25 && this.state.pw.length <=25);
         const validEmail = util.validEmail(this.state.email) && this.state.email.length > 0;
-        const submitDisabled = validPW && validEmail && this.state.pw.length > 0 && this.state.confirmPW.length > 0;
+        const submitDisabled = validPW && validEmail && this.state.pw.length > 0 && this.state.confirmPW.length > 0 && (this.state.acct_type === 1 || this.state.acct_type ===2)
         
         return (
             <div className='register'>
