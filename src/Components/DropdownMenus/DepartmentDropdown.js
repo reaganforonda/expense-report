@@ -4,7 +4,7 @@ export default function DepartmentDropdown(props) {
 
     let depts = props.departments.map((department, index) => {
         return (
-            <option value={department.name} key={~~department.department_id + index}>{department.name}</option>
+            <option value={department.dept_id} key={~~department.dept_id + index}>{department.name}</option>
         )
     })
 
