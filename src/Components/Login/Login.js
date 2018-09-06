@@ -12,7 +12,8 @@ export class Login extends React.Component{
 
         this.state={
             email: '',
-            password: ''
+            password: '',
+            error: false
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -40,6 +41,8 @@ export class Login extends React.Component{
         }).catch((err) => {
             if(err.response.status === 500){
                 this.props.history.push('/error/500');
+            } else if (err.response.status===401){
+                this.setState({error: true})
             }
         })
     }
@@ -47,7 +50,8 @@ export class Login extends React.Component{
     resetForm(){
         this.setState({
             email: '',
-            password: ''
+            password: '',
+            error: false
         })
     }
 
@@ -70,7 +74,11 @@ export class Login extends React.Component{
                             <button disabled={!disabledSubmit} onClick={(e)=>this.handleSubmit(e)}>Login</button>
                         </div>
                     </form>
+                    {
+                    this.state.error ? (<div className='form-row'><div className='error'>Incorrect Email or Password</div></div>) : null
+                }
                 </article>
+                
             </div>
         )
     }
