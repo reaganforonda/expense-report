@@ -93,7 +93,7 @@ module.exports = {
                         title: user[0].title,
                         department: user[0].department,
                         acct_type: user[0].account_type,
-                        right: user[0].rights
+                        rights: user[0].rights
                     }
                     res.status(200).send(loggedUser);
                 } else {
