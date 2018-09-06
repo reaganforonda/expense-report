@@ -62,6 +62,7 @@ DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS companies;
 DROP TABLE IF EXISTS enterprise_users;
+DROP TABLE IF EXISTS individual_users;
 DROP TABLE IF EXISTS account_types;
 
 CREATE TABLE account_types (
@@ -70,6 +71,18 @@ CREATE TABLE account_types (
 );
 
 CREATE TABLE enterprise_users(
+    user_id SERIAL PRIMARY KEY,
+    account_type INTEGER REFERENCES account_types(acct_id),
+    email VARCHAR(45),
+    pw TEXT,
+    first_name VARCHAR(45),
+    last_name VARCHAR(45),
+    tempPassword VARCHAR(15),
+    tempExpiration TIMESTAMPTZ,
+    lastLogin TIMESTAMPTZ
+);
+
+CREATE TABLE individual_users(
     user_id SERIAL PRIMARY KEY,
     account_type INTEGER REFERENCES account_types(acct_id),
     email VARCHAR(45),
