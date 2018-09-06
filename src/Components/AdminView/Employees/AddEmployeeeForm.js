@@ -65,7 +65,7 @@ export class AddEmployeeForm extends React.Component {
     }
 
     render(){
-        let disabled = (this.state.firstName.length < 1) && (this.state.lastName.length < 1) && (this.state.department === '') && (this.state.title.length < 1) && (this.state.workPhone.length < 1) && (!util.validEmail(this.state.email))
+        let disabled = ((this.state.firstName.length < 1) || (this.state.lastName.length < 1) || (this.state.department === '') || (this.state.title.length < 1) || (this.state.workPhone.length < 1) || (!util.validEmail(this.state.email)))
         return (
             this.props.departmentLoading ? <Loading/> : (
             <div className='employee-form'>
