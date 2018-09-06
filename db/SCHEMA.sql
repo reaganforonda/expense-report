@@ -48,6 +48,7 @@ CREATE TABLE roles (
 
 CREATE TABLE employees (
     employee_id SERIAL PRIMARY KEY,
+    company INTEGER REFERENCES companies(company_id);
     first_name VARCHAR(45),
     last_name VARCHAR(45),
     department INTEGER REFERENCES departments(dept_id),
