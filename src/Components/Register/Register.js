@@ -35,6 +35,7 @@ export class Register extends React.Component {
         if(user.confirmPW === user.pw) {
             axios.post(`/api/auth/register`, user).then((result) => {
                 this.resetForm();
+                this.props.history.push('/login');
             }).catch((err) => {
                 console.log(err.response);
                 // TODO: 400 error for duplicate emails
@@ -67,6 +68,9 @@ export class Register extends React.Component {
                 <RegisterHeader login={this.loginRedirect}/>
                 <main className='main'>
                     <div className='form-container'>
+                        <div className='form-header'> 
+                            <h2>Sign Up</h2>
+                        </div>
                         <form className='register-form'>
                             <div className='form-row'>
                                 <input required type='text' name="firstName" value={this.state.firstName} placeholder='First Name' onChange={(e)=>this.handleInputChange(e)}/>
@@ -86,12 +90,14 @@ export class Register extends React.Component {
                             {
                                 validPW ? null : (
                                     <div className='form-row'>
-                                        Password does not match
+                                        <p>Password does not match</p>
                                     </div>
                                 )
                             }
+                            <div className='form-row'>
                             
-                            <button disabled={!submitDisabled} type='submit' onClick={(e)=>this.createAccount(e)}>Create An Account</button>
+                                <button disabled={!submitDisabled} type='submit' onClick={(e)=>this.createAccount(e)}>Sign Up</button>
+                            </div>
                         </form>
                         {
 
