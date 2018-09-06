@@ -29,13 +29,14 @@ CREATE TABLE companies(
     city VARCHAR(45),
     state VARCHAR(45),
     zipcode INTEGER,
-    phone VARCHAR(45)
+    phone VARCHAR(45),
+    admin INTEGER REFERENCES users(user_id)
 );
 
 CREATE TABLE departments (
     dept_id SERIAL PRIMARY KEY,
     company INTEGER REFERENCES companies(company_id),
-    description VARCHAR(45)
+    name VARCHAR(45)
 );
 
 CREATE TABLE employees (
