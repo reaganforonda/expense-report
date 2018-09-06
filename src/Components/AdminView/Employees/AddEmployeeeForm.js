@@ -48,10 +48,16 @@ export class AddEmployeeForm extends React.Component {
             department: this.state.department,
             title: this.state.title,
             workPhone: this.state.workPhone,
-            email: this.state.email
+            email: this.state.email,
+            user: this.props.user
         }
 
-        console.log(employee);
+        axios.post('/api/employees', employee).then((result) => {
+            console.log(result);
+        }).catch((err) => {
+            console.log(err.response);
+            
+        })
     }
 
     resetForm() {
