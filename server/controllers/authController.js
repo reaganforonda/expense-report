@@ -5,12 +5,17 @@ module.exports = {
     register : async (req, res, next) => {
         const db = req.app.get('db');
         const {
+            acct_type,
             firstName,
             lastName,
             email,
             pw,
             confirmPW
         } = req.body
+
+        let lowerEmail = email.toLowerCase();
+
+        console.log(req.body);
 
         if(pw !== confirmPW) {
             res.sendStatus(400);
@@ -20,34 +25,55 @@ module.exports = {
             res.sendStatus(400);
         };
 
-        await db.CHECK_EMAIL([email]).then((users) => {
-            if(users.length !== 0){
-                if(users[0].email === email) {
-                    res.status(400).send('Please Login')
-                }
-            } else {
-                const salt = bcrypt.genSaltSync(10);
-                const hash = bcrypt.hashSync(confirmPW, salt);
+        if(acct_type === 1) {
+            await db.CHECK_EMAIL([lowerEmail]).then((users) => {
+                if(users.length !== 0) {
+                    if(users[0].email === lowerEmail) {
+                        res.status(400).send('Please Login');
+                    }
+                } else {
+                    const salt = bcrypt.genSaltSync(10);
+                    const hash = bcrypt.hashSync(confirmPW, salt);
+                    const rights= {
+                        "Admin" : true,
+                        "Approve" : false,
+                        "Expense" : false
+                    }
 
-                db.CREATE_USER([email, hash, firstName, lastName, 1]).then((user) => {
-                    res.status(200).send('User Created');
-                }).catch((err) => {
-                    console.log(`Server error while attempting to create user: ${err}`);
-                    res.sendStatus(500);
-                })
-            }
-        }).catch((err) => {
-            console.log(`Server error while attempting to search emails: ${err}`);
-            res.sendStatus(500);
-        })
+                    db.CREATE_ENTERPRISE_USER([acct_type, lowerEmail, hash, firstName, lastName, rights]).then((user) => {
+                        res.status(200).send('User Created');
+                    }).catch((err) => {
+                        console.log(`Server error while attemtping to create enterprise user: ${err}`);
+                    })
+                }
+            })
+        } else if(acct_type === 2) {
+            await db.CHECK_EMAIL([lowerEmail]).then((users) => {
+                if(users.length !== 0) {
+                    if(users[0].email === lowerEmail) {
+                        res.status(400).send('Please Login');
+                    }
+                } else {
+                    const salt = bcrypt.genSaltSync(10);
+                    const hash = bcrypt.hashSync(confirmPW, salt);
+
+                    db.CREATE_INDIVIDUAL_USER([acct_type, lowerEmail, hash, firstName, lastName]).then((user) => {
+                        res.status(200).send('User Created');
+                    }).catch((err) => {
+                        console.log(`Server error while attemtping to create enterprise user: ${err}`);
+                    })
+                }
+            })
+        }
     },
     
     login: (req, res, next) => {
         const db = req.app.get('db');
 
         const {email, password} = req.body;
+        let lowerEmail = email.toLowerCase();
 
-        db.CHECK_EMAIL([email]).then((user) => {
+        db.CHECK_EMAIL([lowerEmail]).then((user) => {
             if(user.length === 0) {
                 res.sendStatus(401);
             }
@@ -59,15 +85,14 @@ module.exports = {
 
                 if(confirmedPW){
                     req.session.user.user_id = userID;
-                    req.session.user.acct_type = user[0].acct_type;
+                    req.session.user.acct_type = user[0].account_type;
                     let loggedUser = {
                         user_id : user[0].user_id,
                         first_name: user[0].first_name,
                         last_name: user[0].last_name,
                         title: user[0].title,
                         department: user[0].department,
-                        company: user[0].company,
-                        acct_type: user[0].acct_type
+                        acct_type: user[0].account_type
                     }
                     res.status(200).send(loggedUser);
                 } else {
