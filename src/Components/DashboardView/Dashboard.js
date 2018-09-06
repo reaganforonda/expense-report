@@ -5,12 +5,25 @@ import DashboardHeader from './DashboardHeader';
 import SideMenu from './SideMenu';
 import Loading from '../Loading/Loading';
 import AdminView from '../AdminView/AdminView';
+import axios from 'axios';
 
 export class Dashboard extends React.Component{
     constructor(props){
         super(props);
 
         this.state={}
+
+        this.handleLogout = this.handleLogout.bind(this);
+    }
+
+    handleLogout(e) {
+        e.preventDefault();
+
+        axios.get('/api/auth/logout').then((res) => {
+            this.props.history.push('/');
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 
     render(){
@@ -19,7 +32,7 @@ export class Dashboard extends React.Component{
             <div className='dashboard'>
                 <SideMenu user={this.props.user}/>
                 <div className='main-section'>
-                    <DashboardHeader/>
+                    <DashboardHeader logout={this.handleLogout}/>
                     <main>
                         <Switch>
                             <Route path='/dashboard/admin' component={AdminView}/>
