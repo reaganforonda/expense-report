@@ -71,7 +71,7 @@ export class CompanyForm extends React.Component{
                 companyID: this.state.companyID,
                 name: this.state.name,
                 address: this.state.address,
-                city: this.state.address,
+                city: this.state.city,
                 state: this.state.state,
                 zipcode: this.state.zipcode,
                 phone: this.state.phone,
