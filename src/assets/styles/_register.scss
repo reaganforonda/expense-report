@@ -88,4 +88,14 @@
         color: $red;
         font-weight: 900;
     }
+
+    .form-row-btns{
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+
+        button{
+            font-size: 14px;
+        }
+    }
 }
