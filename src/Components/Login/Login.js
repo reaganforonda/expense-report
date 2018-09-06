@@ -36,8 +36,13 @@ export class Login extends React.Component{
                 this.props.loadCompany(result.data[0])
                 this.props.history.push('/dashboard');
                 this.resetForm();
-            })
-            
+            }).catch((err) => {
+                if(err.response.status === 500){
+                    this.props.history.push('/error/500');
+                } else if (err.response.status===401){
+                    this.setState({error: true})
+                }
+            })  
         }).catch((err) => {
             if(err.response.status === 500){
                 this.props.history.push('/error/500');
