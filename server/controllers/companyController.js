@@ -70,5 +70,12 @@ module.exports = {
         const db = req.app.get('db');
 
         
+    },
+
+    createEmployee: (req, res) => {
+        const db = req.app.get('db');
+        const {} = req.body;
+
+
     }
 }
