@@ -39,10 +39,8 @@ export class Landing extends React.Component{
                     </section>
                     <section className='mid-section'>
                         <div>
-                            <input type='email' placeholder='Enter Your Email'/>
-                        </div>
-                        <div>
                             <p>Enter your email to contact us</p>
+                            <input type='email' placeholder='Enter Your Email'/>
                         </div>
                     </section>
                 </main>

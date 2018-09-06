@@ -41,6 +41,7 @@
         border: 1px solid $blue;
         color: $blue;
         outline: 0;
+        cursor: pointer;
     }
 
     @include for-desktop-up {

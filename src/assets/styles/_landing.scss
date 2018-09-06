@@ -43,11 +43,18 @@
             display: flex;
             justify-content: space-evenly;
             align-items: center;
-
         }
 
         .mid-section div {
-            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mid-section div>p{
+            padding: 30px 0;
         }
     }
 
@@ -60,7 +67,6 @@
 
             .mid-section {
                 height: 400px;
-                
             }
         }
     }
