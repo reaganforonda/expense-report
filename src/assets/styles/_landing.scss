@@ -2,17 +2,66 @@
 @import './variables.scss';
 
 .landing {
-    
+    position: relative;
+    height: 100%;
     main {
         background: #00B4DB;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to top, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to top, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         margin-top: 81px;
+        min-height: 100%;
+                
+        .top-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .top-section div {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .top-section div h1{
+            font-size: 5em;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: $white;
+        }
+        .top-section div p{
+            
+            font-size: 2em;
+            width: 400px;
+            padding: 10px 10px;
+            color: $white;
+        }
+        .mid-section {
+            background: $white;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+        }
+
+        .mid-section div {
+            width: 50%;
+        }
     }
+
 
     @include for-desktop-up {
         main {
-            // height: 700px;
+            .top-section {
+                height: 600px;
+            }
+
+            .mid-section {
+                height: 400px;
+                
+            }
         }
     }
     

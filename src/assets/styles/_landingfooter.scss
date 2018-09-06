@@ -2,10 +2,13 @@
 @import './variables.scss';
 
 .landing-footer{
+    background: $darkBlue;
+    color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     @include for-desktop-up{
         height: 100px;
-        position: absolute;
-        bottom: 0;
         width: 100%;
     }
 }

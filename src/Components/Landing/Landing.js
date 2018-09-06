@@ -29,14 +29,24 @@ export class Landing extends React.Component{
             <div className='landing'>
                 <LandingHeader register={this.handleRegisterBtn} login={this.handleLoginBtn}/>
                 <main>
-                    <div className='main-sec-1'>
-                        <h1>Expenster</h1>
-                    </div>
-                    <div className='main-sec-1'>
-                        
-                    </div>
+                    <section className='top-section'>
+                        <div>
+                            <h1>Expenster</h1>
+                        </div>
+                        <div>
+                            <p>Expense Report Management Software</p>
+                        </div>
+                    </section>
+                    <section className='mid-section'>
+                        <div>
+                            <input type='email' placeholder='Enter Your Email'/>
+                        </div>
+                        <div>
+                            <p>Enter your email to contact us</p>
+                        </div>
+                    </section>
                 </main>
-                {/* <LandingFooter/> */}
+                <LandingFooter/>
             </div>
         )
     }
