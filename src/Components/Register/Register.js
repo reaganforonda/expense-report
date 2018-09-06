@@ -63,7 +63,7 @@ export class Register extends React.Component {
         const submitDisabled = validPW && validEmail && this.state.pw.length > 0 && this.state.confirmPW.length > 0;
         
         return (
-            <div className='regsiter'>
+            <div className='register'>
                 <RegisterHeader login={this.loginRedirect}/>
                 <main className='main'>
                     <div className='form-container'>
