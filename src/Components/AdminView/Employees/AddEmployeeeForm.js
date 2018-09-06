@@ -29,7 +29,30 @@ export class AddEmployeeForm extends React.Component {
             <div className='employee-form'>
                 <form className='form'>
                     <div className='form-row'>
-                        <input type='text' name='firstName' value={this.state.firstName} />
+                        <input type='text' name='firstName' value={this.state.firstName} onChange={(e)=>this.handleInputChange(e)} 
+                            placeholder='First Name'/>
+                    </div>
+                    <div className='form-row'>
+                        <input type='text' name='lastName' value={this.state.lastName} onChange={(e)=>this.handleInputChange(e)} 
+                            placeholder='First Name'/>
+                    </div>
+                    <div className='form-row'>
+                        Department
+                    </div>
+                    <div className='form-row'>
+                        <input type='text' name='title' value={this.state.title} onChange={(e)=>this.handleInputChange(e)} 
+                            placeholder='Title'/>
+                    </div>
+                    <div className='form-row'>
+                        <input type='text' name='workPhone' value={this.state.workPhone} onChange={(e)=>this.handleInputChange(e)} 
+                            placeholder='Work Phone'/>
+                    </div>
+                    <div className='form-row'>
+                        <input type='email' name='email' value={this.state.email} onChange={(e)=>this.handleInputChange(e)} 
+                            placeholder='Email'/>
+                    </div>
+                    <div className='form-row'>
+                        <button>Add Employee</button>
                     </div>
                 </form>
             </div>
@@ -45,4 +68,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {loadCompany})(withRouter(AddEmployeeForm))
+export default connect(mapStateToProps, {})(withRouter(AddEmployeeForm))

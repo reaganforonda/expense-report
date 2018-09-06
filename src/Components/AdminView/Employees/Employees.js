@@ -1,6 +1,7 @@
 import React from 'react';
 import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
+import AddEmployeeForm from './AddEmployeeeForm';
 
 export class Employees extends React.Component{
     constructor(props) {
@@ -9,10 +10,19 @@ export class Employees extends React.Component{
         this.state={}
     }
 
+
+
     render(){
         return(
             <div className='employees'>
-                Employees
+                <div>
+
+                </div>
+                <AddEmployeeForm />
+                <main>
+
+                </main>
+
             </div>
         )
     }
