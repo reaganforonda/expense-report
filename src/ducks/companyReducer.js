@@ -12,9 +12,15 @@ const LOAD_COMPANY = "LOAD_COMPANY";
 const LOAD_DEPARTMENTS = "LOAD_DEPARTMENTS";
 const LOAD_EMPLOYEES = "LOAD_EMPLOYEES";
 
-export function loadEmployees(companID, userID){
-    
+export function loadEmployees(companyID, userID){
+    let employees = axios.get(`/api/departments?companyID=${companyID}&userID=${userID}`).then((result) => {
+        return result.data
+    })
 
+    return {
+        type: LOAD_EMPLOYEES,
+        payload: employees
+    }
 }
 
 export function loadCompany(company){
@@ -37,6 +43,11 @@ export function loadDepartments(companyID, userID) {
 
 export default function companyReducer(state=INITIAL_STATE, action ) {
     switch(action.type) {
+
+        case LOAD_EMPLOYEES + "_PENDING":
+            return Object.assign({}, state, {employeesLoading: true});
+        case LOAD_EMPLOYEES + "_FULFILLED":
+            return Object.assign({}, state, {employees: action.payload, employeesLoading: false});
 
         case LOAD_DEPARTMENTS + "_PENDING":
             return Object.assign({}, state, {departmentLoading: true})
