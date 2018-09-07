@@ -17,7 +17,7 @@ export class EmployeeList extends React.Component{
 
     handleEmployeeSelect(e, employee){
         e.preventDefault();
-
+        console.log(employee);
         this.props.selectEmployee(employee);
         this.props.history.push('/dashboard/admin/employees-detail')
     }

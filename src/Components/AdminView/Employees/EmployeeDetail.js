@@ -15,7 +15,7 @@ export class EmployeeDetail extends React.Component {
             lastName: '',
             title: '',
             department: '',
-            work_phone: '',
+            workPhone: '',
             email: '',
             lockMode: true,
             btnText: 'Edit'
@@ -31,10 +31,10 @@ export class EmployeeDetail extends React.Component {
                     employee_id: props.selectedEmployee.employee_id,
                     department: props.selectedEmployee.name,
                     firstName: props.selectedEmployee.first_name,
-                    lastName: props.selectedEmployee.last_Name,
+                    lastName: props.selectedEmployee.last_name,
                     title: props.selectedEmployee.title,
                     email: props.selectedEmployee.email,
-                    work_phone: props.selectedEmployee.work_phone
+                    workPhone: props.selectedEmployee.work_phone
                 }
             }
         }
@@ -55,7 +55,7 @@ export class EmployeeDetail extends React.Component {
     }
 
     render(){ 
-        
+        console.log(this.props.selectedEmployee)
         return (
             this.props.selectedLoading ? <Loading/> :(
             <div className='employee-detail'>
@@ -71,7 +71,14 @@ export class EmployeeDetail extends React.Component {
                             <input name='firstName' type='text' value={this.state.firstName} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
                         </div>
                         <div className='form-row'>
-                            <input name='lastName' type='text' value={this.state.lasttName} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
+                            <input name='lastName' type='text' value={this.state.lastName} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
+                        </div>
+                        
+                        <div className='form-row'>
+                            <input name='email' type='email' value={this.state.email} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
+                        </div>
+                        <div className='form-row'>
+                            <input name='workPhone' type='text' value={this.state.workPhone} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
                         </div>
                         <div className='form-row'>
                             <div className='row-buttons'>
