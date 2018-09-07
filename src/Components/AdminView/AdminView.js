@@ -6,6 +6,7 @@ import AdminMain from './AdminMain';
 import CompanyForm from './Company/CompanyForm';
 import Departments from './Departments/Departments';
 import Employees from './Employees/Employees';
+import EmployeeDetail from './Employees/EmployeeDetail';
 
 export class AdminView extends React.Component {
     constructor(props) {
@@ -24,6 +25,7 @@ export class AdminView extends React.Component {
                         <Route path='/dashboard/admin/company' component={CompanyForm}/>
                         <Route path='/dashboard/admin/departments' component={Departments}/>
                         <Route path='/dashboard/admin/employees' component={Employees}/>
+                        <Route path='/dashboard/admin/employees/detail' component={EmployeeDetail}/>
                     </Switch>
                 </main>
             </div>
