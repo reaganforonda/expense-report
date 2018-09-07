@@ -101,6 +101,24 @@ module.exports = {
         } else {
             res.sendStatus(401);
         }
+    },
 
+    updateEmployee: (req, res) => {
+        const db= req.app.get('db');
+
+        const {company, 
+            firstName, 
+            lastName, 
+            department, 
+            title, 
+            workPhone, 
+            email, 
+            user
+        } = req.body
+
+        const {employeeID} = req.params
+
+        console.log(req.body);
+        console.log(req.params);
     }
 }
