@@ -13,7 +13,7 @@ const LOAD_DEPARTMENTS = "LOAD_DEPARTMENTS";
 const LOAD_EMPLOYEES = "LOAD_EMPLOYEES";
 
 export function loadEmployees(companyID, userID){
-    let employees = axios.get(`/api/departments?companyID=${companyID}&userID=${userID}`).then((result) => {
+    let employees = axios.get(`/api/employees?companyID=${companyID}&userID=${userID}`).then((result) => {
         return result.data
     })
 
