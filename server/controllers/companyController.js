@@ -69,9 +69,10 @@ module.exports = {
 
     getEmployees: (req, res) => {
         const db = req.app.get('db');
-        const {companyID, userID} = req.query;
+        const {companyID, employeeID, userID} = req.query;
+        console.log(req.query);
 
-        db.GET_EMPLOYEES([companyID, userID]).then((result) => {
+        db.GET_EMPLOYEES([companyID, employeeID]).then((result) => {
             res.status(200).send(result);
         }).catch((err) => {
             console.log(`Server error while attempting to retrieve employees: ${err}`);
