@@ -11,7 +11,11 @@ export function Error500(props){
     return (
         <div className='error500'>
             <main>
-                Error 500
+                <div>
+                    <h1>Oopps....</h1>
+                    <p>Something Went Wrong</p>
+                    <p>Error: 500</p>
+                </div>
                 <div>
                     <button onClick={(e)=>handleClick(e)}>Home</button>
                 </div>
