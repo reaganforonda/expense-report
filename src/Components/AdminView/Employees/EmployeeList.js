@@ -12,7 +12,7 @@ export class EmployeeList extends React.Component{
     }
 
     componentDidMount(){
-        this.props.loadEmployees(this.props.companyID, this.props.userID)
+        this.props.loadEmployees(this.props.companyID)
     }
 
     render(){

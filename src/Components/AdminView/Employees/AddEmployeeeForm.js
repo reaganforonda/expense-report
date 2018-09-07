@@ -54,7 +54,7 @@ export class AddEmployeeForm extends React.Component {
 
         axios.post('/api/employees', employee).then((result) => {
             this.resetForm();
-            this.props.loadEmployees(this.props.company.company_id, this.props.user.user_id);
+            this.props.loadEmployees(this.props.company.company_id);
             this.props.toggleForm();
         }).catch((err) => {
             console.log(err.response);
