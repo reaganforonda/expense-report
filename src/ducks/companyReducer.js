@@ -5,15 +5,25 @@ const INITIAL_STATE = {
     departments: {},
     departmentLoading: true,
     employees: {},
-    employeesLoading: true
+    employeesLoading: true,
+    selectedEmployee: {},
+    selectedLoading: true
 }
 
 const LOAD_COMPANY = "LOAD_COMPANY";
 const LOAD_DEPARTMENTS = "LOAD_DEPARTMENTS";
 const LOAD_EMPLOYEES = "LOAD_EMPLOYEES";
+const SELECT_EMPLOYEE = "SELECT_EMPLOYEE";
 
-export function loadEmployees(companyID, userID){
-    let employees = axios.get(`/api/employees?companyID=${companyID}&userID=${userID}`).then((result) => {
+export function selectEmployee(employee) {
+    return {
+        type: SELECT_EMPLOYEE,
+        payload: employee
+    }
+}
+
+export function loadEmployees(companyID){
+    let employees = axios.get(`/api/employees?companyID=${companyID}`).then((result) => {
         return result.data
     })
 
@@ -57,6 +67,8 @@ export default function companyReducer(state=INITIAL_STATE, action ) {
         case LOAD_COMPANY:
             return Object.assign({}, state, {company: action.payload})
 
+        case SELECT_EMPLOYEE:
+            return Object.assign({}, state, {selectedEmployee: action.payload, selectedEmployee: false})
         default:
             return state;
     }
