@@ -68,7 +68,7 @@ export default function companyReducer(state=INITIAL_STATE, action ) {
             return Object.assign({}, state, {company: action.payload})
 
         case SELECT_EMPLOYEE:
-            return Object.assign({}, state, {selectedEmployee: action.payload, selectedEmployee: false})
+            return Object.assign({}, state, {selectedEmployee: action.payload, selectedLoading: false})
         default:
             return state;
     }
