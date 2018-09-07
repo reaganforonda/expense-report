@@ -4,12 +4,14 @@ import {connect} from 'react-redux';
 import Loading from '../../Loading/Loading';
 import axios from 'axios';
 import DepartmentDropdown from '../../DropdownMenus/DepartmentDropdown';
+import {loadEmployees,selectEmployee} from '../../../ducks/companyReducer';
 
 export class EmployeeDetail extends React.Component {
     constructor(props) {
         super(props);
 
         this.state ={
+            companyID: '',
             employee_id: '',
             firstName:'',
             lastName: '',
@@ -24,14 +26,18 @@ export class EmployeeDetail extends React.Component {
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleDisplayOptions = this.handleDisplayOptions.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
+        this.handleSaveEdit = this.handleSaveEdit.bind(this);
     }
 
     static getDerivedStateFromProps(props, state){
         if(props.selectedEmployee) {
             if(props.selectedEmployee.employee_id !== state.employee_id) {
                 return {
+                    companyID : props.selectedEmployee.company,
                     employee_id: props.selectedEmployee.employee_id,
-                    department: props.selectedEmployee.name,
+                    department: props.selectedEmployee.department,
                     firstName: props.selectedEmployee.first_name,
                     lastName: props.selectedEmployee.last_name,
                     title: props.selectedEmployee.title,
@@ -52,17 +58,24 @@ export class EmployeeDetail extends React.Component {
             this.setState({lockMode: false, btnText: "Save"})
         } else if (this.state.lockMode === false){
             let updatedEmployee ={
-                employee_id: this.state.employee_id,
+                company: this.state.companyID,
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
                 title: this.state.title,
                 department: this.state.department,
                 workPhone: this.state.workPhone,
                 email: this.state.email,
+                user: this.props.user
             }
 
-            console.log(updatedEmployee);
-            
+            axios.put(`/api/employees?employeeID=${this.state.employee_id}`, updatedEmployee).then((result) => {
+                this.props.loadEmployees(this.props.company.company_id, this.props.user.user_id);
+                
+                this.setState({lockMode: true, btnText: "Edit"});
+            }).catch((err) => {
+                console.log(err.response);
+                
+            })
         }
     }
 
@@ -71,6 +84,12 @@ export class EmployeeDetail extends React.Component {
             this.setState({displayDetail: false, displayOptions: true})
         } else if (this.state.displayOptions===true) {
             this.setState({displayDetail: true, displayOptions: false})
+        }
+    }
+
+    handleCancel(){
+        if(this.state.lockMode === false) {
+            this.setState({lockMode: true})
         }
     }
 
@@ -104,8 +123,16 @@ export class EmployeeDetail extends React.Component {
                         </div>
                         <div className='form-row'>
                             <div className='row-buttons'>
+                            {
+                                this.state.lockMode ? null : (<button type='button' onClick={()=>this.handleCancel()}>Cancel</button>)
+                            }
                                 <button onClick={(e)=>this.handleSaveEdit(e)}>{this.state.btnText}</button>
-                                <button type='button' onClick={()=>this.handleDisplayOptions()}>Account Options</button>
+                                {
+                                    this.state.lockMode ?(
+
+                                        <button type='button' onClick={()=>this.handleDisplayOptions()}>Account Options</button>
+                                    ) : null
+                                }
                             </div>
                         </div>
                     </form>
@@ -116,7 +143,8 @@ export class EmployeeDetail extends React.Component {
                     {
                         this.state.displayOptions ? (<div className='employee-account-info'>
                             <div>
-                                Active Account
+                                <h2>{this.state.firstName} {this.state.lastName}</h2>
+                                <h3>Expenster Account Options</h3>
                             </div>
                             <div>
                                 Rights
@@ -143,10 +171,11 @@ export class EmployeeDetail extends React.Component {
 function mapStateToProps(state) {
     return {
         user: state.userReducer.user,
+        company: state.companyReducer.company,
         departments: state.companyReducer.departments,
         selectedEmployee: state.companyReducer.selectedEmployee,
         selectedLoading: state.companyReducer.selectedLoading
     }
 }
 
-export default connect(mapStateToProps, {})(withRouter(EmployeeDetail))
+export default connect(mapStateToProps, {loadEmployees})(withRouter(EmployeeDetail))

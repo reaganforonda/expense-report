@@ -27,7 +27,7 @@ export class EmployeeList extends React.Component{
         if(this.props.employeesLoading === false) {
             employees = this.props.employees.map((employee, index) => {
                 return (
-                    <div onClick={(e)=>this.handleEmployeeSelect(e, employee)}className='employee-row' key={~~employee.employee_id + index}>
+                    <div onClick={(e)=>this.handleEmployeeSelect(e, employee)}className='employee-row' key={~~employee.employee_id + employee.last_name + index}>
                         <div>{employee.first_name} {employee.last_name}</div>
                         <div>{employee.name}</div>
                         <div>{employee.title}</div>
