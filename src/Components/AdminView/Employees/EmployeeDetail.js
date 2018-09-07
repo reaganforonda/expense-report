@@ -18,7 +18,9 @@ export class EmployeeDetail extends React.Component {
             workPhone: '',
             email: '',
             lockMode: true,
-            btnText: 'Edit'
+            btnText: 'Edit',
+            displayOptions: false,
+            displayDetail: true,
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -48,9 +50,27 @@ export class EmployeeDetail extends React.Component {
         e.preventDefault();
         if(this.state.lockMode === true){
             this.setState({lockMode: false, btnText: "Save"})
+        } else if (this.state.lockMode === false){
+            let updatedEmployee ={
+                employee_id: this.state.employee_id,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                title: this.state.title,
+                department: this.state.department,
+                workPhone: this.state.workPhone,
+                email: this.state.email,
+            }
 
-        } else {
+            console.log(updatedEmployee);
+            
+        }
+    }
 
+    handleDisplayOptions () {
+        if(this.state.displayOptions===false ) {
+            this.setState({displayDetail: false, displayOptions: true})
+        } else if (this.state.displayOptions===true) {
+            this.setState({displayDetail: true, displayOptions: false})
         }
     }
 
@@ -60,7 +80,9 @@ export class EmployeeDetail extends React.Component {
             this.props.selectedLoading ? <Loading/> :(
             <div className='employee-detail'>
                 <div className='employee-profile'>
-                    <form className='profile-form'>
+                {
+                    this.state.displayDetail ? (
+                        <form className='profile-form'>
                         <div className='form-row'>
                             <input name='title' type='text' value={this.state.title} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
                         </div>
@@ -83,13 +105,35 @@ export class EmployeeDetail extends React.Component {
                         <div className='form-row'>
                             <div className='row-buttons'>
                                 <button onClick={(e)=>this.handleSaveEdit(e)}>{this.state.btnText}</button>
-                                <button>Account Options</button>
+                                <button type='button' onClick={()=>this.handleDisplayOptions()}>Account Options</button>
                             </div>
                         </div>
                     </form>
-                    <div className='employee-account-info'>
+                    ) : null
+                }
 
-                    </div>
+
+                    {
+                        this.state.displayOptions ? (<div className='employee-account-info'>
+                            <div>
+                                Active Account
+                            </div>
+                            <div>
+                                Rights
+                            </div>
+                            <div>
+                                Reset Password
+                            </div>
+                            <div>
+                                Deactive Account
+                            </div>
+                            <div>
+                                <button type='button' onClick={()=>this.handleDisplayOptions()}>Cancel</button>
+                                <button type='button'>Save</button>
+                            </div>
+                        </div>) :null
+                    }
+                    
                 </div>
             </div>)
         )
