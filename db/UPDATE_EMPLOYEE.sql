@@ -6,3 +6,5 @@ SET department = $1,
     work_phone = $5,
     email = $6
 WHERE employees.employee_id  = $7
+AND employees.company = $8
+returning *
