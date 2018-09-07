@@ -2,6 +2,7 @@ import React from 'react';
 import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {loadDepartments} from '../../../ducks/companyReducer';
+import Loading from '../../Loading/Loading';
 
 export class DepartmentList extends React.Component {
     constructor(props) {
@@ -29,7 +30,7 @@ export class DepartmentList extends React.Component {
         return (
             <div className='department-list'>
                 {
-                    this.props.company.departmentLoading ? <div>Loading</div> : <div>{departments}</div>
+                    this.props.company.departmentLoading ? <Loading/>: <div>{departments}</div>
                 }
             </div>
         )

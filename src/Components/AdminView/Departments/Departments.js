@@ -59,7 +59,7 @@ export class Departments extends React.Component{
     }
 
     render(){
-        
+        let disabled = this.state.name.length < 1;
         return (
             <div className='department'>
                 {
@@ -78,7 +78,7 @@ export class Departments extends React.Component{
                                         <input value={this.state.name} onChange={(e)=>this.handleInputChange(e)} name='name' placeholder='Department Name'/>
                                     </div>
                                     <div className='add-form-row'>
-                                        <button onClick={(e)=>this.handleAddDepartment(e)}>Add Department</button>
+                                        <button disabled={disabled} onClick={(e)=>this.handleAddDepartment(e)}>Add Department</button>
                                     </div>
                                 </form>
                             </div>
