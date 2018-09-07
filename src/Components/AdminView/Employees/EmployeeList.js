@@ -21,9 +21,8 @@ export class EmployeeList extends React.Component{
             employees = this.props.employees.map((employee, index) => {
                 return (
                     <div className='employee-row' key={~~employee.employee_id + index}>
-                        <div>{employee.first_name}</div>
-                        <div>{employee.last_name}</div>
-                        <div>{employee.department}</div>
+                        <div>{employee.first_name} + {employee.last_name}</div>
+                        <div>{employee.name}</div>
                         <div>{employee.title}</div>
                         <div>{employee.email}</div>
                         <div>{employee.work_phone}</div>
@@ -33,6 +32,13 @@ export class EmployeeList extends React.Component{
         }
         return (
             <div className='employee-list'>
+                <div className='employee-list-header'>
+                    <div className='header-col'>Name</div>
+                    <div className='header-col'>Department</div>
+                    <div className='header-col'>Title</div>
+                    <div className='header-col'>Email</div>
+                    <div className='header-col'>Phone</div>
+                </div>
                 {employees}
             </div>
         )
