@@ -44,6 +44,7 @@ module.exports = {
     getDepartments: (req, res) => {
         const db = req.app.get('db');
         const {companyID, userID} = req.query;
+        
 
         db.GET_DEPARTMENTS([companyID, userID]).then((result) => {
             res.status(200).send(result);
@@ -68,8 +69,14 @@ module.exports = {
 
     getEmployees: (req, res) => {
         const db = req.app.get('db');
+        const {companyID, userID} = req.query;
 
-        
+        db.GET_EMPLOYEES([companyID, userID]).then((result) => {
+            res.status(200).send(result);
+        }).catch((err) => {
+            console.log(`Server error while attempting to retrieve employees: ${err}`);
+            res.sendStatus(500);
+        });
     },
 
     createEmployee: (req, res) => {
@@ -84,8 +91,6 @@ module.exports = {
             email,
             user
         } = req.body;
-
-        console.log(user.rights.Admin)
         if(user.rights.Admin) {
             db.CREATE_EMPLOYEE([company, department, firstName, lastName, title, workPhone, email]).then((result) => {
                 res.status(200).send(result[0])
