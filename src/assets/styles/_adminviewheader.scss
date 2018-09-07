@@ -1,2 +1,28 @@
 @import './mixins.scss';
 @import './variables.scss';
+
+
+.admin-view-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    border-bottom: 1px solid $darkBlue;
+    
+    .header-nav {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        NavLink
+    }
+
+    @include for-desktop-up {
+        height: 35px;
+
+        .header-nav {
+            width: 50%;
+            
+        }
+    }
+}
