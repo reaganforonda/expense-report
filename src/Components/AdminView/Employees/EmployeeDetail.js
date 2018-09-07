@@ -16,18 +16,50 @@ export class EmployeeDetail extends React.Component {
             department: '',
             work_phone: '',
             email: '',
+            lockMode: true
+        }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if(props.selectedEmployee) {
+
         }
     }
 
-    componentDidMount = async () => {
-        await axios.get(`/api/employees?employeeID=${this.props.employee.employee}`)
+    handleInputChange(e) {
+        this.setState({[e.target.name]: e.target.value})
     }
-
 
     render(){ 
         return (
             <div className='employee-detail'>
-            
+                <div className='employee-profile'>
+                    <form className='profile-form'>
+                        <div className='form-row'>
+                            <input name='title' type='text' value={this.state.title} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
+                        </div>
+                        <div className='form-row'>
+                            Department
+                        </div>
+                        <div className='form-row'>
+                            <input name='firstName' type='text' value={this.state.firstName} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
+                        </div>
+                        <div className='form-row'>
+                            <input name='lastName' type='text' value={this.state.lasttName} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
+                        </div>
+                        <div className='form-row'>
+                            <div className='row-buttons'>
+                                <button>Save/Edit</button>
+                                <button>Account Options</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div className='employee-account-info'>
+
+                    </div>
+                </div>
             </div>
         )
     }
