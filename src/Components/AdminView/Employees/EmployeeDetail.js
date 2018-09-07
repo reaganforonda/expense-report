@@ -55,7 +55,7 @@ export class EmployeeDetail extends React.Component {
     }
 
     render(){ 
-        console.log(this.props.selectedEmployee)
+        
         return (
             this.props.selectedLoading ? <Loading/> :(
             <div className='employee-detail'>
