@@ -12,7 +12,7 @@ export default function DepartmentDropdown(props) {
     }
 
     return (
-        <select onChange={(e)=>props.handleSelect(e)} name='department' className='dept-dropdown'>
+        <select disabled={props.disabled} onChange={(e)=>props.handleSelect(e)} name='department' className='dept-dropdown'>
             <option value='' disabled selected>Department</option>
             {depts}
         </select>

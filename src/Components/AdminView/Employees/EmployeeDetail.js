@@ -3,7 +3,7 @@ import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Loading from '../../Loading/Loading';
 import axios from 'axios';
-
+import DepartmentDropdown from '../../DropdownMenus/DepartmentDropdown';
 
 export class EmployeeDetail extends React.Component {
     constructor(props) {
@@ -65,7 +65,7 @@ export class EmployeeDetail extends React.Component {
                             <input name='title' type='text' value={this.state.title} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
                         </div>
                         <div className='form-row'>
-                            Department
+                            <DepartmentDropdown disabled={this.state.lockMode} handleSelect={this.handleInputChange} departments={this.props.departments}/>
                         </div>
                         <div className='form-row'>
                             <input name='firstName' type='text' value={this.state.firstName} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
@@ -99,6 +99,7 @@ export class EmployeeDetail extends React.Component {
 function mapStateToProps(state) {
     return {
         user: state.userReducer.user,
+        departments: state.companyReducer.departments,
         selectedEmployee: state.companyReducer.selectedEmployee,
         selectedLoading: state.companyReducer.selectedLoading
     }

@@ -7,6 +7,8 @@ import CompanyForm from './Company/CompanyForm';
 import Departments from './Departments/Departments';
 import Employees from './Employees/Employees';
 import EmployeeDetail from './Employees/EmployeeDetail';
+import {loadDepartments} from '../../ducks/companyReducer';
+import Loading from '../Loading/Loading';
 
 export class AdminView extends React.Component {
     constructor(props) {
@@ -15,8 +17,13 @@ export class AdminView extends React.Component {
         this.state = {}
     }
 
+    componentDidMount(){
+        this.props.loadDepartments(this.props.company.company_id, this.props.user.user_id);
+    }
+
     render(){
         return (
+            this.props.company ? (
             <div className='admin-view'>
                 <AdminViewHeader/>
                 <main>
@@ -28,15 +35,16 @@ export class AdminView extends React.Component {
                         <Route path='/dashboard/admin/employees-detail' component={EmployeeDetail}/>
                     </Switch>
                 </main>
-            </div>
+            </div>) : null
         )
     }
 }
 
 function mapStateToProps(state) {
     return {
-        user: state.userReducer.user
+        user: state.userReducer.user,
+        company: state.companyReducer.company
     }
 }
 
-export default connect(mapStateToProps, {})(withRouter(AdminView));
+export default connect(mapStateToProps, {loadDepartments})(withRouter(AdminView));
