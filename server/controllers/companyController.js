@@ -70,7 +70,6 @@ module.exports = {
     getEmployees: (req, res) => {
         const db = req.app.get('db');
         const {companyID, employeeID, userID} = req.query;
-        console.log(req.query);
 
         db.GET_EMPLOYEES([companyID, employeeID]).then((result) => {
             res.status(200).send(result);
@@ -116,9 +115,19 @@ module.exports = {
             user
         } = req.body
 
-        const {employeeID} = req.params
+        const {employeeID} = req.param
 
         console.log(req.body);
-        console.log(req.params);
+        console.log(req.query);
+
+        if(user.rights.Admin ) {
+            db.UPDATE_EMPLOYEE([]).then((result) => {
+                res.status(200).send(result[0]);
+            }).catch((err) => {
+                console.log(`Server error while attempting to create employee: ${err}`);
+            })
+        } else {
+            res.sendStatus(401);
+        }
     }
 }
