@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Loading from '../../Loading/Loading';
 import axios from 'axios';
 
+
 export class EmployeeDetail extends React.Component {
     constructor(props) {
         super(props);
@@ -16,15 +17,26 @@ export class EmployeeDetail extends React.Component {
             department: '',
             work_phone: '',
             email: '',
-            lockMode: true
+            lockMode: true,
+            btnText: 'Edit'
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    static getDerivedStateFromProps(props, state) {
+    static getDerivedStateFromProps(props, state){
         if(props.selectedEmployee) {
-
+            if(props.selectedEmployee.employee_id !== state.employee_id) {
+                return {
+                    employee_id: props.selectedEmployee.employee_id,
+                    department: props.selectedEmployee.name,
+                    firstName: props.selectedEmployee.first_name,
+                    lastName: props.selectedEmployee.last_Name,
+                    title: props.selectedEmployee.title,
+                    email: props.selectedEmployee.email,
+                    work_phone: props.selectedEmployee.work_phone
+                }
+            }
         }
     }
 
@@ -32,8 +44,20 @@ export class EmployeeDetail extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
+    handleSaveEdit(e) {
+        e.preventDefault();
+        if(this.state.lockMode === true){
+            this.setState({lockMode: false, btnText: "Save"})
+
+        } else {
+
+        }
+    }
+
     render(){ 
+        
         return (
+            this.props.selectedLoading ? <Loading/> :(
             <div className='employee-detail'>
                 <div className='employee-profile'>
                     <form className='profile-form'>
@@ -51,7 +75,7 @@ export class EmployeeDetail extends React.Component {
                         </div>
                         <div className='form-row'>
                             <div className='row-buttons'>
-                                <button>Save/Edit</button>
+                                <button onClick={(e)=>this.handleSaveEdit(e)}>{this.state.btnText}</button>
                                 <button>Account Options</button>
                             </div>
                         </div>
@@ -60,7 +84,7 @@ export class EmployeeDetail extends React.Component {
 
                     </div>
                 </div>
-            </div>
+            </div>)
         )
     }
 }
@@ -68,6 +92,8 @@ export class EmployeeDetail extends React.Component {
 function mapStateToProps(state) {
     return {
         user: state.userReducer.user,
+        selectedEmployee: state.companyReducer.selectedEmployee,
+        selectedLoading: state.companyReducer.selectedLoading
     }
 }
 

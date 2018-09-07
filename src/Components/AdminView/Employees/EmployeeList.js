@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {loadEmployees} from '../../../ducks/companyReducer';
+import {loadEmployees, selectEmployee} from '../../../ducks/companyReducer';
 import Loading from '../../Loading/Loading';
 
 export class EmployeeList extends React.Component{
@@ -15,13 +15,20 @@ export class EmployeeList extends React.Component{
         this.props.loadEmployees(this.props.companyID)
     }
 
+    handleEmployeeSelect(e, employee){
+        e.preventDefault();
+
+        this.props.selectEmployee(employee);
+        this.props.history.push('/dashboard/admin/employees-detail')
+    }
+
     render(){
         let employees = [];
         if(this.props.employeesLoading === false) {
             employees = this.props.employees.map((employee, index) => {
                 return (
-                    <div className='employee-row' key={~~employee.employee_id + index}>
-                        <div>{employee.first_name} + {employee.last_name}</div>
+                    <div onClick={(e)=>this.handleEmployeeSelect(e, employee)}className='employee-row' key={~~employee.employee_id + index}>
+                        <div>{employee.first_name} {employee.last_name}</div>
                         <div>{employee.name}</div>
                         <div>{employee.title}</div>
                         <div>{employee.email}</div>
@@ -55,4 +62,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {loadEmployees})(withRouter(EmployeeList))
+export default connect(mapStateToProps, {loadEmployees, selectEmployee})(withRouter(EmployeeList))
