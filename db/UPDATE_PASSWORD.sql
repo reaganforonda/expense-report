@@ -1,4 +1,7 @@
-INSERT INTO users
-(pw, temppassword, tempexpiration, lastlogin)
-VALUES
-($1, null, null, $2)
+UPDATE users
+SET pw=$3,
+    temppassword=null,
+    tempexpiration=null,
+    lastlogin=$4
+WHERE user_id = $1
+AND email = $2
