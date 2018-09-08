@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS expense,
+DROP TABLE IF EXISTS expense_reports;
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS companies;
@@ -50,3 +52,24 @@ CREATE TABLE employees (
     work_phone VARCHAR(45),
     email VARCHAR(45)
 );
+
+CREATE TABLE expense_reports (
+    report_id SERIAL PRIMARY KEY,
+    report_number VARCHAR(10),
+    employee INTEGER REFERENCES employees(employee_id),
+    date DATE,
+    description VARCHAR(50),
+    approved BOOLEAN
+)
+
+CREATE TABLE expense (
+    expense_id SERIAL PRIMARY KEY,
+    report_id INTEGER REFERENCES expense_reports(report_id)
+    date Date,
+    merchant VARCHAR(45),
+    amount NUMERIC,
+    category VARCHAR(45),
+    comment VARCHAR(100),
+    tag TEXT[],
+    img TEXT
+)
