@@ -100,7 +100,8 @@ module.exports = {
                             department: user[0].department,
                             acct_type: user[0].account_type,
                             rights: user[0].rights,
-                            updatePWRequired: true
+                            updatePWRequired: true,
+                            email: user[0].email
                         }
                         let loginDate = new Date();
                         db.UPDATE_LOGIN([loginDate, user[0].user_id, user[0].email] ).then((result )=> {
@@ -130,6 +131,7 @@ module.exports = {
                         department: user[0].department,
                         acct_type: user[0].account_type,
                         rights: user[0].rights,
+                        email: user[0].email,
                         updatePWRequired: false
                     }
                     let loginDate = new Date();
@@ -163,5 +165,12 @@ module.exports = {
         } else {
             res.status(401).send('Unauthorized');
         }
+    },
+
+    passwordReset: (req, res, next) => {
+        const db = req.app.get('db');
+        const {user, newPW, confirmPW} = req.body
+
+        console.log(req.body);
     }
 }
