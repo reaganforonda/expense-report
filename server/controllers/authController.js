@@ -44,6 +44,7 @@ module.exports = {
                         res.status(200).send('User Created');
                     }).catch((err) => {
                         console.log(`Server error while attemtping to create enterprise user: ${err}`);
+                        res.sendStatus(500);
                     })
                 }
             })
@@ -61,6 +62,7 @@ module.exports = {
                         res.status(200).send('User Created');
                     }).catch((err) => {
                         console.log(`Server error while attemtping to create enterprise user: ${err}`);
+                        res.sendStatus(500);
                     })
                 }
             })
