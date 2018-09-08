@@ -28,6 +28,7 @@ export class Login extends React.Component{
     handleSubmit(e) {
         e.preventDefault();
         let user = Object.assign({}, this.state);
+        console.log(user);
 
         axios.post(`/api/auth/login`, user).then((result) => {
             this.props.loadUser(result.data);
