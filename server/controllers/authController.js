@@ -167,7 +167,7 @@ module.exports = {
         }
     },
 
-    passwordReset: (req, res, next) => {
+    updatePW: (req, res, next) => {
         const db = req.app.get('db');
         const {user, newPW, currentPW, confirmPW} = req.body
 
