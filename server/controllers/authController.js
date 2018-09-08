@@ -101,6 +101,7 @@ module.exports = {
                             acct_type: user[0].account_type,
                             rights: user[0].rights,
                             updatePWRequired: true,
+                            employee_id: user[0].employee_id,
                             email: user[0].email
                         }
                         let loginDate = new Date();
@@ -132,6 +133,7 @@ module.exports = {
                         acct_type: user[0].account_type,
                         rights: user[0].rights,
                         email: user[0].email,
+                        employee_id: user[0].employee_id,
                         updatePWRequired: false
                     }
                     let loginDate = new Date();
