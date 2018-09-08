@@ -17,13 +17,9 @@ export class AdminView extends React.Component {
         this.state = {}
     }
 
-    componentDidMount(){
-        this.props.loadDepartments(this.props.company.company_id, this.props.user.user_id);
-    }
-
     render(){
         return (
-            this.props.company ? (
+            
             <div className='admin-view'>
                 <AdminViewHeader/>
                 <main>
@@ -35,7 +31,7 @@ export class AdminView extends React.Component {
                         <Route path='/dashboard/admin/employees-detail' component={EmployeeDetail}/>
                     </Switch>
                 </main>
-            </div>) : null
+            </div>
         )
     }
 }
