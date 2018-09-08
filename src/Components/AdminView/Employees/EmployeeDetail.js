@@ -30,6 +30,7 @@ export class EmployeeDetail extends React.Component {
         this.handleDisplayOptions = this.handleDisplayOptions.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
         this.handleSaveEdit = this.handleSaveEdit.bind(this);
+        this.handleCancelOptions = this.handleCancelOptions.bind(this);
     }
 
     static getDerivedStateFromProps(props, state){
@@ -94,6 +95,12 @@ export class EmployeeDetail extends React.Component {
         }
     }
 
+    handleCancelOptions(){
+        if(this.state.displayOptions === true) {
+            this.setState({displayOptions: false, displayDetail: true});
+        } 
+    }
+
     render(){ 
         
         return (
@@ -130,7 +137,6 @@ export class EmployeeDetail extends React.Component {
                                 <button onClick={(e)=>this.handleSaveEdit(e)}>{this.state.btnText}</button>
                                 {
                                     this.state.lockMode ?(
-
                                         <button type='button' onClick={()=>this.handleDisplayOptions()}>Account Options</button>
                                     ) : null
                                 }
@@ -140,7 +146,7 @@ export class EmployeeDetail extends React.Component {
                     ) : null
                 }
                     {
-                        this.state.displayOptions ? <EmployeeAcct /> :null
+                        this.state.displayOptions ? <EmployeeAcct cancel={this.handleCancelOptions}employee={this.props.selectedEmployee}/> : null
                     }
                 </div>
             </div>)
