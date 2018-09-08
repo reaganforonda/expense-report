@@ -6,6 +6,7 @@ import SideMenu from './SideMenu';
 import Loading from '../Loading/Loading';
 import AdminView from '../AdminView/AdminView';
 import axios from 'axios';
+import ExpReportView from '../ExpenseReportView/ExpReportView';
 
 export class Dashboard extends React.Component{
     constructor(props){
@@ -44,6 +45,7 @@ export class Dashboard extends React.Component{
                     <main>
                         <Switch>
                             <Route path='/dashboard/admin' component={AdminView}/>
+                            <Route path='/dashboard/expense' component={ExpReportView}/>
                         </Switch>
                     </main>
                 </div>
