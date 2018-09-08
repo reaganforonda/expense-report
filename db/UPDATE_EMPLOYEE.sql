@@ -4,7 +4,8 @@ SET department = $1,
     last_name = $3,
     title = $4,
     work_phone = $5,
-    email = $6
+    email = $6,
+    user_id = $7
 WHERE employees.employee_id  = $7
 AND employees.company = $8
 returning *
