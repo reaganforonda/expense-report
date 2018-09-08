@@ -1,0 +1,11 @@
+@import './mixins.scss';
+@import './variables.scss';
+
+.exp-report-view {
+    display: flex;
+    flex-direction: column;
+
+    .exp-report-header {
+            border: $test;
+    }
+}
