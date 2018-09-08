@@ -169,8 +169,32 @@ module.exports = {
 
     passwordReset: (req, res, next) => {
         const db = req.app.get('db');
-        const {user, newPW, confirmPW} = req.body
+        const {user, newPW, currentPW, confirmPW} = req.body
 
-        console.log(req.body);
-    }
+        db.CHECK_EMAIL([user.email.toLowerCase()]).then((users)=> {
+            if(users.length ===0 ) {
+                res.sendStatus(401);
+            } else if (users.length !== 0) {
+                const userID = users[0].user_id;
+                const tempPW = users[0].temppassword;
+                const confirmedPW = bcrypt.compareSync(currentPW, tempPW);
+                
+
+                if(userID === user.user_id && confirmedPW && (newPW === confirmPW)){
+                    const salt = bcrypt.genSaltSync(10);
+                    const hash = bcrypt.hashSync(confirmPW, salt);
+                    const login = new Date();
+
+                    db.UPDATE_PASSWORD([userID, users[0].email, hash, login]).then((result) => {
+                        res.sendStatus(200);
+                    }).catch((err) => {
+                        console.log(`Server error while attempting to update password: ${err}`);
+                        res.sendStatus(500);
+                    })
+                } else {
+                    res.sendStatus(401);
+                }
+            }
+        })
+    },
 }
