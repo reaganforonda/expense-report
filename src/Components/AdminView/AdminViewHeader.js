@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 
 export default function AdminViewHeader(props) {
     return (
-        <header className='admin-view-header'>
+        <header className='sub-view-header'>
             <nav className='header-nav'>
                 <NavLink className='admin-link' activeClassName='active-link' to='/dashboard/admin/main'>Main</NavLink>
                 <NavLink className='admin-link' activeClassName='active-link'  to='/dashboard/admin/company'>Company</NavLink>
