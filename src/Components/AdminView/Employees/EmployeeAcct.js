@@ -65,6 +65,7 @@ export class EmployeeAcct extends React.Component{
                 user: this.props.user,
                 user_id : ~~result.data
             }
+
             axios.put(`api/employees?employeeID=${this.props.employee.employee_id}`, updateEmployee).then((result) => {
                 this.props.cancel();
             })
@@ -74,7 +75,6 @@ export class EmployeeAcct extends React.Component{
     }
 
     render(){
-        console.log(this.props.employee);
         return(
             this.props.employee.user_id ? (
             <div className='employee-account-info'>
