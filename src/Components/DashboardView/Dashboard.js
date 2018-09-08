@@ -16,6 +16,14 @@ export class Dashboard extends React.Component{
         this.handleLogout = this.handleLogout.bind(this);
     }
 
+    componentDidMount = async () => {
+        await axios.get(`/api/auth/me`).then((users) => {
+            console.log('Login');
+        }).catch(err => {
+            this.props.history.push('/');
+        })
+    }
+
     handleLogout(e) {
         e.preventDefault();
 

@@ -157,7 +157,7 @@ module.exports = {
 
     validate: (req, res, next) => {
         let user = req.session.user;
-
+        
         if(req.session.user.user_id) {
             res.status(200).send(user);
         } else {
