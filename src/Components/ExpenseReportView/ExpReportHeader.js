@@ -6,6 +6,8 @@ export default function AdminViewHeader(props) {
         <header className='sub-view-header'>
             <nav className='header-nav'>
                 <NavLink className='admin-link' activeClassName='active-link' to='/dashboard/expense/main'>Main</NavLink>
+                <NavLink className='admin-link' activeClassName='active-link' to='/dashboard/expense/main'>Expense Reports</NavLink>
+                <NavLink className='admin-link' activeClassName='active-link' to='/dashboard/expense/main'>New Expense Report</NavLink>
             </nav>        
         
         </header>
