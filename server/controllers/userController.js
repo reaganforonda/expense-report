@@ -11,12 +11,14 @@ module.exports = {
             adminUser
         } = req.body;
 
+        
         console.log(req.body);
 
         // Expiration Date for Temp Password
         const expireDate = new Date();
         expireDate.setDate(expireDate.getDate() + 1);
 
+        console.log()
         if(adminUser.rights.Admin){
             db.CREATE_NEW_USER([account_type, email, temppassword, expireDate, firstName, lastName, rights]).then((result) => {
                 console.log(result[0]);
