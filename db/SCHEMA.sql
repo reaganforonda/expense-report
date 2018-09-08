@@ -16,7 +16,7 @@ CREATE TABLE users(
     pw TEXT,
     first_name VARCHAR(45),
     last_name VARCHAR(45),
-    tempPassword VARCHAR(15),
+    tempPassword TEXT,
     tempExpiration TIMESTAMPTZ,
     lastLogin TIMESTAMPTZ,
     rights JSONB NOT NULL DEFAULT '{"Admin":false, "Approve":false, "Expense":false}'::JSONB
