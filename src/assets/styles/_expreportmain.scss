@@ -6,6 +6,15 @@
     flex-direction: column;
 
     .exp-report-header {
-        
+        border: $test;
+        padding: 10px 0;
+
+        button {
+            border-radius: 3px;
+            background: white;
+            outline: 0; 
+            border: 1px solid $blue;
+            padding: 4px;
+        }
     }
 }
