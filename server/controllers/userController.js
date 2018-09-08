@@ -1,5 +1,7 @@
+const bcrypt = require('bcryptjs');
+
 module.exports = {
-    createUser: (req, res) => {
+    createUser: async (req, res) => {
         const db = req.app.get('db');
         const {
             account_type,
@@ -11,22 +13,34 @@ module.exports = {
             adminUser
         } = req.body;
 
-        
-        console.log(req.body);
-
         // Expiration Date for Temp Password
         const expireDate = new Date();
         expireDate.setDate(expireDate.getDate() + 1);
 
-        console.log()
+        
         if(adminUser.rights.Admin){
-            db.CREATE_NEW_USER([account_type, email, temppassword, expireDate, firstName, lastName, rights]).then((result) => {
-                console.log(result[0]);
-                res.status(500).send(result[0]);
+            await db.CHECK_EMAIL([email.toLowerCase()]).then((users) => {
+                if(users.length !== 0) {
+                    if(users[0].email === lowerEmail) {
+                        res.sendStatus(400);
+                    }
+                } else {
+                    const salt = bcrypt.genSaltSync(10);
+                    const hash = bcrypt.hashSync(temppassword, salt);
+                    
+                    db.CREATE_NEW_USER([account_type, email, hash, expireDate, firstName, lastName, rights]).then((result) => {
+                        res.status(200).send(result[0].user_id.toString());
+                    }).catch((err) => {
+                        console.log(`Server error while attempting to create new user: ${err}`)
+                        res.sendStatus(500);
+                    });
+                }
             }).catch((err) => {
-                console.log(`Server error while attempting to create new user: ${err}`)
+                console.log(`Server error while attempting to check emails for duplicates: ${err}`);
                 res.sendStatus(500);
             })
+
+
         }
     },
 
