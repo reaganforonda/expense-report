@@ -11,6 +11,7 @@ const middleware = require('./middlewares/middleware');
 const authController = require('./controllers/authController');
 const companyController = require('./controllers/companyController');
 const userController = require('./controllers/userController');
+const expenseController = require('./controllers/expenseReportController');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -57,6 +58,9 @@ app.put('/api/employees', companyController.updateEmployee);
 
 // USER ENDPOINTS
 app.post('/api/user/register', userController.createUser);
+
+// EXPENSE REPORT ENDPOINTS
+app.get('/api/expense', expenseController.getExpenseReports)
 
 app.listen(SERVER_PORT, () => {
   console.log(`Creeping on Port: ${SERVER_PORT}`);
