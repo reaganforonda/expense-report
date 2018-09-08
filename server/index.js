@@ -43,6 +43,7 @@ app.get('/api/auth/me', authController.validate)
 app.post('/api/auth/login', authController.login);
 app.get('/api/auth/logout', authController.logout);
 app.post('/api/auth/register', authController.register);
+app.put('/api/auth/update', authController.passwordReset);
 
 // COMPANY ENDPOINTS
 app.post('/api/company', companyController.createNewCompany);
