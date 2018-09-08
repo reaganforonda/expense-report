@@ -68,6 +68,11 @@ module.exports = {
        }
    },
 
+   /* 
+    * Function to generate a random string of a specified length
+    * @param Integer length = length of the random string that is to be generated
+    * Returns a string
+    */
    generateRandomString(length) {
        let randomString='';
        const characters ='abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
