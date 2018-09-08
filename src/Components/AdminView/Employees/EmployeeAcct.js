@@ -1,7 +1,9 @@
 import React from 'react';
 import * as util from '../../../utilities/generalUtilities';
+import axios from 'axios';
+import {connect} from 'react-redux';
 
-export default class EmployeeAcct extends React.Component{
+export class EmployeeAcct extends React.Component{
     constructor(props) {
         super(props);
 
@@ -10,7 +12,8 @@ export default class EmployeeAcct extends React.Component{
             displayTempPW: false,
             adminRight: false,
             approveRight: false,
-            expenseRight: false
+            expenseRight: false,
+            email: this.props.employee.email
         }
 
         this.handleGenerateTempPW = this.handleGenerateTempPW.bind(this);
@@ -31,8 +34,30 @@ export default class EmployeeAcct extends React.Component{
         this.setState({tempPassword: util.generateRandomString(5), displayTempPW: true})
     }
 
-    handleCreateNewUser(){
-        
+    handleCreateNewUser(e){
+        e.preventDefault();
+
+        let newUser = {
+            account_type: 1,
+            email: this.state.email,
+            firstName: this.props.employee.first_name,
+            lastName: this.props.employee.last_name,
+            temppassword: this.state.tempPassword,
+            rights: {
+                "Admin": this.state.adminRight,
+                "Approve" : this.state.approveRight,
+                "Expense" : this.state.expenseRight
+            },
+            adminUser: this.props.user
+        }
+
+        console.log(newUser);
+
+        axios.post(`/api/user/register`, newUser).then((result) => {
+            console.log(result);
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 
     render(){
@@ -59,7 +84,7 @@ export default class EmployeeAcct extends React.Component{
                     <form className='create-account-form'>
                         <div className='form-create-employee'>
                             <div>User Name (Email)</div>
-                            <input type='email' value={this.props.employee.email} onChange={(e)=>this.handleInputChange(e)}/>
+                            <input type='email' value={this.state.email} onChange={(e)=>this.handleInputChange(e)}/>
                         </div>
                         <div className='form-create-employee'>
                             <div>Account Rights</div>
@@ -86,7 +111,7 @@ export default class EmployeeAcct extends React.Component{
                         </div>
                         <div className='form-create-employee'>
                             <button type='button' onClick={()=>this.props.cancel()}>Cancel</button>
-                            <button>Create Account</button>
+                            <button onClick={(e)=>this.handleCreateNewUser(e)}>Create Account</button>
                         </div>
                     </form>
                 </div>
@@ -94,3 +119,11 @@ export default class EmployeeAcct extends React.Component{
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.userReducer.user
+    }
+}
+
+export default connect(mapStateToProps, {})(EmployeeAcct);
