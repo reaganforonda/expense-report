@@ -28,7 +28,11 @@ export default class EmployeeAcct extends React.Component{
     }
 
     handleGenerateTempPW(){
-        this.setState({tempPassword: util.generateRandomString(5)})
+        this.setState({tempPassword: util.generateRandomString(5), displayTempPW: true})
+    }
+
+    handleCreateNewUser(){
+        
     }
 
     render(){
