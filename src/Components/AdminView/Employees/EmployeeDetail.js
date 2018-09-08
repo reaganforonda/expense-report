@@ -5,6 +5,7 @@ import Loading from '../../Loading/Loading';
 import axios from 'axios';
 import DepartmentDropdown from '../../DropdownMenus/DepartmentDropdown';
 import {loadEmployees,selectEmployee} from '../../../ducks/companyReducer';
+import EmployeeAcct from './EmployeeAcct';
 
 export class EmployeeDetail extends React.Component {
     constructor(props) {
@@ -138,30 +139,9 @@ export class EmployeeDetail extends React.Component {
                     </form>
                     ) : null
                 }
-
-
                     {
-                        this.state.displayOptions ? (<div className='employee-account-info'>
-                            <div>
-                                <h2>{this.state.firstName} {this.state.lastName}</h2>
-                                <h3>Expenster Account Options</h3>
-                            </div>
-                            <div>
-                                Rights
-                            </div>
-                            <div>
-                                Reset Password
-                            </div>
-                            <div>
-                                Deactive Account
-                            </div>
-                            <div>
-                                <button type='button' onClick={()=>this.handleDisplayOptions()}>Cancel</button>
-                                <button type='button'>Save</button>
-                            </div>
-                        </div>) :null
+                        this.state.displayOptions ? <EmployeeAcct /> :null
                     }
-                    
                 </div>
             </div>)
         )
