@@ -54,13 +54,27 @@ export class EmployeeAcct extends React.Component{
         console.log(newUser);
 
         axios.post(`/api/user/register`, newUser).then((result) => {
-            console.log(result);
+            let updateEmployee = {
+                company: this.props.employee.company,
+                firstName: this.props.employee.first_name,
+                lastName: this.props.employee.last_name,
+                title: this.props.employee.title,
+                department: this.props.employee.department,
+                workPhone: this.props.employee.work_phone,
+                email: this.props.employee.email,
+                user: this.props.user,
+                user_id : ~~result.data
+            }
+            axios.put(`api/employees?employeeID=${this.props.employee.employee_id}`, updateEmployee).then((result) => {
+                this.props.cancel();
+            })
         }).catch((err) => {
             console.log(err);
         })
     }
 
     render(){
+        console.log(this.props.employee);
         return(
             this.props.employee.user_id ? (
             <div className='employee-account-info'>

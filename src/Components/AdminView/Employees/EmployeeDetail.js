@@ -104,7 +104,7 @@ export class EmployeeDetail extends React.Component {
     render(){ 
         
         return (
-            this.props.selectedLoading ? <Loading/> :(
+            this.props.selectedLoading || this.props.departmentLoading ? <Loading/> :(
             <div className='employee-detail'>
                 <div className='employee-profile'>
                 {
@@ -159,6 +159,7 @@ function mapStateToProps(state) {
         user: state.userReducer.user,
         company: state.companyReducer.company,
         departments: state.companyReducer.departments,
+        departmentLoading : state.companyReducer.departmentLoading,
         selectedEmployee: state.companyReducer.selectedEmployee,
         selectedLoading: state.companyReducer.selectedLoading
     }
