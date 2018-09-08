@@ -76,12 +76,22 @@ export class Login extends React.Component{
 
         let updateInfo={
             user: this.state.user,
+            currentPW: this.state.password,
             confirmPW : this.state.confirmPW,
             newPW : this.state.newPW
         }
 
-        console.log(updateInfo);
-
+        axios.put('/api/auth/update', updateInfo).then((result) => {
+            alert('Password Reset Successful - Please Login Again');
+            this.props.history.push('/login');
+            this.resetForm();
+        }).catch((err) => {
+            console.log(err.response);
+            if(err.response.status === 500) {
+                this.props.history.push('/error/500')
+            }
+            
+        })
     }
 
     render(){
