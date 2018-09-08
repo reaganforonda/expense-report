@@ -112,13 +112,14 @@ module.exports = {
             title, 
             workPhone, 
             email, 
-            user
+            user,
+            user_id,
         } = req.body
 
         const {employeeID} = req.query
 
         if(user.rights.Admin ) {
-            db.UPDATE_EMPLOYEE([department, firstName, lastName, title, workPhone, email, employeeID, company]).then((result) => {
+            db.UPDATE_EMPLOYEE([department, firstName, lastName, title, workPhone, email, employeeID, company, user_id]).then((result) => {
                 res.status(200).send(result[0]);
             }).catch((err) => {
                 console.log(`Server error while attempting to create employee: ${err}`);
