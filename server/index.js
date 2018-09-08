@@ -60,7 +60,8 @@ app.put('/api/employees', companyController.updateEmployee);
 app.post('/api/user/register', userController.createUser);
 
 // EXPENSE REPORT ENDPOINTS
-app.get('/api/expense', expenseController.getExpenseReports)
+app.get('/api/expense/report', expenseController.getExpenseReports);
+app.post('/api/expense/report', expenseController.createNewReport);
 
 app.listen(SERVER_PORT, () => {
   console.log(`Creeping on Port: ${SERVER_PORT}`);
