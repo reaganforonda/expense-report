@@ -2,6 +2,7 @@ import React from 'react';
 import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ReportFormModal from './ReportFormModal';
+import ReportList from './ReportList';
 
 export class ExpReportReports extends React.Component{
     constructor(props) {
@@ -34,7 +35,7 @@ export class ExpReportReports extends React.Component{
                     }
                 </header>
                 <main >
-
+                    <ReportList reports={this.props.expenseReports} />
                 </main>
             </div>
         )
@@ -44,7 +45,7 @@ export class ExpReportReports extends React.Component{
 function mapStateToProps(state) {
     return {
         user: state.userReducer.user,
-        
+        expenseReports: state.expenseReducer.expenseReports
     }
 }
 
