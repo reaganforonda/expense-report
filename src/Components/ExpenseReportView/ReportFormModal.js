@@ -26,7 +26,11 @@ export default class ReportFormModal extends React.Component{
             description: this.state.description
         }
 
-        console.log(report);
+        axios.post('/api/expense/report', report).then((result) => {
+            console.log(result);
+        }).catch(err=> {
+            console.log(err.response);
+        })
     }
 
     render(){
