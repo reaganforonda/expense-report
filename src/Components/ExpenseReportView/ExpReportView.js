@@ -2,8 +2,9 @@ import React from 'react';
 import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Loading from '../Loading/Loading';
-import ExpReportMain from './ExpReportMain';
-
+import ExpReportReports from './ExpReportReports';
+import ExpReportExpenses from './ExpReportExpenses';
+import ExpReportViewHeader from './ExpReportViewHeader';
 
 export class ExpReportView extends React.Component{
     constructor(props) {
@@ -15,9 +16,11 @@ export class ExpReportView extends React.Component{
     render(){
         return (
             <div className='exp-report-view'>
+                <ExpReportViewHeader/>
                 <main>
                     <Switch>
-                        <Route exact path='/dashboard/expense' component={ExpReportMain}/>
+                        <Route exact path='/dashboard/expense/reports' component={ExpReportReports}/>
+                        <Route exact path='/dashboard/expense/expenses' component={ExpReportExpenses}/>
                     </Switch>
                 </main>
             </div>

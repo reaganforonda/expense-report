@@ -2,7 +2,7 @@ import React from 'react';
 import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-export class ExpReportMain extends React.Component{
+export class ExpReportExpenses extends React.Component{
     constructor(props) {
         super(props);
 
@@ -13,10 +13,10 @@ export class ExpReportMain extends React.Component{
         return (
             <div className='exp-main'>
                 <header className='exp-report-header'>
-                    <button>Create New Expense Report</button>
+                    <button>Create New Expense</button>
                 </header>
                 <main >
-                    
+
                 </main>
             </div>
         )
@@ -30,4 +30,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {})(withRouter(ExpReportMain));
+export default connect(mapStateToProps, {})(withRouter(ExpReportExpenses));
