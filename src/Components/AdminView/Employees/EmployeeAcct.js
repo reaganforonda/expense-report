@@ -8,6 +8,7 @@ export class EmployeeAcct extends React.Component{
         super(props);
 
         this.state={
+            employeeID: '',
             tempPassword: '',
             displayTempPW: false,
             adminRight: false,
@@ -19,6 +20,19 @@ export class EmployeeAcct extends React.Component{
         this.handleGenerateTempPW = this.handleGenerateTempPW.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if(props.employee.rights){
+        if(props.employee.user_id !== state.employeeID) {
+            return {
+                email: props.employee.email,
+                adminRight: props.employee.rights.Admin,
+                approveRight: props.employee.rights.Approve,
+                expenseRight: props.employee.rights.Expense,
+                email: props.employee.email
+            }
+        }}
     }
 
     handleCheckboxChange(e) {
@@ -51,8 +65,6 @@ export class EmployeeAcct extends React.Component{
             adminUser: this.props.user
         }
 
-        console.log(newUser);
-
         axios.post(`/api/user/register`, newUser).then((result) => {
             let updateEmployee = {
                 company: this.props.employee.company,
@@ -75,6 +87,7 @@ export class EmployeeAcct extends React.Component{
     }
 
     render(){
+        console.log(this.props.employee);
         return(
             this.props.employee.user_id ? (
             <div className='employee-account-info'>
@@ -82,13 +95,31 @@ export class EmployeeAcct extends React.Component{
                     <h2>Expenster Account Options</h2>
                 </div>
                 <div>
-                    Rights
+                    <div>Account Rights</div>
+                    <div>
+                        <div>
+                            <input id='admin-right' name='adminRight' type='checkbox' checked={this.state.adminRight} onChange={(e)=>this.handleCheckboxChange(e)}/>
+                            <label  htmlFor='admin-right'>Administration Rights</label>
+                        </div>
+                        <div>
+                            <input id='approve-right' name='approveRight' type='checkbox' checked={this.state.approveRight} onChange={(e)=>this.handleCheckboxChange(e)}/>
+                            <label  htmlFor='approve-right'>Expense Report Approval Rights</label>
+                        </div>
+                        <div>
+                            <input id='expense-right' name='expenseRight' type='checkbox' checked={this.state.expenseRight} onChange={(e)=>this.handleCheckboxChange(e)}/>
+                            <label  htmlFor='expense-right'>Expense Report Creation Rights</label>
+                        </div>
+                    </div>
                 </div>
                 <div>
-                    Reset Password
+                    <button type='button' onClick={()=>this.handleGenerateTempPW()}>Reset Password</button>
+                    {this.state.displayTempPW ? <div>{this.state.tempPassword}</div> : null}
                 </div>
                 <div>
-                    
+                    <div>
+                        <button type='button' onClick={()=>this.props.cancel()}>Cancel</button>
+                        <button>Save</button>
+                    </div>
                 </div>
             </div>): (
                 <div className='create-account-employee'>
