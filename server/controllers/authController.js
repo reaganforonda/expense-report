@@ -15,8 +15,6 @@ module.exports = {
 
         let lowerEmail = email.toLowerCase();
 
-        console.log(req.body);
-
         if(pw !== confirmPW) {
             res.sendStatus(400);
         };
@@ -76,31 +74,40 @@ module.exports = {
         let lowerEmail = email.toLowerCase();
 
         db.CHECK_EMAIL([lowerEmail]).then((user) => {
+            
             if(user.length === 0) {
                 res.sendStatus(401);
             }
 
             if(user.length !== 0){
-                const userID = user[0].user_id;
-                const userPW = user[0].pw;
-                const confirmedPW = bcrypt.compareSync(password, userPW);
+                if(user.temppassword !== null){
+                    const userID = user[0].user_id;
+                    const userPW = user[0].pw;
+                    const confirmedPW = bcrypt.compareSync(password, userPW);
 
-                if(confirmedPW){
-                    req.session.user.user_id = userID;
-                    req.session.user.acct_type = user[0].account_type;
-                    let loggedUser = {
-                        user_id : user[0].user_id,
-                        first_name: user[0].first_name,
-                        last_name: user[0].last_name,
-                        title: user[0].title,
-                        department: user[0].department,
-                        acct_type: user[0].account_type,
-                        rights: user[0].rights
+                    if(confirmedPW){
+                        req.session.user.user_id = userID;
+                        req.session.user.acct_type = user[0].account_type;
+                        let loggedUser = {
+                            user_id : user[0].user_id,
+                            first_name: user[0].first_name,
+                            last_name: user[0].last_name,
+                            title: user[0].title,
+                            department: user[0].department,
+                            acct_type: user[0].account_type,
+                            rights: user[0].rights
+                        }
+                        let loginDate = new Date();
+                        db.UPDATE_LOGIN([loginDate, user[0].user_id, user[0].email] ).then((result )=> {
+                            res.status(200).send(loggedUser);
+                        }).catch((err) => {
+                            console.log(`Server error while attempting to update login date: ${err}`);
+                            res.sendStatus(500);
+                        })
+                    } else {
+                        res.sendStatus(401);
                     }
-                    res.status(200).send(loggedUser);
-                } else {
-                    res.sendStatus(401);
-                }
+                } 
             }
         }).catch((err) => {
             console.log(`Server error while attempting to login user: ${err}`);
