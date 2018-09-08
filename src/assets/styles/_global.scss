@@ -10,3 +10,38 @@
     width: 100vw;
     height: 100vh;
 }
+
+.sub-view-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    
+    .header-nav {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        .admin-link {
+            text-decoration: none;
+            color: $darkBlue;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+
+        .active-link {
+            border-bottom: 2px solid $red;
+            color: $red;
+        }
+    }
+
+    @include for-desktop-up {
+        height: 35px;
+        padding: 10px 0;
+
+        .header-nav {
+            width: 50%;
+            font-size: 16px;
+        }
+    }
+}
