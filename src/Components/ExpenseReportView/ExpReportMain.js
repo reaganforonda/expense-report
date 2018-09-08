@@ -12,7 +12,12 @@ export class ExpReportMain extends React.Component{
     render(){
         return (
             <div className='exp-main'>
-                Expense Report Main
+                <header className='exp-report-header'>
+                    <button>Create New Expense Report</button>
+                </header>
+                <main >
+                    
+                </main>
             </div>
         )
     }

@@ -15,9 +15,6 @@ export class ExpReportView extends React.Component{
     render(){
         return (
             <div className='exp-report-view'>
-                <header className='exp-report-header'>
-                    <button>Create New Expense Report</button>
-                </header>
                 <main>
                     <Switch>
                         <Route exact path='/dashboard/expense' component={ExpReportMain}/>
