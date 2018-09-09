@@ -5,7 +5,7 @@ import Loading from '../Loading/Loading';
 import ExpReportReports from './ExpReportReports';
 import ExpReportExpenses from './ExpReportExpenses';
 import ExpReportViewHeader from './ExpReportViewHeader';
-import {loadExpenseReports} from '../../ducks/expenseReducer';
+import {loadExpenseReports, loadExpenses} from '../../ducks/expenseReducer';
 
 export class ExpReportView extends React.Component{
     constructor(props) {
@@ -16,6 +16,7 @@ export class ExpReportView extends React.Component{
 
     componentDidMount(){
         this.props.loadExpenseReports(this.props.user.employee_id);
+        this.props.loadExpenses(this.props.user.employee_id)
     }
 
     render(){
@@ -25,7 +26,7 @@ export class ExpReportView extends React.Component{
                 
                 <main>
                     {
-                        this.props.reportLoading ? <Loading/> : (
+                        this.props.reportLoading && this.props.expensesLoading ? <Loading/> : (
                         <Switch>
                             <Route exact path='/dashboard/expense/reports' component={ExpReportReports}/>
                             <Route exact path='/dashboard/expense/expenses' component={ExpReportExpenses}/>
@@ -46,4 +47,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {loadExpenseReports})(withRouter(ExpReportView));
+export default connect(mapStateToProps, {loadExpenseReports, loadExpenses})(withRouter(ExpReportView));
