@@ -37,7 +37,6 @@ module.exports = {
     getExpenseReports : (req, res) => {
         const db = req.app.get('db');
         const {employeeID} = req.query;
-        console.log(employeeID);
 
         db.GET_EXPENSE_REPORTS([employeeID]).then((result) => {
             res.status(200).send(result);
@@ -45,5 +44,17 @@ module.exports = {
             console.log(`Server error while attempting to get expense reports; ${err}`);
             res.sendStatus(500);
         })
-    }
+    },
+
+    getExpenses : (req, res) => {
+        const db = req.app.get('db');
+        const {employeeID, reportID}  = req.query;
+
+        db.GET_EXPENSES([employeeID, reportID]).then((result) => {
+            res.status(200).send(result)
+        }).catch((err) => {
+            console.log(`Server error while attempting to retrieve expenses: ${err}`);
+            res.sendStatus(500);
+        })
+    },
 }
