@@ -65,6 +65,7 @@ CREATE TABLE expense_reports (
 CREATE TABLE expenses (
     expense_id SERIAL PRIMARY KEY,
     report_id INTEGER REFERENCES expense_reports(report_id),
+    employee INTEGER REFERENCES employees(employee_id),
     expense_date Date,
     merchant VARCHAR(45),
     amount NUMERIC,
