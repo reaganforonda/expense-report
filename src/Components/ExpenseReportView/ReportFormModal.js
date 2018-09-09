@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import {loadExpenseReports} from '../../ducks/expenseReducer';
 
-export default class ReportFormModal extends React.Component{
+export class ReportFormModal extends React.Component{
     constructor(props) {
         super(props);
 
@@ -28,7 +29,7 @@ export default class ReportFormModal extends React.Component{
         }
 
         axios.post('/api/expense/report', report).then((result) => {
-            console.log(result);
+            this.props.loadExpenseReports(this.props.user.employee_id);
         }).catch(err=> {
             console.log(err.response);
         })
@@ -60,3 +61,12 @@ export default class ReportFormModal extends React.Component{
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.userReducer.user,
+        expenseReports: state.expenseReducer.expenseReports
+    }
+}
+
+export default connect(mapStateToProps, {loadExpenseReports})(ReportFormModal);
