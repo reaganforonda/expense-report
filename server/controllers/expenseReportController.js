@@ -57,4 +57,17 @@ module.exports = {
             res.sendStatus(500);
         })
     },
+
+    createExpense : (req, res) => {
+        const db = req.app.get('db');
+        const {} = req.body;
+    },
+
+    deleteExpense : (req, res) => {
+        const db= req.app.get('db');
+    },
+
+    editExpense : (req, res) => {
+        const db = req.app.get('db');
+    }
 }
