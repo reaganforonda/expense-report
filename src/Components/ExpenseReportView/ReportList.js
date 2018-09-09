@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function ReportList (props) {
     let reportList = props.reports.map((report) => {
-        console.log(report.report_id)
+        
         return (
             <div className='report-item' key={report.report_id}>
                 {report.description}
