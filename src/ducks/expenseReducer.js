@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 }
 
 const LOAD_EXP_REPORTS = "LOAD_EXP_REPORTS";
-const LOAD_EXPS = "LOAD_EXPS";
+const LOAD_EXPENSES = "LOAD_EXPENSES";
 
 export function loadExpenseReports(employeeID){
     const reports = axios.get(`/api/expense/report?employeeID=${employeeID}`).then((result) => {
@@ -21,12 +21,29 @@ export function loadExpenseReports(employeeID){
     }
 }
 
+export function loadExpenses(employeeID, expenseID) {
+    const expenses = axios.get(`/api/expenses?employeeID=${employeeID}&expenseID=${expenseID}`).then((result) => {
+        return result.data
+    })
+
+    return {
+        type: LOAD_EXPENSES,
+        payload: expenses
+    }
+}
+
 export default function expenseReducer(state=INITIAL_STATE, action ) {
     switch(action.type) {
         case LOAD_EXP_REPORTS + "_PENDING":
             return Object.assign({}, state, {reportLoading: true});
         case LOAD_EXP_REPORTS + "_FULFILLED":
             return Object.assign({}, state, {expenseReports: action.payload, reportLoading: false});
+
+        case LOAD_EXPENSES + "_PENDING":
+            return Object.assign({}, state, {reportLoading: true});
+
+        case LOAD_EXPENSES + "_FULFILLED":
+            return Object.assign({}, state, {reportLoading: false, expenses: action.payload})
 
         default:
             return state;
