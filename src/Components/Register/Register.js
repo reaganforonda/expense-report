@@ -21,7 +21,7 @@ export class Register extends React.Component {
             state: '',
             zipcode : '',
             phone: '',
-            
+
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -101,8 +101,8 @@ export class Register extends React.Component {
                         <form className='register-form'>
                             <div className='form-row'>
                                 <div className='form-row-btns'>
-                                    <button type='button' onClick={()=>this.setEnterpise()}>Enterpise</button>
-                                    <button type='button' onClick={()=>this.setIndividual()} disabled={true}>Individual</button>
+                                    <button type='button' onClick={()=>this.setEnterpise()}>Enterprise</button>
+                                    <button  type='button' onClick={()=>this.setIndividual()} disabled={true}>Individual</button>
                                 </div>
                             </div>
                             <div className='form-row'>
