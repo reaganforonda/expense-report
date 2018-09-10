@@ -99,8 +99,6 @@ export class CompanyForm extends React.Component{
 
     render(){
         let disabledBtn = !(util.validCity(this.state.city) && util.validZipCode(this.state.zipcode) && util.validState(this.state.state) && util.validAddress(this.state.address));
-        // console.log(this.state);
-        console.log(this.props)
         return (
             <div className='company-form'>
                 {
