@@ -1,5 +1,5 @@
 import React from 'react';
-
+import * as util from '../../utilities/generalUtilities'
 
 export default function ReportList (props) {
     let reportList = props.reports.map((report) => {
@@ -9,7 +9,7 @@ export default function ReportList (props) {
                 <div>{report.report_number}</div>
                 <div>{report.date}</div>
                 <div>{report.description}</div>
-                <div>{report.amount}</div>
+                <div>{util.formatCurrency(parseFloat(report.amount))}</div>
                 <div>
                 {
                     report.approve? "Yes" : "No"

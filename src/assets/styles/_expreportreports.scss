@@ -1,0 +1,21 @@
+@import './mixins.scss';
+@import './variables.scss';
+
+.exp-report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .header-filter{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 30%;
+        border: 1px solid $darkBlue;
+        padding: 4px 0;
+
+        button {
+            border: 1px solid black;
+        }
+    }
+}
