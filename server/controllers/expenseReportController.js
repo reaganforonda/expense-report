@@ -8,8 +8,14 @@ module.exports = {
             reportNumber
         } = req.body;
 
+        const defaultStatus= {
+            "Approved" : false,
+            "Submitted": false,
+            "Rejected" : false
+        }
+
         if(user.rights.Expense) {
-            db.CREATE_NEW_EXP_REPORT([user.employee_id, date, description, reportNumber]).then((result) => {
+            db.CREATE_NEW_EXP_REPORT([user.employee_id, date, description, reportNumber, JSON.stringify(defaultStatus)]).then((result) => {
                 res.status(200).send(result);
             }).catch((err)=> {
                 console.log(`Server error while attempting to create new report: ${err}`);
