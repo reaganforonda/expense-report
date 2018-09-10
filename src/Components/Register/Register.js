@@ -20,7 +20,8 @@ export class Register extends React.Component {
             city: '',
             state: '',
             zipcode : '',
-            phone: ''
+            phone: '',
+            
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
