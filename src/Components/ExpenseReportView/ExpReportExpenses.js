@@ -6,6 +6,7 @@ import ExpenseFormModal from './ExpenseFormModal';
 import {loadExpenses} from '../../ducks/expenseReducer';
 import Loading from '../Loading/Loading';
 import ReportsDropdown from '../DropdownMenus/ReportsDropdown';
+import axios from 'axios';
 
 export class ExpReportExpenses extends React.Component{
     constructor(props) {
@@ -21,7 +22,7 @@ export class ExpReportExpenses extends React.Component{
         this.handlDisplayExpenseForm = this.handlDisplayExpenseForm.bind(this);
         this.handleCheckBox  = this.handleCheckBox.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
-        
+        this.handleAddToReport = this.handleAddToReport.bind(this);
     }
 
     handlDisplayExpenseForm (){
@@ -52,6 +53,17 @@ export class ExpReportExpenses extends React.Component{
     handleAddToReport(){
         console.log(this.state.selectedExpenses);
         console.log(this.state.report);
+        let updateInfo = {
+            expenses: this.state.selectedExpenses,
+            report : this.state.report,
+            user: this.props.user
+        }
+
+        axios.put(`/api/expense?reportupdate=${true}`, updateInfo).then((result) => {
+            this.props.loadExpenses(this.props.user.employee_id);
+        }).catch((err)=> {
+            console.log(err);
+        })
     }
 
     handleSelect(e){
@@ -66,7 +78,7 @@ export class ExpReportExpenses extends React.Component{
                     {
                         this.state.displayExpenseForm ? null : (<button type='button' onClick={()=>this.handlDisplayExpenseForm()}>Create New Expense</button>)
                     }{
-                        this.state.selectedExpenses.length > 0 ? <div><div>
+                        this.state.selectedExpenses.length > 0 && !this.state.displayExpenseForm ? <div><div>
                             <button type='button' onClick={()=>this.handleAddToReport()}>Add to Report</button>
                             <ReportsDropdown reports={this.props.expenseReports} select={this.handleSelect}/>
                          </div> <div><button type='button'>Delete Expenses</button></div></div>: null
