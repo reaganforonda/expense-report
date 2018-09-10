@@ -59,7 +59,7 @@ CREATE TABLE expense_reports (
     employee INTEGER REFERENCES employees(employee_id),
     report_date DATE,
     description VARCHAR(50),
-    approved BOOLEAN
+    status JSON NOT NULL DEFAULT '{"Approved": false, "Submitted:" false, "Rejected": false}'::JSONB
 );
 
 CREATE TABLE expenses (
