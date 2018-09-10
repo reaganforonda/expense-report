@@ -15,7 +15,7 @@ export default function SideMenu(props) {
             <nav className='nav-menu'>
                 <NavLink className='side-link' activeClassName='active-link' exact to='/dashboard'>Home</NavLink>
                 {
-                    props.user.rights.Expense === true ? <NavLink className='side-link' activeClassName='active-link' to='/dashboard/inbox'>Inbox</NavLink> : (
+                    props.user.rights.Approve === true ? <NavLink className='side-link' activeClassName='active-link' to='/dashboard/inbox'>Inbox</NavLink> : (
                         null
                     )
                 }
