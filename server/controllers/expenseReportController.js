@@ -89,5 +89,15 @@ module.exports = {
 
     editExpense : (req, res) => {
         const db = req.app.get('db');
+        const {reportupdate} = req.query;
+
+        if(reportupdate) {
+            const expenses = req.body.expenses;
+            const report = req.body.report;
+            const user = req.body.user;
+
+            
+            
+        }
     }
 }
