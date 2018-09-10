@@ -94,6 +94,6 @@ module.exports = {
      * @param Integer numer = number to convert to a USD currenty format
      */
     formatCurrency(number){
-        return '$' + number.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        return '$' +' ' + number.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
 }
