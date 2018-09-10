@@ -18,6 +18,7 @@ export class ExpReportExpenses extends React.Component{
 
         this.handlDisplayExpenseForm = this.handlDisplayExpenseForm.bind(this);
         this.handleCheckBox  = this.handleCheckBox.bind(this);
+        
     }
 
     handlDisplayExpenseForm (){
@@ -37,24 +38,32 @@ export class ExpReportExpenses extends React.Component{
             this.setState({
                 selectedExpenses : [...this.state.selectedExpenses, expense_id]
             });
-            console.log(`Add: ${this.state.selectedExpenses}`)
         } else if (found) {
             let filtered = this.state.selectedExpenses.filter((value) => {
                 return value !== expense_id;
             })
             this.setState({selectedExpenses: filtered})
-            console.log(`Remove: ${this.state.selectedExpenses}`)
         }
     }
 
-    render(){
+    handleAddToReport(){
         console.log(this.state.selectedExpenses);
+    }
+
+    render(){
         return (
             <div className='exp-main'>
                 <header className='exp-report-header'>
-                {
-                    this.state.displayExpenseForm ? null : (<button type='button' onClick={()=>this.handlDisplayExpenseForm()}>Create New Expense</button>)
-                }
+                <div>
+                    {
+                        this.state.displayExpenseForm ? null : (<button type='button' onClick={()=>this.handlDisplayExpenseForm()}>Create New Expense</button>)
+                    }{
+                        this.state.selectedExpenses.length > 0 ? <div><div>
+                            <button type='button' onClick={()=>this.handleAddToReport()}>Add to Report</button>
+                            <input placeholder='List of Reports'/>
+                         </div> <div><button type='button'>Delete Expenses</button></div></div>: null
+                    }
+                </div>
                 {
                     this.state.displayExpenseForm ? <ExpenseFormModal user={this.props.user} closeForm={this.handlDisplayExpenseForm}/> : null
                 }
