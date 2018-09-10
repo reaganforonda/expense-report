@@ -33,6 +33,18 @@ export class ExpReportReports extends React.Component{
                     {
                         this.state.displayReportForm ? <ReportFormModal user={this.props.user} closeForm={this.handleDisplayReportForm}/> : null
                     }
+                    {
+                        this.state.displayReportForm ? null : (
+                            <div className='header-filter'>
+                            <div>Filter</div>
+                            <button>All Reports</button>
+                            <button>Approved</button>
+                            <button>Pending</button>
+                            <button>Not Approved</button>
+                        </div>
+                        )
+                    }
+
                 </header>
                 <main >
                     <ReportList reports={this.props.expenseReports} />

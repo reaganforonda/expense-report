@@ -10,7 +10,11 @@ export default function ReportList (props) {
                 <div>{report.date}</div>
                 <div>{report.description}</div>
                 <div>{report.amount}</div>
-                <div>{report.approved}</div>
+                <div>
+                {
+                    report.approve? "Yes" : "No"
+                }
+                </div>
             </div>
         )
     })
