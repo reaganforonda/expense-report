@@ -38,17 +38,23 @@ export class Login extends React.Component{
                 this.setState({displayPWReset: true, user: result.data})
             }else {
                 this.props.loadUser(result.data);
-                axios.get(`/api/company/${result.data.user_id}`).then((result) => {
-                    this.props.loadCompany(result.data[0])
+                if(result.data.company) {
+                    axios.get(`/api/company/${result.data.user_id}`).then((result) => {
+                        this.props.loadCompany(result.data[0])
+                        this.props.history.push('/dashboard');
+                        this.resetForm();
+                    }).catch((err) => {
+                        if(err.response.status === 500){
+                            this.props.history.push('/error/500');
+                        } else if (err.response.status===401){
+                            this.setState({error: true})
+                        }
+                    })
+                } else {
                     this.props.history.push('/dashboard');
                     this.resetForm();
-                }).catch((err) => {
-                    if(err.response.status === 500){
-                        this.props.history.push('/error/500');
-                    } else if (err.response.status===401){
-                        this.setState({error: true})
-                    }
-                })
+                }
+
             }  
         }).catch((err) => {
             if(err.response.status === 500){
