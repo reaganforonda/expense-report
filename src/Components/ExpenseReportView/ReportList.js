@@ -6,20 +6,22 @@ export default function ReportList (props) {
         
         return (
             <div className='report-item' key={report.report_id}>
-                {report.report_number}
-                {report.date}
-                {report.description}
-                {report.approved}
+                <div>{report.report_number}</div>
+                <div>{report.date}</div>
+                <div>{report.description}</div>
+                <div>{report.amount}</div>
+                <div>{report.approved}</div>
             </div>
         )
     })
     return (
         <div className='report-list'>
-            <div>
+            <div className='report-list-header'>
                 <h2>Report Number</h2>
                 <h2>Report Date</h2>
                 <h2>Report Description</h2>
-                <h2>Approve</h2>
+                <h2>Amount</h2>
+                <h2>Approved</h2>
             </div>
             {reportList}
         </div>
