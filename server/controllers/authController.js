@@ -97,6 +97,7 @@ module.exports = {
                             first_name: user[0].first_name,
                             last_name: user[0].last_name,
                             title: user[0].title,
+                            company: user[0].company,
                             department: user[0].department,
                             acct_type: user[0].account_type,
                             rights: user[0].rights,
@@ -114,15 +115,12 @@ module.exports = {
                     } else {
                         res.sendStatus(401);
                     }
-                    
                 }else {
                 
                 const confirmedPW = bcrypt.compareSync(password, userPW)
 
                 if(confirmedPW){
-                    
-                
-                    req.session.user.user_id = userID;
+                    req.session.user.user_id = user[0].user_id;
                     req.session.user.acct_type = user[0].account_type;
                     let loggedUser = {
                         user_id : user[0].user_id,
@@ -131,6 +129,7 @@ module.exports = {
                         title: user[0].title,
                         department: user[0].department,
                         acct_type: user[0].account_type,
+                        company: user[0].company,
                         rights: user[0].rights,
                         email: user[0].email,
                         employee_id: user[0].employee_id,
@@ -148,7 +147,6 @@ module.exports = {
                 }
             }}
         }).catch((err) => {
-            console.log('hit 122');
             console.log(`Server error while attempting to login user: ${err}`);
             res.sendStatus(500);
         })
@@ -161,7 +159,7 @@ module.exports = {
 
     validate: (req, res, next) => {
         let user = req.session.user;
-        
+        console.log(user);
         if(req.session.user.user_id) {
             res.status(200).send(user);
         } else {
