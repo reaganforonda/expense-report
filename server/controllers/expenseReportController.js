@@ -50,7 +50,6 @@ module.exports = {
         const db = req.app.get('db');
         const {employeeID, reportID}  = req.query;
 
-        console.log(req.query);
         db.GET_EXPENSES([employeeID, reportID]).then((result) => {
             res.status(200).send(result)
         }).catch((err) => {
@@ -96,8 +95,15 @@ module.exports = {
             const report = req.body.report;
             const user = req.body.user;
 
-            
-            
+            if(user.rights.Expense){
+                for(var i=0; i < expenses.length; i ++) {
+                    db.ADD_EXPENSE_TO_REPORT([report, expenses[i]]).then((result) => {
+                    }).catch(err => {
+                        console.log(`Server Error while trying to update expense: ${err} Report: ${report}`);
+                        res.sendStatus(400);
+                    })
+                } res.sendStatus(200);
+            }
         }
     }
 }
