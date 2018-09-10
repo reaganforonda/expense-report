@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {loadExpenses} from '../../ducks/expenseReducer'
+import axios from 'axios';
 
 export class ExpenseFormModal extends React.Component{
     constructor(props) {
@@ -12,31 +13,39 @@ export class ExpenseFormModal extends React.Component{
             amount : '',
             category: '',
             comment: '',
+            reportID: '',
             tags: ''
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmitForm = this.handleSubmitForm.bind(this);
+        this.resetForm = this.resetForm;
     }
 
     handleInputChange(e) {
-        this.setsState({[e.target.name]: e.target.value})
+        this.setState({[e.target.name]: e.target.value})
     }
 
     handleSubmitForm (e) {
         e.preventDefault();
 
         let expense = {
-            employee : this.props.user,
+            reportID : this.state.reportID,
+            user : this.props.user,
             date: this.state.date,
             merchant: this.state.merchant,
             amount: this.state.amount,
             category: this.state.category,
             comment: this.state.comment,
-            tage: this.state.tags
+            tags: this.state.tags
         }
 
-        console.log(expense)
+        axios.post('/api/expense', expense).then((result) => {
+            this.loadExpenses(this.props.user.employee_id);
+            this.resetForm();
+        }).catch((err) => {
+            console.log(err.response)
+        })
     }
 
     resetForm(){
@@ -46,7 +55,8 @@ export class ExpenseFormModal extends React.Component{
             amount : '',
             category: '',
             comment: '',
-            tags: ''
+            tags: '',
+            reportID: ''
         })
     }
 
@@ -68,6 +78,9 @@ export class ExpenseFormModal extends React.Component{
                     </div>
                     <div className='expense-form-row'>
                         <input type='text' placeholder='Comment' name='comment' value={this.state.comment} onChange={(e)=>this.handleInputChange(e)}/>
+                    </div>
+                    <div className='expense-form-row'>
+                        <input type='text' placeholder='Category' name='category' value={this.state.category} onChange={(e)=>this.handleInputChange(e)}/>
                     </div>
                     <div className='expense-form-row'>
                         <div className='expen-form-btns'>
