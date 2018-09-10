@@ -105,6 +105,7 @@ module.exports = {
                             employee_id: user[0].employee_id,
                             email: user[0].email
                         }
+                        console.log(loggedUser)
                         let loginDate = new Date();
                         db.UPDATE_LOGIN([loginDate, user[0].user_id, user[0].email] ).then((result )=> {
                             res.status(200).send(loggedUser);
@@ -135,6 +136,7 @@ module.exports = {
                         employee_id: user[0].employee_id,
                         updatePWRequired: false
                     }
+                    console.log(loggedUser)
                     let loginDate = new Date();
                     db.UPDATE_LOGIN([loginDate, user[0].user_id, user[0].email] ).then((result )=> {
                         res.status(200).send(loggedUser);
