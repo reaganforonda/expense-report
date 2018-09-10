@@ -38,7 +38,7 @@ export class Dashboard extends React.Component{
 
     render(){
         console.log(this.props.user)
-        console.log(this.props.company)
+        
         return (
             (!this.props.user || this.props.user === {})  ? <Loading/> : (
             <div className='dashboard'>
