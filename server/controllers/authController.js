@@ -10,7 +10,13 @@ module.exports = {
             lastName,
             email,
             pw,
-            confirmPW
+            confirmPW,
+            companyName,
+            address,
+            city,
+            state,
+            zipcode,
+            phone
         } = req.body
 
         let lowerEmail = email.toLowerCase();
@@ -39,7 +45,9 @@ module.exports = {
                     }
 
                     db.CREATE_ENTERPRISE_USER([acct_type, lowerEmail, hash, firstName, lastName, rights]).then((user) => {
-                        res.status(200).send('User Created');
+                        db.CREATE_COMPANY([companyName, address, city, state, zipcode, phone, user[0].user_id]).then((user) => {
+                            res.send(200).status('Registerd');
+                        })
                     }).catch((err) => {
                         console.log(`Server error while attemtping to create enterprise user: ${err}`);
                         res.sendStatus(500);
