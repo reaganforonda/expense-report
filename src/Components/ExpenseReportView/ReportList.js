@@ -12,7 +12,7 @@ export default function ReportList (props) {
                 <div>{util.formatCurrency(parseFloat(report.amount))}</div>
                 <div>
                 {
-                    report.approve? "Yes" : "No"
+                    report.status.Approved? "Yes" : "No"
                 }
                 </div>
             </div>
