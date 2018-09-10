@@ -88,5 +88,12 @@ module.exports = {
     formatDate(date){
         let truncatedDate = date.slice(0,10);
         return truncatedDate
+    },
+
+    /* Function to format currencty
+     * @param Integer numer = number to convert to a USD currenty format
+     */
+    formatCurrency(number){
+        return '$' + number.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
 }
