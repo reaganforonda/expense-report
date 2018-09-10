@@ -59,7 +59,7 @@ CREATE TABLE expense_reports (
     employee INTEGER REFERENCES employees(employee_id),
     report_date DATE,
     description VARCHAR(50),
-    status JSON NOT NULL DEFAULT '{"Approved": false, "Submitted:" false, "Rejected": false}'::JSONB
+    status JSONB NOT NULL DEFAULT '{"Approved":false, "Submitted":false, "Rejected":false}'::JSONB
 );
 
 CREATE TABLE expenses (
