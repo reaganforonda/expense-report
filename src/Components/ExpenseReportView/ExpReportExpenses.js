@@ -78,10 +78,16 @@ export class ExpReportExpenses extends React.Component{
                     {
                         this.state.displayExpenseForm ? null : (<button type='button' onClick={()=>this.handlDisplayExpenseForm()}>Create New Expense</button>)
                     }{
-                        this.state.selectedExpenses.length > 0 && !this.state.displayExpenseForm ? <div><div>
-                            <button type='button' onClick={()=>this.handleAddToReport()}>Add to Report</button>
-                            <ReportsDropdown reports={this.props.expenseReports} select={this.handleSelect}/>
-                         </div> <div><button type='button'>Delete Expenses</button></div></div>: null
+                        this.state.selectedExpenses.length > 0 && !this.state.displayExpenseForm ? 
+                        <div className='select-form'>
+                            <div className='add-form'>
+                                <button type='button' onClick={()=>this.handleAddToReport()}>Add to Report</button>
+                                <ReportsDropdown reports={this.props.expenseReports} select={this.handleSelect}/>
+                            </div> 
+                            <div>
+                                <button type='button'>Delete Expenses</button>
+                            </div>
+                        </div>: null
                     }
                 </div>
                 {
