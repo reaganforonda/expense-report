@@ -13,8 +13,8 @@ export default function ExpenseList (props) {
                 <div>{expense.comment}</div>
                 <div>{expense.category}</div>
                 <div>{expense.report_id}</div>
-                <div><input type='checkbox' id='expense-add-to-report'/></div>
                 <div><button type='button'>Edit</button></div>
+                <div><input onChange={()=>props.handleCheckbox(expense.expense_id)}type='checkbox' id='expense-add-to-report'/></div>
             </div>
         )
     })
@@ -30,8 +30,8 @@ export default function ExpenseList (props) {
                 <h2>Comment</h2>
                 <h2>Category</h2>
                 <h2>Report ID</h2>
-                <div>Select</div>
                 <div>Edit</div>
+                <div>Select</div>
                 
             </div>
             {expenseList}

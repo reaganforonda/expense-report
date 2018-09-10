@@ -11,10 +11,13 @@ export class ExpReportExpenses extends React.Component{
         super(props);
 
         this.state={
-            displayExpenseForm: false
+            displayExpenseForm: false,
+            selectedExpenses: []
+
         }
 
         this.handlDisplayExpenseForm = this.handlDisplayExpenseForm.bind(this);
+        this.handleCheckBox  = this.handleCheckBox.bind(this);
     }
 
     handlDisplayExpenseForm (){
@@ -25,7 +28,27 @@ export class ExpReportExpenses extends React.Component{
         }
     }
 
+    handleCheckBox(expense_id){
+        let found = this.state.selectedExpenses.find((expense)=> {
+            return expense === expense_id
+        })
+
+        if(!found) {
+            this.setState({
+                selectedExpenses : [...this.state.selectedExpenses, expense_id]
+            });
+            console.log(`Add: ${this.state.selectedExpenses}`)
+        } else if (found) {
+            let filtered = this.state.selectedExpenses.filter((value) => {
+                return value !== expense_id;
+            })
+            this.setState({selectedExpenses: filtered})
+            console.log(`Remove: ${this.state.selectedExpenses}`)
+        }
+    }
+
     render(){
+        console.log(this.state.selectedExpenses);
         return (
             <div className='exp-main'>
                 <header className='exp-report-header'>
@@ -37,7 +60,7 @@ export class ExpReportExpenses extends React.Component{
                 }
                 </header>
                 <main >
-                    <ExpenseList expenses = {this.props.expenses}/>
+                    <ExpenseList handleCheckbox={this.handleCheckBox} expenses = {this.props.expenses}/>
                 </main>
             </div>
         )
