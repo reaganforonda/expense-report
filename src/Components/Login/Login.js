@@ -35,6 +35,7 @@ export class Login extends React.Component{
 
         axios.post(`/api/auth/login`, user).then((result) => {
             if(result.data.updatePWRequired){
+                
                 this.setState({displayPWReset: true, user: result.data})
             }else {
                 this.props.loadUser(result.data);
