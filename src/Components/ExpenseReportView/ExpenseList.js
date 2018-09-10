@@ -9,7 +9,7 @@ export default function ExpenseList (props) {
                 <div>{expense.expense_id}</div>
                 <div>{util.formatDate(expense.expense_date)}</div>
                 <div>{expense.merchant}</div>
-                <div>{expense.amount}</div>
+                <div>{util.formatCurrency(parseFloat(expense.amount))}</div>
                 <div>{expense.comment}</div>
                 <div>{expense.category}</div>
                 <div>{expense.report_id}</div>
