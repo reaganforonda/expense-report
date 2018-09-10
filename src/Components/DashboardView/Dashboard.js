@@ -6,6 +6,7 @@ import SideMenu from './SideMenu';
 import Loading from '../Loading/Loading';
 import AdminView from '../AdminView/AdminView';
 import axios from 'axios';
+import InboxView from '../InboxView/InboxView'
 import ExpReportView from '../ExpenseReportView/ExpReportView';
 
 export class Dashboard extends React.Component{
@@ -46,6 +47,7 @@ export class Dashboard extends React.Component{
                         <Switch>
                             <Route path='/dashboard/admin' component={AdminView}/>
                             <Route path='/dashboard/expense' component={ExpReportView}/>
+                            <Route path='/dashboard/inbox' component={InboxView}/>
                         </Switch>
                     </main>
                 </div>
