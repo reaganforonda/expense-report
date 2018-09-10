@@ -9,10 +9,12 @@ export class ReportFormModal extends React.Component{
 
         this.state={
             date: '',
-            description: ''
+            description: '',
+            reportNumber: ''
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.resetForm = this.resetForm.bind(this);
     }
 
     handleInputChange(e) {
@@ -25,26 +27,39 @@ export class ReportFormModal extends React.Component{
         let report = {
             user: this.props.user,
             date: this.state.date,
-            description: this.state.description
+            description: this.state.description,
+            reportNumber: this.state.reportNumber
         }
 
         axios.post('/api/expense/report', report).then((result) => {
             this.props.loadExpenseReports(this.props.user.employee_id);
+            this.resetForm();
         }).catch(err=> {
             console.log(err.response);
         })
     }
 
+    resetForm(){
+        this.setState({
+            date: '',
+            description: '',
+            reportNumber: ''
+        })
+    }
+
     render(){
-        const disabled = (this.state.date === '') && (this.state.description.length < 1);
+        const disabled = (this.state.date === '') && (this.state.description.length < 1) && (this.state.reportNumber.length < 1);
         return (
             <main className='report-form-modal'>
                 <form className='report-form'>
                     <div className='form-row'>
-                        <p>Employee Name</p>
+                        <h2>{this.props.user.first_name} {this.props.user.last_name}</h2>
                     </div>
                     <div className='form-row'>
-                        <p>Employee Department</p>
+                        <h2>{this.props.user.name}</h2>
+                    </div>
+                    <div className='form-row'>
+                        <div>Reference Number:</div><input type='text' name='reportNumber' maxLength={10} placeholder='Reference Number' value={this.state.reportNumber} onChange={(e)=>this.handleInputChange(e)}/>
                     </div>
                     <div className='form-row'>
                         <div>Report Date</div> <input type='date' name='date' value={this.state.date} placeholder='Report Date' onChange={(e)=>this.handleInputChange(e)}/>
