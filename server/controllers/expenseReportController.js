@@ -50,6 +50,7 @@ module.exports = {
         const db = req.app.get('db');
         const {employeeID, reportID}  = req.query;
 
+        console.log(req.query);
         db.GET_EXPENSES([employeeID, reportID]).then((result) => {
             res.status(200).send(result)
         }).catch((err) => {
@@ -60,7 +61,23 @@ module.exports = {
 
     createExpense : (req, res) => {
         const db = req.app.get('db');
-        const {} = req.body;
+        const {
+            user,
+            date,
+            merchant,
+            amount,
+            category,
+            comment,
+            tags
+        } = req.body;
+
+        if(user.rights.Expense) {
+            db.CREATE_EXPENSE([date, merchant, amount, category, comment, user.employee_id]).then((result) => {
+                res.status(200).send(result);
+            })
+        } else {
+            res.sendStatus(401)
+        }
     },
 
     deleteExpense : (req, res) => {
