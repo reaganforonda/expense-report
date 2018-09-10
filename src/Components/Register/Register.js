@@ -74,6 +74,7 @@ export class Register extends React.Component {
         const validPW = (this.state.pw === this.state.confirmPW) && (this.state.confirmPW.length <=25 && this.state.pw.length <=25);
         const validEmail = util.validEmail(this.state.email) && this.state.email.length > 0;
         const submitDisabled = validPW && validEmail && this.state.pw.length > 0 && this.state.confirmPW.length > 0 && (this.state.acct_type === 1 || this.state.acct_type ===2)
+        const inputDisabled = !(this.state.acct_type === 1 || this.state.acct_type === 2);
         
         return (
             <div className='register'>
@@ -91,19 +92,19 @@ export class Register extends React.Component {
                                 </div>
                             </div>
                             <div className='form-row'>
-                                <input required type='text' name="firstName" value={this.state.firstName} placeholder='First Name' onChange={(e)=>this.handleInputChange(e)}/>
+                                <input disabled={inputDisabled} required type='text' name="firstName" value={this.state.firstName} placeholder='First Name' onChange={(e)=>this.handleInputChange(e)}/>
                             </div>
                             <div className='form-row'>
-                                <input required type='text' name="lastName" value={this.state.lastName} placeholder='Last Name' onChange={(e)=>this.handleInputChange(e)}/>
+                                <input disabled={inputDisabled} required type='text' name="lastName" value={this.state.lastName} placeholder='Last Name' onChange={(e)=>this.handleInputChange(e)}/>
                             </div>
                             <div className='form-row'>
-                                <input required type='email' name='email' value={this.state.email} placeholder='Email' onChange={(e)=>this.handleInputChange(e)}/>
+                                <input disabled={inputDisabled} required type='email' name='email' value={this.state.email} placeholder='Email' onChange={(e)=>this.handleInputChange(e)}/>
                             </div>
                             <div className='form-row'>
-                                <input required type='password' name='pw' value={this.state.pw} maxLength={25} placeholder='Password' onChange={(e)=>this.handleInputChange(e)}/>
+                                <input disabled={inputDisabled} required type='password' name='pw' value={this.state.pw} maxLength={25} placeholder='Password' onChange={(e)=>this.handleInputChange(e)}/>
                             </div>
                             <div className='form-row'>
-                                <input required type='password' name='confirmPW' value={this.state.confirmPW} maxLength={25} placeholder='Confirm Password' onChange={(e)=>this.handleInputChange(e)}/>
+                                <input disabled={inputDisabled} required type='password' name='confirmPW' value={this.state.confirmPW} maxLength={25} placeholder='Confirm Password' onChange={(e)=>this.handleInputChange(e)}/>
                             </div>
                             {
                                 validPW ? null : (
