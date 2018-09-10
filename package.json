@@ -7,7 +7,6 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
-    "cypress": "^3.1.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
@@ -31,8 +30,12 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "main": "./server/index.js",
-  "proxy": "http://localhost:3006"
+  "proxy": "http://localhost:3006",
+  "devDependencies": {
+    "cypress": "^3.1.0"
+  }
 }
