@@ -12,7 +12,7 @@ export default function ReportsDropdown (props) {
     }
 
     return (
-        <select name='report' className='report-dropdown'>
+        <select onChange={(e)=>props.select(e)}name='report' className='report-dropdown'>
             <option value='' disabled selected>Report</option>
             {reports}
         </select>

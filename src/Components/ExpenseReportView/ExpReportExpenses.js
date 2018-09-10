@@ -5,6 +5,7 @@ import ExpenseList from './ExpenseList';
 import ExpenseFormModal from './ExpenseFormModal';
 import {loadExpenses} from '../../ducks/expenseReducer';
 import Loading from '../Loading/Loading';
+import ReportsDropdown from '../DropdownMenus/ReportsDropdown';
 
 export class ExpReportExpenses extends React.Component{
     constructor(props) {
@@ -12,12 +13,14 @@ export class ExpReportExpenses extends React.Component{
 
         this.state={
             displayExpenseForm: false,
-            selectedExpenses: []
+            selectedExpenses: [],
+            report: ''
 
         }
 
         this.handlDisplayExpenseForm = this.handlDisplayExpenseForm.bind(this);
         this.handleCheckBox  = this.handleCheckBox.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         
     }
 
@@ -48,6 +51,11 @@ export class ExpReportExpenses extends React.Component{
 
     handleAddToReport(){
         console.log(this.state.selectedExpenses);
+        console.log(this.state.report);
+    }
+
+    handleSelect(e){
+        this.setState({[e.target.name] : e.target.value})
     }
 
     render(){
@@ -60,7 +68,7 @@ export class ExpReportExpenses extends React.Component{
                     }{
                         this.state.selectedExpenses.length > 0 ? <div><div>
                             <button type='button' onClick={()=>this.handleAddToReport()}>Add to Report</button>
-                            <input placeholder='List of Reports'/>
+                            <ReportsDropdown reports={this.props.expenseReports} select={this.handleSelect}/>
                          </div> <div><button type='button'>Delete Expenses</button></div></div>: null
                     }
                 </div>
@@ -80,7 +88,8 @@ function mapStateToProps(state) {
     return {
         user: state.userReducer.user,
         expensesLoading: state.expenseReducer.expensesLoading,
-        expenses : state.expenseReducer.expenses
+        expenses : state.expenseReducer.expenses,
+        expenseReports: state.expenseReducer.expenseReports
     }
 }
 
