@@ -4,14 +4,12 @@ module.exports = {
         const {
             date,
             description,
-            user
+            user,
+            reportNumber
         } = req.body;
 
-        console.log(req.body);
-
         if(user.rights.Expense) {
-            
-            db.CREATE_NEW_EXP_REPORT([user.employee_id, date, description]).then((result) => {
+            db.CREATE_NEW_EXP_REPORT([user.employee_id, date, description, reportNumber]).then((result) => {
                 res.status(200).send(result);
             }).catch((err)=> {
                 console.log(`Server error while attempting to create new report: ${err}`);
@@ -36,7 +34,7 @@ module.exports = {
 
     getExpenseReports : (req, res) => {
         const db = req.app.get('db');
-        const {employeeID, reportID} = req.query;
+        const {employeeID, reportID, filter} = req.query;
 
         db.GET_EXPENSE_REPORTS([employeeID, reportID]).then((result) => {
             res.status(200).send(result);
