@@ -14,7 +14,13 @@ export class Register extends React.Component {
             lastName: '',
             email: '',
             pw: '',
-            confirmPW: ''
+            confirmPW: '',
+            companyName: '',
+            address: '',
+            city: '',
+            state: '',
+            zipcode : '',
+            phone: ''
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -58,7 +64,13 @@ export class Register extends React.Component {
             lastName: '',
             email: '',
             pw: '',
-            confirmPW: ''  
+            confirmPW: '',
+            companyName: '',
+            address: '',
+            city: '',
+            state: '',
+            zipcode : '',
+            phone: ''  
         })
     }
 
@@ -73,7 +85,8 @@ export class Register extends React.Component {
     render() {
         const validPW = (this.state.pw === this.state.confirmPW) && (this.state.confirmPW.length <=25 && this.state.pw.length <=25);
         const validEmail = util.validEmail(this.state.email) && this.state.email.length > 0;
-        const submitDisabled = validPW && validEmail && this.state.pw.length > 0 && this.state.confirmPW.length > 0 && (this.state.acct_type === 1 || this.state.acct_type ===2)
+        const validCompany = (this.state.companyName.length > 0 && this.state.address.length > 0 && this.state.city.length > 0 && this.state.zipcode.length > 0 && this.state.phone.length > 0) && this.state.acct_type===1;
+        const submitDisabled = validCompany && validPW && validEmail && this.state.pw.length > 0 && this.state.confirmPW.length > 0 && (this.state.acct_type === 1 || this.state.acct_type ===2)
         const inputDisabled = !(this.state.acct_type === 1 || this.state.acct_type === 2);
         
         return (
@@ -100,6 +113,30 @@ export class Register extends React.Component {
                             <div className='form-row'>
                                 <input disabled={inputDisabled} required type='email' name='email' value={this.state.email} placeholder='Email' onChange={(e)=>this.handleInputChange(e)}/>
                             </div>
+                            {
+                                this.state.acct_type === 1 ? 
+                                (<div>
+                                    <div className='form-row'>
+                                        <input disabled={inputDisabled} required type='text' name={"companyName"} value={this.state.companyName} placeholder='Company Name' onChange={(e)=>this.handleInputChange(e)}/>
+                                    </div>
+                                    <div className='form-row'>
+                                        <input disabled={inputDisabled} required type='text' name={"address"} value={this.state.address} placeholder='Company Address' onChange={(e)=>this.handleInputChange(e)}/>
+                                    </div>
+                                    <div className='form-row'>
+                                        <input disabled={inputDisabled} required type='text' name={"city"} value={this.state.city} placeholder='City' onChange={(e)=>this.handleInputChange(e)}/>
+                                    </div>
+                                    <div className='form-row'>
+                                        <input disabled={inputDisabled} required type='text' name={"state"} value={this.state.state} placeholder='State' onChange={(e)=>this.handleInputChange(e)}/>
+                                    </div>
+                                    <div className='form-row'>
+                                        <input disabled={inputDisabled} required type='number' name={"zipcode"} value={this.state.zipcode} placeholder='Zipcode' onChange={(e)=>this.handleInputChange(e)}/>
+                                    </div>
+                                    <div className='form-row'>
+                                        <input disabled={inputDisabled} required type='text' name={"phone"} value={this.state.phone} placeholder='Phone' onChange={(e)=>this.handleInputChange(e)}/>
+                                    </div>
+                                </div>
+                                ) : null
+                            }
                             <div className='form-row'>
                                 <input disabled={inputDisabled} required type='password' name='pw' value={this.state.pw} maxLength={25} placeholder='Password' onChange={(e)=>this.handleInputChange(e)}/>
                             </div>
@@ -118,9 +155,6 @@ export class Register extends React.Component {
                                 <button disabled={!submitDisabled} type='submit' onClick={(e)=>this.createAccount(e)}>Sign Up</button>
                             </div>
                         </form>
-                        {
-
-                        }
                     </div>
                 </main>
                 
