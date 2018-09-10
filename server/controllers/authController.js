@@ -45,8 +45,16 @@ module.exports = {
                     }
 
                     db.CREATE_ENTERPRISE_USER([acct_type, lowerEmail, hash, firstName, lastName, rights]).then((user) => {
-                        db.CREATE_COMPANY([companyName, address, city, state, zipcode, phone, user[0].user_id]).then((user) => {
-                            res.send(200).status('Registerd');
+                        db.CREATE_COMPANY([companyName, address, city, state, zipcode, phone, user[0].user_id]).then((company) => {
+                            db.REG_CREATE_EMPLOYEE([company[0].company_id, user[0].user_id, firstName, lastName, email]).then((employee) => {
+                                res.status(200).send('New Employee')
+                            }).catch((err) => {
+                                console.log(`Server error while attempting to create employee during registration: ${err}`)
+                                res.sendStatus(500);
+                            })
+                        }).catch((err) => {
+                            console.log(`Server error while attempting to create company during registration: ${err}`);
+                            res.sendStatus(500);
                         })
                     }).catch((err) => {
                         console.log(`Server error while attemtping to create enterprise user: ${err}`);
@@ -67,7 +75,7 @@ module.exports = {
                     db.CREATE_INDIVIDUAL_USER([acct_type, lowerEmail, hash, firstName, lastName]).then((user) => {
                         res.status(200).send('User Created');
                     }).catch((err) => {
-                        console.log(`Server error while attemtping to create enterprise user: ${err}`);
+                        console.log(`Server error while attemtping to create Individual user: ${err}`);
                         res.sendStatus(500);
                     })
                 }
@@ -82,7 +90,7 @@ module.exports = {
         let lowerEmail = email.toLowerCase();
 
         db.CHECK_EMAIL([lowerEmail]).then((user) => {
-
+            
             if(user.length === 0) {
                 res.sendStatus(401);
             }
