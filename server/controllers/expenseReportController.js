@@ -74,6 +74,9 @@ module.exports = {
         if(user.rights.Expense) {
             db.CREATE_EXPENSE([date, merchant, amount, category, comment, user.employee_id]).then((result) => {
                 res.status(200).send(result);
+            }).catch((err) => {
+                console.log(`Server error while attempting to create new expense: ${err}`);
+                res.sendStatus(500);
             })
         } else {
             res.sendStatus(401)
