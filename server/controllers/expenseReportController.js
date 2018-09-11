@@ -52,9 +52,10 @@ module.exports = {
 
     getExpenses : (req, res) => {
         const db = req.app.get('db');
-        const {employeeID, reportID}  = req.query;
+        const {employeeID, reportID, expenseID}  = req.query;
+        console.log(req.query);
 
-        db.GET_EXPENSES([employeeID, reportID]).then((result) => {
+        db.GET_EXPENSES([employeeID, reportID, expenseID]).then((result) => {
             res.status(200).send(result)
         }).catch((err) => {
             console.log(`Server error while attempting to retrieve expenses: ${err}`);

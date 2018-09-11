@@ -3,18 +3,25 @@ import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ReportFormModal from './ReportFormModal';
 import ReportList from './ReportList';
-import {loadExpenseReports} from '../../ducks/expenseReducer';
+import {loadExpenseReports, loadExpenses} from '../../ducks/expenseReducer';
 import Loading from '../Loading/Loading';
+import ReportDetail from './ReportDetail';
+import axios from 'axios';
 
 export class ExpReportReports extends React.Component{
     constructor(props) {
         super(props);
 
         this.state={
-            displayReportForm: false
+            displayReportForm: false,
+            displayModal: false,
+            expenses: [],
+            report: ''
         }
 
         this.handleDisplayReportForm = this.handleDisplayReportForm.bind(this);
+        this.selectReport = this.selectReport.bind(this);
+        this.hideDetailModal = this.hideDetailModal.bind(this);
     }
 
     componentDidMount(){
@@ -29,6 +36,20 @@ export class ExpReportReports extends React.Component{
         }
     }
 
+    selectReport(reportID, report) {
+        this.setState({displayModal: true, report: report});
+        axios.get(`/api/expenses?employeeID?=${this.props.user.employee}&reportID=${reportID}`).then((expense) => {
+            console.log(expense.data);
+            this.setState({expenses: expense.data});
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+    hideDetailModal(){
+        this.setState({displayModal: false});
+    }
+
     render(){
         return (
             this.props.reportLoading ? <Loading /> : (
@@ -38,7 +59,7 @@ export class ExpReportReports extends React.Component{
                         this.state.displayReportForm ? null : <button onClick={()=>this.handleDisplayReportForm()}type='button'>New Expense Report</button>
                     }
                     {
-                        this.state.displayReportForm ? <ReportFormModal user={this.props.user} closeForm={this.handleDisplayReportForm}/> : null
+                        this.state.displayReportForm ? <ReportFormModal  user={this.props.user} closeForm={this.handleDisplayReportForm}/> : null
                     }
                     {
                         this.state.displayReportForm ? null : (
@@ -54,7 +75,10 @@ export class ExpReportReports extends React.Component{
 
                 </header>
                 <main >
-                    <ReportList reports={this.props.expenseReports} />
+                    <ReportList selectReport={this.selectReport} reports={this.props.expenseReports} />
+                    {
+                        this.state.displayModal ? <ReportDetail expense={ this.state.expenses} cancel={this.hideDetailModal}/> : null
+                    }
                 </main>
             </div>)
         )
@@ -65,8 +89,9 @@ function mapStateToProps(state) {
     return {
         user: state.userReducer.user,
         expenseReports: state.expenseReducer.expenseReports,
-        reportLoading: state.expenseReducer.reportLoading
+        reportLoading: state.expenseReducer.reportLoading,
+
     }
 }
 
-export default connect(mapStateToProps, {loadExpenseReports})(withRouter(ExpReportReports));
+export default connect(mapStateToProps, {loadExpenseReports, loadExpenses})(withRouter(ExpReportReports));

@@ -10,8 +10,8 @@ const INITIAL_STATE = {
 const LOAD_EXP_REPORTS = "LOAD_EXP_REPORTS";
 const LOAD_EXPENSES = "LOAD_EXPENSES";
 
-export function loadExpenseReports(employeeID){
-    const reports = axios.get(`/api/expense/report?employeeID=${employeeID}`).then((result) => {
+export function loadExpenseReports(employeeID, reportID){
+    const reports = axios.get(`/api/expense/report?employeeID=${employeeID}&reportID=${reportID}`).then((result) => {
         return result.data
     });
 
@@ -21,8 +21,8 @@ export function loadExpenseReports(employeeID){
     }
 }
 
-export function loadExpenses(employeeID, expenseID) {
-    const expenses = axios.get(`/api/expenses?employeeID=${employeeID}&expenseID=${expenseID}`).then((result) => {
+export function loadExpenses(employeeID) {
+    const expenses = axios.get(`/api/expenses?employeeID=${employeeID}`).then((result) => {
         return result.data
     })
 
