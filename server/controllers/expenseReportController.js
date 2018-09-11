@@ -52,15 +52,23 @@ module.exports = {
 
     getExpenses : (req, res) => {
         const db = req.app.get('db');
-        const {employeeID, reportID, expenseID}  = req.query;
-        console.log(req.query);
-
+        const {employeeID, reportID, expenseID, filter}  = req.query;
+        
+        if(filter === 'open') {
+            db.GET_OPEN_EXPENSES([employeeID]).then((result) => {
+                res.status(200).send(result)
+            }).catch((err) => {
+                console.log(`Server error while attempting to retrieve expenses: ${err}`);
+                res.sendStatus(500);
+            })    
+        } else {
         db.GET_EXPENSES([employeeID, reportID, expenseID]).then((result) => {
             res.status(200).send(result)
         }).catch((err) => {
             console.log(`Server error while attempting to retrieve expenses: ${err}`);
             res.sendStatus(500);
-        })
+        })}
+
     },
 
     createExpense : (req, res) => {

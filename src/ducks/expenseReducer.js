@@ -22,7 +22,7 @@ export function loadExpenseReports(employeeID, reportID){
 }
 
 export function loadExpenses(employeeID) {
-    const expenses = axios.get(`/api/expenses?employeeID=${employeeID}`).then((result) => {
+    const expenses = axios.get(`/api/expenses?employeeID=${employeeID}&filter=${'open'}`).then((result) => {
         return result.data
     })
 

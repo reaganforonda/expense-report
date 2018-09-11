@@ -48,7 +48,7 @@ export class ReportDetail extends React.Component{
                 <div className='report-detail-modal'>
                     <header className='report-detail-modal-header'>
                         <div>Report Number: {this.props.report.report_number}</div>
-                        <div>Report Date: {this.props.report.report_date}</div>
+                        <div>Report Date: {util.formatDate(this.props.report.report_date)}</div>
                         <div>Description: {this.props.report.description}</div>
                     </header>
                     <main className='report-detail-main'>
