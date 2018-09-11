@@ -7,7 +7,7 @@ export default function ExpenseList (props) {
         return (
             <div className='expense-item' key = {expense.expense_id}>
                 <div>{expense.expense_id}</div>
-                <div>{util.formatDate(expense.expense_date)}</div>
+                {/* <div>{util.formatDate(expense.expense_date)}</div> */}
                 <div>{expense.merchant}</div>
                 <div>{util.formatCurrency(parseFloat(expense.amount))}</div>
                 <div>{expense.comment}</div>

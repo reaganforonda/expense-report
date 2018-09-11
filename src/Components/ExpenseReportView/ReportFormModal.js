@@ -35,6 +35,7 @@ export class ReportFormModal extends React.Component{
 
         axios.post('/api/expense/report', report).then((result) => {
             this.props.loadExpenseReports(this.props.user.employee_id);
+            this.props.closeForm();
             this.resetForm();
         }).catch(err=> {
             console.log(err.response);

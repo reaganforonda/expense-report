@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {loadExpenses} from '../../ducks/expenseReducer';
+import {loadExpenses, loadExpenseReports} from '../../ducks/expenseReducer';
 import * as util from '../../utilities/generalUtilities';
 import axios from 'axios';
 
@@ -28,7 +28,8 @@ export class ReportDetail extends React.Component{
         
         axios.put(`/api/report/${reportID}?employeeID=${this.props.user.employee_id}&submit=${true}`).then((result) => {
             console.log(result);
-            this.props.loadExpenses(this.props.user.employee)
+            this.props.loadExpenses(this.props.user.employee_id)
+            this.props.loadExpenseReports(this.props.user.employee_id)
             this.props.cancel();
         }).catch((err) => {
             console.log(err);
@@ -90,4 +91,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {loadExpenses})(ReportDetail);
+export default connect(mapStateToProps, {loadExpenses, loadExpenseReports})(ReportDetail);

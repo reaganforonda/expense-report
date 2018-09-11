@@ -25,6 +25,10 @@ export class ExpReportExpenses extends React.Component{
         this.handleAddToReport = this.handleAddToReport.bind(this);
     }
 
+    componentDidMount(){
+        this.props.loadExpenses(this.props.user.employee_id);
+    }
+
     handlDisplayExpenseForm (){
         if(this.state.displayExpenseForm === false ) {
             this.setState({displayExpenseForm : true});
