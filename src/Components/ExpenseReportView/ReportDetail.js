@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {loadExpenses} from '../../ducks/expenseReducer';
 import * as util from '../../utilities/generalUtilities';
+import axios from 'axios';
 
 export class ReportDetail extends React.Component{
     constructor(props) {
@@ -22,8 +23,16 @@ export class ReportDetail extends React.Component{
         }
     }
 
-    handleReportSubmit(e) {
+    handleReportSubmit(e, reportID) {
         e.preventDefault;
+        
+        axios.put(`/api/report/${reportID}?employeeID=${this.props.user.employee_id}&submit=${true}`).then((result) => {
+            console.log(result);
+            this.props.loadExpenses(this.props.user.employee)
+            this.props.cancel();
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 
     render(){
@@ -63,7 +72,7 @@ export class ReportDetail extends React.Component{
                             {expenseList}
                         <div className='report-detail-btns'>
                             <button onClick={()=>this.props.cancel()} type='button'>Cancel</button>
-                            <button onClick={(e)=>this.handleReportSubmit(e)} type='button'>Submit </button>
+                            <button onClick={(e)=>this.handleReportSubmit(e, this.props.report.report_id)} type='button'>Submit </button>
                         </div>
                     </main>
                 </div>

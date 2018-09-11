@@ -65,6 +65,7 @@ app.get('/api/expenses', expenseController.getExpenses);
 app.post('/api/expense/report', expenseController.createNewReport);
 app.post('/api/expense', expenseController.createExpense);
 app.put('/api/expense', expenseController.editExpense);
+app.put('/api/report/:reportID', expenseController.editExpenseReport)
 
 app.listen(SERVER_PORT, () => {
   console.log(`Creeping on Port: ${SERVER_PORT}`);

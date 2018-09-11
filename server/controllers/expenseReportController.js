@@ -27,7 +27,25 @@ module.exports = {
     },
 
     editExpenseReport : (req, res) => {
+        const db = req.app.get('db');
 
+        const {submit, employeeID} = req.query;
+        console.log(req.query);
+
+        const {reportID} = req.params
+        console.log(req.params);
+
+        const {} = req.body;
+
+        if(submit) {
+            db.SUBMIT_REPORT([employeeID, reportID]).then((result) => {
+                
+                res.status(200).send(result);
+            }).catch((err) => {
+                console.log(`Server error while attempting to update report for submission: ${err}`);
+                res.sendStatus(500);
+            })
+        }
     },
 
     deleteExpenseReport : (req, res) => {

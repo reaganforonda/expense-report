@@ -14,7 +14,7 @@
 .report-detail-modal{
     background: $white;
     border-radius: 10px;
-    min-height: fit-content;
+    // min-height: fit-content;
     height: 500px;
     width: 500px;
     position: fixed;
@@ -24,9 +24,9 @@
       bottom: auto;
     transform: translate(-50%, -50%);
     z-index: 1010;
+    overflow-y: scroll;
+    
 
     main {
-        overflow: auto;
-        overflow-y: scroll;
     }
 }
