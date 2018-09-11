@@ -3,7 +3,7 @@ import * as util from '../../utilities/generalUtilities'
 
 export default function ReportList (props) {
     let reportList = props.reports.map((report) => {
-        
+        console.log(report)
         return (
             <div className='report-item' key={report.report_id}>
                 <div>{report.report_number}</div>
@@ -12,7 +12,7 @@ export default function ReportList (props) {
                 <div>{util.formatCurrency(parseFloat(report.amount))}</div>
                 <div>
                 {
-                    report.status? "Yes" : "No"
+                    report.status.Approve ? "Approved" : report.status.Rejected ? "Rejected" : report.status.Submitted  ? "Submitted" : "Open"
                 }
                 </div>
             </div>
