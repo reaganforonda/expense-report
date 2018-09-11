@@ -60,7 +60,8 @@ export class AddEmployeeForm extends React.Component {
             title: this.state.title,
             workPhone: this.state.workPhone,
             email: this.state.email.toLocaleLowerCase(),
-            user: this.props.user
+            user: this.props.user,
+            approver: this.state.approver
         }
 
         axios.post('/api/employees', employee).then((result) => {

@@ -6,6 +6,7 @@ import axios from 'axios';
 import DepartmentDropdown from '../../DropdownMenus/DepartmentDropdown';
 import {loadEmployees,selectEmployee} from '../../../ducks/companyReducer';
 import EmployeeAcct from './EmployeeAcct';
+import EmployeeDropdown from '../../DropdownMenus/EmployeeDropdown';
 
 export class EmployeeDetail extends React.Component {
     constructor(props) {
@@ -24,6 +25,8 @@ export class EmployeeDetail extends React.Component {
             btnText: 'Edit',
             displayOptions: false,
             displayDetail: true,
+            approvers: [],
+            approver: ''
             
         }
 
@@ -32,6 +35,15 @@ export class EmployeeDetail extends React.Component {
         this.handleCancel = this.handleCancel.bind(this);
         this.handleSaveEdit = this.handleSaveEdit.bind(this);
         this.handleCancelOptions = this.handleCancelOptions.bind(this);
+        this.selectApprover = this.selectApprover.bind(this);
+    }
+
+    componentDidMount(){
+        axios.get(`/api/employees?companyID=${this.props.user.company}&filter=${'approver'}`).then((result)=> {
+            this.setState({approvers : result.data})
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 
     static getDerivedStateFromProps(props, state){
@@ -45,7 +57,8 @@ export class EmployeeDetail extends React.Component {
                     lastName: props.selectedEmployee.last_name,
                     title: props.selectedEmployee.title,
                     email: props.selectedEmployee.email,
-                    workPhone: props.selectedEmployee.work_phone
+                    workPhone: props.selectedEmployee.work_phone,
+                    approver: props.selectedEmployee.approver
                 }
             }
         }
@@ -53,6 +66,10 @@ export class EmployeeDetail extends React.Component {
 
     handleInputChange(e) {
         this.setState({[e.target.name]: e.target.value})
+    }
+
+    selectApprover(e) {
+        this.setState({approver: e.target.value})
     }
 
     handleSaveEdit(e) {
@@ -68,7 +85,8 @@ export class EmployeeDetail extends React.Component {
                 department: this.state.department,
                 workPhone: this.state.workPhone,
                 email: this.state.email,
-                user: this.props.user
+                user: this.props.user,
+                approver: this.state.approver
             }
 
             axios.put(`/api/employees?employeeID=${this.state.employee_id}`, updatedEmployee).then((result) => {
@@ -103,7 +121,6 @@ export class EmployeeDetail extends React.Component {
     }
 
     render(){ 
-        
         return (
             this.props.selectedLoading || this.props.departmentLoading ? <Loading/> :(
             <div className='employee-detail'>
@@ -129,6 +146,9 @@ export class EmployeeDetail extends React.Component {
                         </div>
                         <div className='form-row'>
                             <input name='workPhone' type='text' value={this.state.workPhone} disabled={this.state.lockMode} onChange={(e)=> this.handleInputChange(e)} />
+                        </div>
+                        <div className='form-row'>
+                            <EmployeeDropdown disabled={this.state.lockMode} selectApprover={this.selectApprover} employees={this.state.approvers}/>
                         </div>
                         <div className='form-row'>
                             <div className='row-buttons'>

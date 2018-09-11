@@ -99,10 +99,11 @@ module.exports = {
             title,
             workPhone,
             email,
-            user
+            user,
+            approver
         } = req.body;
         if(user.rights.Admin) {
-            db.CREATE_EMPLOYEE([company, department, firstName, lastName, title, workPhone, email]).then((result) => {
+            db.CREATE_EMPLOYEE([company, department, firstName, lastName, title, workPhone, email, approver]).then((result) => {
                 res.status(200).send(result[0])
             }).catch((err)=> {
                 console.log(`Server error while attempting to create employee: ${err}`)
@@ -124,12 +125,13 @@ module.exports = {
             email, 
             user,
             user_id,
+            approver
         } = req.body
 
         const {employeeID} = req.query
 
         if(user.rights.Admin ) {
-            db.UPDATE_EMPLOYEE([department, firstName, lastName, title, workPhone, email, employeeID, company, user_id]).then((result) => {
+            db.UPDATE_EMPLOYEE([department, firstName, lastName, title, workPhone, email, employeeID, company, user_id, approver]).then((result) => {
                 res.status(200).send(result[0]);
             }).catch((err) => {
                 console.log(`Server error while attempting to create employee: ${err}`);
