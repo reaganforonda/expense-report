@@ -89,8 +89,7 @@ function mapStateToProps(state) {
     return {
         user: state.userReducer.user,
         expenseReports: state.expenseReducer.expenseReports,
-        reportLoading: state.expenseReducer.reportLoading,
-
+        reportLoading: state.expenseReducer.reportLoading
     }
 }
 

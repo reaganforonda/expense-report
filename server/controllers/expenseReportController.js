@@ -60,12 +60,21 @@ module.exports = {
         const db = req.app.get('db');
         const {employeeID, reportID, filter} = req.query;
 
-        db.GET_EXPENSE_REPORTS([employeeID, reportID]).then((result) => {
-            res.status(200).send(result);
-        }).catch((err) => {
-            console.log(`Server error while attempting to get expense reports; ${err}`);
-            res.sendStatus(500);
-        })
+        if(filter = 'pending') {
+            db.GET_PENDING_REPORTS([employeeID]).then((result) => {
+                res.status(200).send(result) ;
+            }).catch((err)=> {
+                console.log(`Server error while attempting to get expense reports pending: ${err}`);
+                res.sendStatus(500);
+            })
+        } else {
+            db.GET_EXPENSE_REPORTS([employeeID, reportID]).then((result) => {
+                res.status(200).send(result);
+            }).catch((err) => {
+                console.log(`Server error while attempting to get expense reports; ${err}`);
+                res.sendStatus(500);
+            })
+        }
     },
 
     getExpenses : (req, res) => {
