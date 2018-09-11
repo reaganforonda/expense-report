@@ -3,6 +3,8 @@ import {withRouter, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ReportFormModal from './ReportFormModal';
 import ReportList from './ReportList';
+import {loadExpenseReports} from '../../ducks/expenseReducer';
+import Loading from '../Loading/Loading';
 
 export class ExpReportReports extends React.Component{
     constructor(props) {
@@ -15,6 +17,10 @@ export class ExpReportReports extends React.Component{
         this.handleDisplayReportForm = this.handleDisplayReportForm.bind(this);
     }
 
+    componentDidMount(){
+        this.props.loadExpenseReports(this.props.user.employee_id);
+    }
+
     handleDisplayReportForm(){
         if(this.state.displayReportForm === false){
             this.setState({displayReportForm: true})
@@ -25,6 +31,7 @@ export class ExpReportReports extends React.Component{
 
     render(){
         return (
+            this.props.reportLoading ? <Loading /> : (
             <div className='exp-main'>
                 <header className='exp-report-header'>
                     {
@@ -49,7 +56,7 @@ export class ExpReportReports extends React.Component{
                 <main >
                     <ReportList reports={this.props.expenseReports} />
                 </main>
-            </div>
+            </div>)
         )
     }
 }
@@ -62,4 +69,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {})(withRouter(ExpReportReports));
+export default connect(mapStateToProps, {loadExpenseReports})(withRouter(ExpReportReports));

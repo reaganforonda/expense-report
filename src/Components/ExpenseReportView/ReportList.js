@@ -3,7 +3,6 @@ import * as util from '../../utilities/generalUtilities'
 
 export default function ReportList (props) {
     let reportList = props.reports.map((report) => {
-        console.log(report)
         return (
             <div className='report-item' key={report.report_id}>
                 <div>{report.report_number}</div>

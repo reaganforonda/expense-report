@@ -26,12 +26,12 @@ export class ExpReportView extends React.Component{
                 
                 <main>
                     {
-                        this.props.reportLoading && this.props.expensesLoading ? <Loading/> : (
+                        
                         <Switch>
                             <Route exact path='/dashboard/expense/reports' component={ExpReportReports}/>
                             <Route exact path='/dashboard/expense/expenses' component={ExpReportExpenses}/>
                         </Switch>
-                        )
+                    
                     }
                 </main>
             </div>
