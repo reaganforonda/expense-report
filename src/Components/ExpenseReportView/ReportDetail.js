@@ -8,7 +8,7 @@ export class ReportDetail extends React.Component{
         super(props);
 
         this.state={
-            expenses : []
+            expenses : [],
         }
     }
 
@@ -19,7 +19,6 @@ export class ReportDetail extends React.Component{
             }
         }
     }
-
 
     render(){
         let expenseList = []
@@ -34,8 +33,6 @@ export class ReportDetail extends React.Component{
                     <div>{util.formatCurrency(parseFloat(expense.amount))}</div>
                     <div>{expense.comment}</div>
                     <div>{expense.category}</div>
-                    <div>{expense.report_id}</div>
-                    <div><button type='button'>Delete</button></div>
                 </div>)
             })
         }
@@ -43,17 +40,23 @@ export class ReportDetail extends React.Component{
         return (
             <div className='report-detail-overlay'>
                 <div className='report-detail-modal'>
-                    <header>
-                        <div>Report ID: {this.props.report.report_id}</div>
-                        <div>Report_Number</div>
-                        <div>Report Date</div>
-                        <div>Description</div>
+                    <header className='report-detail-modal-header'>
+                        <div>Report Number: {this.props.report.report_number}</div>
+                        <div>Report Date: {this.props.report.report_date}</div>
+                        <div>Description: {this.props.report.description}</div>
                     </header>
-                    <main>
-                        {expenseList}
+                    <main className='report-detail-main'>
+                        <div className='report-detail-expense-list-header'>
+                            <h2>Expense ID</h2>
+                            <h2>Expense Date</h2>
+                            <h2>Merchant</h2>
+                            <h2>Amount</h2>
+                            <h2>Comment</h2>
+                            <h2>Category</h2>
+                        </div>
+                            {expenseList}
                         <div className='report-detail-btns'>
                             <button onClick={()=>this.props.cancel()} type='button'>Cancel</button>
-                            <button type='button'>Save</button>
                             <button type='button'>Submit </button>
                         </div>
                     </main>

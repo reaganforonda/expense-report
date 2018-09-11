@@ -77,7 +77,7 @@ export class ExpReportReports extends React.Component{
                 <main >
                     <ReportList selectReport={this.selectReport} reports={this.props.expenseReports} />
                     {
-                        this.state.displayModal ? <ReportDetail expense={ this.state.expenses} cancel={this.hideDetailModal}/> : null
+                        this.state.displayModal ? <ReportDetail report={this.state.report} expense={ this.state.expenses} cancel={this.hideDetailModal}/> : null
                     }
                 </main>
             </div>)
