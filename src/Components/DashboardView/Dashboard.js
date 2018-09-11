@@ -38,7 +38,7 @@ export class Dashboard extends React.Component{
 
     render(){
         return (
-            (!this.props.user || this.props.user === {})  ? <Loading/> : (
+            (!this.props.user.user_id)  ? <Loading/> : (
             <div className='dashboard'>
                 <SideMenu user={this.props.user}/>
                 <div className='main-section'>
