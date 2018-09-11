@@ -1,0 +1,32 @@
+@import './mixins.scss';
+@import './variables.scss';
+
+.report-detail-overlay{
+    background-color: transparentize(black, .1);
+    
+    position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    z-index: 1009;
+}
+.report-detail-modal{
+    background: $white;
+    border-radius: 10px;
+    height: 500px;
+    widtH: 500px;
+    position: fixed;
+      top: 50%;
+      left: 50%;
+      right: auto;
+      bottom: auto;
+    transform: translate(-50%, -50%);
+    z-index: 1010;
+
+    main {
+        
+        overflow: auto;
+        overflow-y: scroll;
+    }
+}
