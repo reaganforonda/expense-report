@@ -10,6 +10,8 @@ export class ReportDetail extends React.Component{
         this.state={
             expenses : [],
         }
+
+        this.handleReportSubmit = this.handleReportSubmit.bind(this);
     }
 
     static getDerivedStateFromProps(props, state){
@@ -18,6 +20,10 @@ export class ReportDetail extends React.Component{
                 expenses: props.expenses
             }
         }
+    }
+
+    handleReportSubmit(e) {
+        e.preventDefault;
     }
 
     render(){
@@ -57,7 +63,7 @@ export class ReportDetail extends React.Component{
                             {expenseList}
                         <div className='report-detail-btns'>
                             <button onClick={()=>this.props.cancel()} type='button'>Cancel</button>
-                            <button type='button'>Submit </button>
+                            <button onClick={(e)=>this.handleReportSubmit(e)} type='button'>Submit </button>
                         </div>
                     </main>
                 </div>
