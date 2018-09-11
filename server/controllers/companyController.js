@@ -102,7 +102,7 @@ module.exports = {
             user,
             approver
         } = req.body;
-        console.log(req.body);
+        
         if(user.rights.Admin) {
 
             if(approver === '') {
@@ -141,7 +141,7 @@ module.exports = {
         } = req.body
 
         const {employeeID} = req.query
-        console.log(req.body);
+        
 
         if(user.rights.Admin ) {
             db.UPDATE_EMPLOYEE([department, firstName, lastName, title, workPhone, email, employeeID, company, user_id, approver]).then((result) => {
