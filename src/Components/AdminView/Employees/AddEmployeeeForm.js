@@ -6,6 +6,7 @@ import DepartmentDropdown from '../../DropdownMenus/DepartmentDropdown';
 import {loadEmployees, loadDepartments} from '../../../ducks/companyReducer';
 import axios from 'axios';
 import Loading from '../../Loading/Loading';
+import EmployeeDropdown from '../../DropdownMenus/EmployeeDropdown';
 
 export class AddEmployeeForm extends React.Component {
     constructor(props) {
@@ -19,15 +20,25 @@ export class AddEmployeeForm extends React.Component {
             department: '',
             title: '',
             workPhone: '',
-            email: ''
+            email: '',
+            approvers: [],
+            approver: ''
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
+        this.selectApprover = this.selectApprover.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount(){
-        this.props.loadDepartments(this.props.company.company_id, this.props.user.user_id)
+        axios.get(`/api/employees?companyID=${this.props.user.company}&filter=${'approver'}`).then((result)=> {
+            this.setState({approvers : result.data})
+            this.props.loadDepartments(this.props.company.company_id, this.props.user.user_id)
+        }).catch((err) => {
+            console.log(err);
+        })
+
     }
 
     handleInputChange(e) {
@@ -62,6 +73,11 @@ export class AddEmployeeForm extends React.Component {
         })
     }
 
+    
+    selectApprover(e) {
+        this.setState({approver : e.target.value});
+    }
+
     resetForm() {
         this.setState({
             firstName: '',
@@ -69,7 +85,8 @@ export class AddEmployeeForm extends React.Component {
             department: '',
             title: '',
             workPhone: '',
-            email: ''
+            email: '',
+            approver: ''
         })
     }
 
@@ -101,6 +118,9 @@ export class AddEmployeeForm extends React.Component {
                     <div className='form-row'>
                         <input type='email' name='email' value={this.state.email} onChange={(e)=>this.handleInputChange(e)} 
                             placeholder='Email'/>
+                    </div>
+                    <div className='form-row'>
+                        <EmployeeDropdown selectApprover={this.selectApprover} employees={this.state.approvers}/>
                     </div>
                     <div className='form-row'>
                         <button disabled={disabled} onClick={(e)=>this.handleSubmit(e)}>Add Employee</button>

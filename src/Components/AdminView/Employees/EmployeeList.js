@@ -33,6 +33,7 @@ export class EmployeeList extends React.Component{
                         <div>{employee.title}</div>
                         <div>{employee.email}</div>
                         <div>{employee.work_phone}</div>
+                        <div>{employee.approver}</div>
                     </div>
                 )
             })
@@ -45,6 +46,7 @@ export class EmployeeList extends React.Component{
                     <div className='header-col'>Title</div>
                     <div className='header-col'>Email</div>
                     <div className='header-col'>Phone</div>
+                    <div className='header-col'>Approver</div>
                 </div>
                 {employees}
             </div>

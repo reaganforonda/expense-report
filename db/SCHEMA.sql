@@ -50,7 +50,8 @@ CREATE TABLE employees (
     last_name VARCHAR(45),
     title VARCHAR(45),
     work_phone VARCHAR(45),
-    email VARCHAR(45)
+    email VARCHAR(45),
+    approver INTEGER REFERENCES users(user_id)
 );
 
 CREATE TABLE expense_reports (

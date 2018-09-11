@@ -14,13 +14,16 @@ export class EmployeeAcct extends React.Component{
             adminRight: false,
             approveRight: false,
             expenseRight: false,
-            email: this.props.employee.email
+            email: this.props.employee.email,
         }
 
         this.handleGenerateTempPW = this.handleGenerateTempPW.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+        this.selectApprover = this.selectApprover.bind(this);
     }
+
+
 
     static getDerivedStateFromProps(props, state) {
         if(props.employee.rights){
@@ -46,6 +49,10 @@ export class EmployeeAcct extends React.Component{
 
     handleGenerateTempPW(){
         this.setState({tempPassword: util.generateRandomString(5), displayTempPW: true})
+    }
+
+    selectApprover(e) {
+        this.setState({approver : e.target.value});
     }
 
     handleCreateNewUser(e){
@@ -87,7 +94,7 @@ export class EmployeeAcct extends React.Component{
     }
 
     render(){
-        console.log(this.props.employee);
+        
         return(
             this.props.employee.user_id ? (
             <div className='employee-account-info'>

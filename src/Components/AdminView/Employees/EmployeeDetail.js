@@ -24,6 +24,7 @@ export class EmployeeDetail extends React.Component {
             btnText: 'Edit',
             displayOptions: false,
             displayDetail: true,
+            
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);

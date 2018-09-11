@@ -69,14 +69,24 @@ module.exports = {
 
     getEmployees: (req, res) => {
         const db = req.app.get('db');
-        const {companyID, employeeID, userID} = req.query;
+        const {companyID, employeeID, userID, filter} = req.query;
 
+        if(filter !== 'approver') {
         db.GET_EMPLOYEES([companyID, employeeID]).then((result) => {
             res.status(200).send(result);
         }).catch((err) => {
             console.log(`Server error while attempting to retrieve employees: ${err}`);
             res.sendStatus(500);
-        });
+        });}
+
+        if(filter === 'approver'){
+            db.GET_APPROVERS([companyID]).then((result) => {
+                res.status(200).send(result);
+            }).catch((err) => {
+                console.log(`Server error while attempting to retrive approvers: ${err}`);
+                res.sendStatus(500);
+            })
+        }
     },
 
     createEmployee: (req, res) => {
