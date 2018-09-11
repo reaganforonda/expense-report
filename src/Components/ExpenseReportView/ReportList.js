@@ -7,7 +7,7 @@ export default function ReportList (props) {
         return (
             <div className='report-item' key={report.report_id}>
                 <div>{report.report_number}</div>
-                <div>{report.date}</div>
+                <div>{util.formatDate(report.report_date)}</div>
                 <div>{report.description}</div>
                 <div>{util.formatCurrency(parseFloat(report.amount))}</div>
                 <div>

@@ -57,7 +57,8 @@ export class ExpReportReports extends React.Component{
 function mapStateToProps(state) {
     return {
         user: state.userReducer.user,
-        expenseReports: state.expenseReducer.expenseReports
+        expenseReports: state.expenseReducer.expenseReports,
+        reportLoading: state.expenseReducer.reportLoading
     }
 }
 
