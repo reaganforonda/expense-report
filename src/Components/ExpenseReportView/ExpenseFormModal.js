@@ -43,7 +43,7 @@ export class ExpenseFormModal extends React.Component{
         axios.post('/api/expense', expense).then((result) => {
             this.props.loadExpenses(this.props.user.employee_id);
             this.resetForm();
-            this.closeForm();
+            this.props.closeForm();
         }).catch((err) => {
             console.log(err)
         })

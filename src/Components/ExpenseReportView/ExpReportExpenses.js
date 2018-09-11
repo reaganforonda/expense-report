@@ -51,8 +51,6 @@ export class ExpReportExpenses extends React.Component{
     }
 
     handleAddToReport(){
-        console.log(this.state.selectedExpenses);
-        console.log(this.state.report);
         let updateInfo = {
             expenses: this.state.selectedExpenses,
             report : this.state.report,
@@ -61,6 +59,7 @@ export class ExpReportExpenses extends React.Component{
 
         axios.put(`/api/expense?reportupdate=${true}`, updateInfo).then((result) => {
             this.props.loadExpenses(this.props.user.employee_id);
+            
         }).catch((err)=> {
             console.log(err);
         })
