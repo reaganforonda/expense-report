@@ -73,6 +73,7 @@ export class EmployeeAcct extends React.Component{
         }
 
         axios.post(`/api/user/register`, newUser).then((result) => {
+            console.log(result.data);
             let updateEmployee = {
                 company: this.props.employee.company,
                 firstName: this.props.employee.first_name,
@@ -82,7 +83,8 @@ export class EmployeeAcct extends React.Component{
                 workPhone: this.props.employee.work_phone,
                 email: this.props.employee.email,
                 user: this.props.user,
-                user_id : ~~result.data
+                user_id : ~~result.data,
+                approver: this.props.employee.approver
             }
 
             axios.put(`api/employees?employeeID=${this.props.employee.employee_id}`, updateEmployee).then((result) => {

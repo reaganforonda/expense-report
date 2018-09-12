@@ -30,10 +30,10 @@ module.exports = {
         const db = req.app.get('db');
 
         const {submit, employeeID} = req.query;
-        console.log(req.query);
+        
 
         const {reportID} = req.params
-        console.log(req.params);
+        
 
         const {} = req.body;
 
@@ -60,7 +60,7 @@ module.exports = {
         const db = req.app.get('db');
         const {employeeID, reportID, filter} = req.query;
 
-        if(filter = 'pending') {
+        if(filter === 'pending') {
             db.GET_PENDING_REPORTS([employeeID]).then((result) => {
                 res.status(200).send(result) ;
             }).catch((err)=> {

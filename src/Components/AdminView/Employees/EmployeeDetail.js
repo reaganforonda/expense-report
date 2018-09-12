@@ -21,6 +21,7 @@ export class EmployeeDetail extends React.Component {
             department: '',
             workPhone: '',
             email: '',
+            userID: '',
             lockMode: true,
             btnText: 'Edit',
             displayOptions: false,
@@ -57,6 +58,7 @@ export class EmployeeDetail extends React.Component {
                     lastName: props.selectedEmployee.last_name,
                     title: props.selectedEmployee.title,
                     email: props.selectedEmployee.email,
+                    userID: props.selectedEmployee.user_id,
                     workPhone: props.selectedEmployee.work_phone,
                     approver: props.selectedEmployee.approver
                 }
@@ -85,6 +87,7 @@ export class EmployeeDetail extends React.Component {
                 department: this.state.department,
                 workPhone: this.state.workPhone,
                 email: this.state.email,
+                user_id: this.state.userID,
                 user: this.props.user,
                 approver: this.state.approver
             }
