@@ -1,11 +1,19 @@
 import React from 'react';
-import * as util from '../../utilities/generalUtilities'
+import * as util from '../../utilities/generalUtilities';
+import axios form 'axios';
 
 export default class PendingList extends React.Component{
     constructor(props) {
         super(props);
 
-        this.state={}
+        this.state={
+            displayDetails: false,
+            expenses: []
+        }
+    }
+
+    getExpenses(reportID) {
+        
     }
 
     render(){
