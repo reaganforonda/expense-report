@@ -18,8 +18,6 @@ export class InboxMain extends React.Component{
         this.props.loadPendingReports(this.props.user.employee_id);
     }
 
-
-
     render(){
         return (
             this.props.reportLoading ? <Loading/> : (
