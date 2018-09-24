@@ -20,7 +20,7 @@ export class Dashboard extends React.Component{
 
     componentDidMount = async () => {
         await axios.get(`/api/auth/me`).then((users) => {
-            console.log('Login');
+            
         }).catch(err => {
             this.props.history.push('/');
         })

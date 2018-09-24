@@ -47,7 +47,7 @@ export default class PendingList extends React.Component{
                 )
             })
         }
-        console.log(expenseList);
+        
         let reports = this.props.pendingReports.map((report) => {
             
             return (
