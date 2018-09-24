@@ -17,7 +17,6 @@ export default class PendingList extends React.Component{
     getExpenses(reportID) {
         if(this.state.displayDetails===false) {
         axios.get(`/api/expenses?reportID=${reportID}`).then((result) => {
-            console.log(result.data);
             this.setState({expenses: result.data, displayDetails: true});
         })} else {
             this.setState({displayDetails: false})
@@ -36,9 +35,9 @@ export default class PendingList extends React.Component{
                 return (
                     <div className='expense-list-item-pending' key={expense.expense_id}>
                         <div>{expense.expense_id}</div>
-                        <div>{expense.expense_date}</div>
+                        <div>{util.formatDate(expense.expense_date)}</div>
                         <div>{expense.merchant}</div>
-                        <div>{expense.amount}</div>
+                        <div>{util.formatCurrency(parseFloat(expense.amount))}</div>
                         <div>{expense.category}</div>
                         <div>{expense.comment}</div>
                         <div>{expense.tag}</div>
@@ -47,7 +46,7 @@ export default class PendingList extends React.Component{
                 )
             })
         }
-        
+
         let reports = this.props.pendingReports.map((report) => {
             
             return (
