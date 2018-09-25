@@ -12,6 +12,9 @@ export default class PendingList extends React.Component{
         }
 
         this.getExpenses = this.getExpenses.bind(this);
+        this.closeDetail = this.closeDetail.bind(this);
+        this.handleApprove = this.handleApprove.bind(this);
+        this.handleReject = this.handleReject.bind(this);
     }
 
     getExpenses(reportID) {
@@ -25,6 +28,16 @@ export default class PendingList extends React.Component{
 
     closeDetail(){
         this.setState({displayDetails: false})
+    }
+
+    handleApprove(e){
+        e.preventDefault();
+
+
+    }
+
+    handleReject(e) {
+
     }
 
     render(){
@@ -56,6 +69,10 @@ export default class PendingList extends React.Component{
                     <div>{util.formatDate(report.report_date)}</div>
                     <div>{report.description}</div>
                     <div>{util.formatCurrency(parseFloat(report.total))}</div>
+                    <div><button onClick={()=>this.getExpenses(report.report_id)} type='button'>Details</button></div>
+                    <div><button type='button'>Approve</button></div>
+                    <div><button type='button'>Reject</button></div>
+
                 </div>
             )
         })
