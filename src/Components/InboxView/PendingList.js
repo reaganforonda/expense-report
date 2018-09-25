@@ -34,15 +34,20 @@ export class PendingList extends React.Component{
 
     handleApprove(e, reportID){
         e.preventDefault();
-        axios.put(`/api/expense/${reportID}?approve=true`).then((result) => {
+        axios.put(`/api/report/${reportID}?approve=${true}`).then((result) => {
             this.props.loadPendingReports(this.props.user.employee_id);
         }).catch(err=> {
             console.log(err);
         })
     }
 
-    handleReject(e) {
-
+    handleReject(e, reportID) {
+        e.preventDefault();
+        axios.put(`/api/report/${reportID}?approve=${false}`).then((result) => {
+            this.props.loadPendingReports(this.props.user.employee_id);
+        }).catch(err=> {
+            console.log(err);
+        })
     }
 
     render(){
@@ -75,8 +80,8 @@ export class PendingList extends React.Component{
                     <div>{report.description}</div>
                     <div>{util.formatCurrency(parseFloat(report.total))}</div>
                     <div><button onClick={()=>this.getExpenses(report.report_id)} type='button'>Details</button></div>
-                    <div><button type='button'>Approve</button></div>
-                    <div><button type='button'>Reject</button></div>
+                    <div><button onClick={(e)=>this.handleApprove(e, report.report_id)} type='button'>Approve</button></div>
+                    <div><button onClick={(e)=>this.handleReject(e, report.report_id)} type='button'>Reject</button></div>
                 </div>
             )
         })
