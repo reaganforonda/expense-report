@@ -29,7 +29,7 @@ module.exports = {
     editExpenseReport : (req, res) => {
         const db = req.app.get('db');
 
-        const {submit, employeeID} = req.query;
+        const {submit, employeeID, approve} = req.query;
         
 
         const {reportID} = req.params
@@ -43,6 +43,19 @@ module.exports = {
                 res.status(200).send(result);
             }).catch((err) => {
                 console.log(`Server error while attempting to update report for submission: ${err}`);
+                res.sendStatus(500);
+            })
+        } if(approve) {
+            db.APPROVE_EXPENSE_REPORT([reportID]).then((result) => {
+                res.status(200).send(result);
+            }).catch((err) => {
+                console.log(`Server error while attempting to approve report: ${err}`);
+                res.sendStatus(500);
+            })
+        } if(approve === false) {
+            db.REJECT_EXPENSE_REPORT([reportID]).then((result) => {
+                res.status(200).send(result);
+            }).catch(err=> {
                 res.sendStatus(500);
             })
         }
