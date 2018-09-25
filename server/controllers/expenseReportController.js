@@ -30,29 +30,24 @@ module.exports = {
         const db = req.app.get('db');
 
         const {submit, employeeID, approve} = req.query;
-        
-
         const {reportID} = req.params
-        
-
         const {} = req.body;
 
         if(submit) {
             db.SUBMIT_REPORT([employeeID, reportID]).then((result) => {
-                
                 res.status(200).send(result);
             }).catch((err) => {
                 console.log(`Server error while attempting to update report for submission: ${err}`);
                 res.sendStatus(500);
             })
-        } if(approve) {
+        } else if(approve === 'true') {
             db.APPROVE_EXPENSE_REPORT([reportID]).then((result) => {
                 res.status(200).send(result);
             }).catch((err) => {
                 console.log(`Server error while attempting to approve report: ${err}`);
                 res.sendStatus(500);
             })
-        } if(approve === false) {
+        } else if(approve === 'false') {
             db.REJECT_EXPENSE_REPORT([reportID]).then((result) => {
                 res.status(200).send(result);
             }).catch(err=> {
