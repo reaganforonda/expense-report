@@ -1,8 +1,10 @@
 import React from 'react';
 import * as util from '../../utilities/generalUtilities';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {loadPendingReports} from '../../ducks/expenseReducer';
 
-export default class PendingList extends React.Component{
+export class PendingList extends React.Component{
     constructor(props) {
         super(props);
 
@@ -30,10 +32,13 @@ export default class PendingList extends React.Component{
         this.setState({displayDetails: false})
     }
 
-    handleApprove(e){
+    handleApprove(e, reportID){
         e.preventDefault();
-
-
+        axios.put(`/api/expense/${reportID}?approve=true`).then((result) => {
+            this.props.loadPendingReports(this.props.user.employee_id);
+        }).catch(err=> {
+            console.log(err);
+        })
     }
 
     handleReject(e) {
@@ -63,7 +68,7 @@ export default class PendingList extends React.Component{
         let reports = this.props.pendingReports.map((report) => {
             
             return (
-                <div onClick={()=>this.getExpenses(report.report_id)}className='pending-report-item' key={report.report_id}>
+                <div className='pending-report-item' key={report.report_id}>
                     <div>{report.report_number}</div>
                     <div>{report.first_name} {report.last_name}</div>
                     <div>{util.formatDate(report.report_date)}</div>
@@ -72,7 +77,6 @@ export default class PendingList extends React.Component{
                     <div><button onClick={()=>this.getExpenses(report.report_id)} type='button'>Details</button></div>
                     <div><button type='button'>Approve</button></div>
                     <div><button type='button'>Reject</button></div>
-
                 </div>
             )
         })
@@ -87,3 +91,11 @@ export default class PendingList extends React.Component{
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.userReducer.user
+    }
+}
+
+export default connect(mapStateToProps, {loadPendingReports})(PendingList);
